@@ -1,0 +1,126 @@
+import React from 'react'
+import img from '../images/profile3.svg'
+import styled from 'styled-components'
+
+const Container = styled.div`
+    background: #f9f9f9;
+    color: #fff;
+    padding: 120px 80px;
+    @media screen and (max-width:1024px){
+        padding: 100px 48px;
+    }
+    @media screen and (max-width:768px){
+        padding: 80px 24px;
+    }
+    z-index: 1;
+`
+const Wrapper = styled.div`
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    z-index: 1;
+    /* height: 860px;
+    width: 100%; */
+    max-width: 1100px;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 50px;
+    justify-content: center;
+
+    @media screen and (min-width:768px){
+        grid-template-columns: repeat(2, 1fr);
+    }
+`
+const Row = styled.div`
+    display: grid;
+    grid-auto-columns: minmax(auto, 1fr);
+    align-items: center;
+    grid-template-areas: 'col1' 'col2';
+    gap: 50px;
+
+    @media screen and (max-width:768px) {
+       grid-template-areas: 'col1 col2' ;
+    }
+`
+const Column1 = styled.div`
+    margin-bottom: 15px;
+    padding: 0 15px;
+    grid-area: col1;
+`
+const Column2 = styled.div`
+    margin-bottom: 15px;
+    padding: 0 15px;
+    grid-area: col2;
+`
+
+const TextWrapper = styled.div`
+    max-width: 540px;
+    padding-top: 0;
+    padding-bottom: 60px;
+`
+const Top = styled.p`
+    color: #00b140;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+`
+const Title = styled.h1`
+    font-size: 48px;
+    color: #010606;
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 24px;
+
+    @media screen and (max-width: 480px){
+        font-size: 32px;
+    }
+`
+const Desc =  styled.p`
+    max-width: 440px;
+    margin-bottom: 35px;
+    font-size: 18px;
+    line-height: 26px;
+    color: #010606;
+`
+const ImageWrapper = styled.div`
+    max-width: 555px;
+    height: 100%;
+`
+const Image = styled.img`
+    width: 100%;
+    margin: 0 0 10px 0;
+    padding-right: 0;
+    border-radius: 50%;
+`
+const About = () => {
+  return (
+    <Container>
+        <Wrapper>
+            <Row>
+                <Column1>
+                    <TextWrapper>
+                        <Top>About Me</Top>
+                        <Title>Software Developer</Title>
+                        <Desc>A Tech enthusiast and Junior Software Developer with experience in front-end and back-end development. 
+                            Has a strong portfolio demonstrating experience in building React apps and working with APIs. 
+                            With an eagerness to learn and a passion for front-end technologies, confident in contributing to the success of the Phocas Analytics team. 
+                            Focuses on effective and result-driven solutions to business needs utilizing theoretical knowledge, personal experience, and certifications.
+                              I am writing to apply for the Junior Software Developer position at Telstra. As a recent software development graduate
+                              with a background in culinary arts, I offer a unique blend of skills that are both practical and deliciously creative.</Desc>
+                    </TextWrapper>
+                </Column1>  
+                <Column2>
+                    <ImageWrapper>
+                        <Image src={img} alt='avatar' />
+                    </ImageWrapper>
+                </Column2>
+            </Row>
+        </Wrapper>
+    </Container>
+  )
+}
+
+export default About
