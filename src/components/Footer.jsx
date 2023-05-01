@@ -126,7 +126,7 @@ const Footer = () => {
             <FooterWrapper>
                 <div>
                     <Address>
-                        11 Victoria Avenue, Penshurst<br />
+                        9 Maple Tree Road, Westmead<br />
                         Sydney, Australia<br />
                         +61 404781370
                     </Address>
