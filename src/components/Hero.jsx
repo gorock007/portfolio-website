@@ -70,11 +70,12 @@ const HeroDesc = styled.h1`
         font-size: 32px;
     }
 `
-
 const HeroP = styled.p`
     margin-top: 24px;
     color: #fff;
-    font-size: 28px;
+    font-size: 2em;
+    line-height: calc(1ex / 0.32);
+    margin: calc(0.5ex / 0.32) 0;
     text-align: center;
     max-width: 600px;
 

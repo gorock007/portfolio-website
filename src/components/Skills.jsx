@@ -4,10 +4,11 @@ import { FaHtml5, FaJs, FaBootstrap, FaNodeJs, FaCss3Alt, FaReact, FaObjectGroup
 import { SiVisualstudio, SiStyledcomponents } from 'react-icons/si';
 
 const Container = styled.div`
-    background: #ffffff;
-    padding: 45px 24px;
+    background: #07100F;
+    height: auto;
+    min-height: 100vh;
     display: flex;
-    max-width: 1100px;
+    
     margin: 0 auto;
     flex-direction: column;
     justify-content: center;
@@ -19,18 +20,21 @@ const Container = styled.div`
         height: 1200px;
     }
 `
+const Wrapper = styled.div`
+    max-width: 1100px;
+`
 const Top = styled.h1`
     font-size: 2.5rem;
-    color: #0B0B0B;
+    color: #00b140;
     margin-bottom: 10px;
     @media screen and (max-width: 480px){
         font-size: 2rem;
-       
     }
 `
 const Subtitle = styled.p`
     font-size: 1rem;
     text-align: center;
+    color: #ffffff;
 `
 const SkillsContainer = styled.div`
   display: flex;
@@ -54,17 +58,15 @@ const Icon = styled.div`
   display: inline-block;
   margin: 0 10px;
   transition: transform 0.3s ease-in-out;
-
    &:hover {
     transform: scale(1.2);
   }
-
 `;
 
 const SkillName = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
-  color: #2f2f2f;
+  color: #ffffff;
   text-align: center;
 `;
 const SkillsData = [
@@ -156,14 +158,16 @@ const Skills = () => {
         <Container id='skills'>
             <Top>Skills</Top>
             <Subtitle>My friends that help me bring ideas to life</Subtitle>
-            <SkillsContainer>
-                {SkillsData.map(skill => (
-                    <Skill key={skill.name}>
-                        <Icon className="icon-container" color={skill.color}>{skill.icon}</Icon>
-                        <SkillName>{skill.name}</SkillName>
-                    </Skill>
-                ))}
-            </SkillsContainer>
+            <Wrapper>
+                <SkillsContainer>
+                    {SkillsData.map(skill => (
+                        <Skill key={skill.name}>
+                            <Icon className="icon-container" color={skill.color}>{skill.icon}</Icon>
+                            <SkillName>{skill.name}</SkillName>
+                        </Skill>
+                    ))}
+                </SkillsContainer>
+            </Wrapper>
         </Container>
     );
 };

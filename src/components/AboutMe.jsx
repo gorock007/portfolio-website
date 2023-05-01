@@ -32,7 +32,7 @@ const wave = keyframes`
     }
 `
 const Container = styled.div`
-    /* background: #0B0B0B; */
+    background: #07100F;
     height: auto;
     min-height: 100vh;
     display: flex;
@@ -40,8 +40,6 @@ const Container = styled.div`
     align-items: center;
     padding: 0 1rem;
     margin: 0 auto;
-   
-    
 `
 const Wrapper = styled.section`
     min-height: 100vh;
@@ -95,24 +93,26 @@ const AboutContent = styled.div`
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0;
+    color: #fff;
 
     p{
-        /* font-family: "Poppins", sans-serif; */
-        font-size: 1.4rem;
+        font-size: 1.5em;
         text-align: justify;
         margin-bottom: 1.5rem;
-        word-break: break-word;
-        /* color: #fff; */
+        line-height: calc(1ex / 0.32);
+        margin: calc(0.5ex / 0.32) 0;
 
         @media screen and (max-width: 768px){
-            font-size: 1.2rem;
+            font-size: 1em;
+            line-height: calc(1ex / 0.32);
+            margin: calc(0.5ex / 0.32) 0;
         }
     }
 `
 const WavingHand = styled.span`
     display: inline-block;
     animation: ${wave} 3s infinite;
-    background: linear-gradient(135deg, #2cc8c0, #1fd313);;
+    background: #00b140;
     background-clip: text;
     background-clip: unset;
     -webkit-background-clip: text;
@@ -120,33 +120,36 @@ const WavingHand = styled.span`
     filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
 `;
 const Top = styled.div`
-    font-size: 3rem;
+    font-size: 2.8rem;
     margin-bottom: 20px;
     /* color: #fff; */
-
+    @media screen and (max-width: 768px){
+        font-size: 2em;
+        line-height: calc(1ex / 0.32);
+        margin: calc(0.5ex / 0.32) 0;
+    }
 `
 const Button= styled.button`
+    margin-top: 50px;
     color: #fff;
     padding: 16px 64px;
     border: none;
     outline: none;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     display: flex;
     align-items: center;
     box-shadow: 0px 5px 30px rgba(0, 100, 148, 0.3);
-    background: linear-gradient(135deg, #2cc8c0, #1fd313);
+    /* background: linear-gradient(135deg, #2cc8c0, #1fd313); */
+    background: #00b140;
     transition: all 0.4s ease-in-out;
-
      &:hover{
         transform: translateY(20%);
-        color: #fff;
     }
 `
 const Hr = styled.hr`
-
   height: 1px;
   border: none;
   background-color: #ccc;
@@ -169,12 +172,10 @@ const AboutMe = () => {
                 <p>I enjoy collaborating with other developers and stakeholders to understand their needs and translate them into software solutions that exceed expectations.</p>
                 <Button href={pdf} download>
                     Download Resume
-                </Button>
-                
+                </Button>        
             </AboutContent>
               <Hr />
         </Wrapper>
-       
     </Container>
   )
 }

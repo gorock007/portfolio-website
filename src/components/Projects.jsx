@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { projectsData } from './ProjectsData';
 
 const Container = styled.div`
-  background: #0B0B0B;
+  background: #07100F;
   height: auto;
   min-height: 100vh;
   display: flex;
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   }
 `
 const Card = styled.div`
-background: #ffffff;
+background: #07100F;
 display: flex;
 flex-direction: column;
 margin: 0 20px 30px 20px;
@@ -55,14 +55,13 @@ flex: 1 1 calc(33.33% - 40px);
 }
 `
 const Icon = styled.img`
-    width: 100%;
+    width: 90%;
     height: auto;
-    border-radius: 10px;
     margin-bottom: 20px;  
 `
 const Top = styled.h1`
-  font-size: 3rem;
-  color: #fff;
+  font-size: 2.5rem;
+  color: #00b140;
   margin: 64px 0 32px ;
 
   @media screen and (max-width: 768px){
@@ -73,18 +72,22 @@ const Title = styled.h3`
   font-size: 22px;
   margin-bottom: 10px;
   text-align: center;
+  color: #fff;
 `
 const Description = styled.p`
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   text-align: center;
-  font-size: 16px;
+  font-size: 1em;
+  line-height: calc(1ex / 0.32);
+  margin: calc(0.5ex / 0.32) 0;
+  color: #fff;
 `
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
 `
 const Button = styled.button`
-  /* background: #0B0B0B; */
+  background: #00b140;
   border: none;
   color: #ffffff;
   border: none;
@@ -95,7 +98,8 @@ const Button = styled.button`
   text-decoration: none;
   font-size: 16px;
   cursor: pointer;
-  background: linear-gradient(135deg, #2cc8c0, #1fd313);
+  /* background: linear-gradient(135deg, #2cc8c0, #1fd313); */
+
     transition: all 0.4s ease-in-out;
 
      &:hover{

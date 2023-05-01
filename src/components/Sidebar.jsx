@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FaTimes } from 'react-icons/fa'
 import { Link as LinkR } from 'react-router-dom';
-import { animateScroll as scroll } from 'react-scroll';
+import { Link as scroll } from 'react-scroll';
 
 const Container = styled.aside`
     position: fixed;
@@ -43,7 +43,7 @@ const Menu = styled.ul`
     }
 
 `
-const Link = styled(LinkR)`
+const Link = styled(scroll)`
     display: flex;
     align-items: center;
     justify-content: center;
