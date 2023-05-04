@@ -124,12 +124,12 @@ const Top = styled.div`
     margin-bottom: 20px;
     /* color: #fff; */
     @media screen and (max-width: 768px){
-        font-size: 2em;
+        font-size: 2em; 
         line-height: calc(1ex / 0.32);
         margin: calc(0.5ex / 0.32) 0;
     }
 `
-const Button= styled.button`
+const Button= styled.a`
     margin-top: 50px;
     color: #fff;
     padding: 16px 64px;
@@ -139,7 +139,7 @@ const Button= styled.button`
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
-    display: flex;
+    display: inline-block;
     align-items: center;
     box-shadow: 0px 5px 30px rgba(0, 100, 148, 0.3);
     /* background: linear-gradient(135deg, #2cc8c0, #1fd313); */
@@ -147,6 +147,7 @@ const Button= styled.button`
     transition: all 0.4s ease-in-out;
      &:hover{
         transform: translateY(20%);
+        color: #fff;
     }
 `
 const Hr = styled.hr`

@@ -65,7 +65,7 @@ const Top = styled.h1`
   margin: 64px 0 32px ;
 
   @media screen and (max-width: 768px){
-      font-size: 2.5rem;
+      font-size: 2rem;
   }
 `
 const Title = styled.h3`
@@ -99,9 +99,7 @@ const Button = styled.button`
   font-size: 16px;
   cursor: pointer;
   /* background: linear-gradient(135deg, #2cc8c0, #1fd313); */
-
     transition: all 0.4s ease-in-out;
-
      &:hover{
         transform: translateY(20%);
         color: #fff;

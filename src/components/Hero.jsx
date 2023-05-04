@@ -111,7 +111,7 @@ const Hero = () => {
   return (
     <Container id='home'>
         <Wrapper>
-            <Background autoPlay loop muted src={Video} type='video/mp4'></Background>
+            <Background autoPlay loop muted playsInline src={Video} type='video/mp4'></Background>
             <Overlay/>
         </Wrapper>
         <Content>
