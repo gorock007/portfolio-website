@@ -18,7 +18,7 @@ export const projectsData = [
         title: "AI Image Generator",
         img: aiImg,
         description: "Develop using Vanilla Javascript that leverages OpenAI's DALLE-E API for text-to-image generation. The user inputs a prompt of an image, and the application generate a corresponding image. User can choose upto 3 different sizes to display and download a generated image.",
-        demoUrl: "https://github.com/gorock007/ai-image-generator",
+        demoUrl: "https://ai-image.netlify.app/",
         githubUrl: "https://github.com/gorock007/ai-image-generator",
     },
     {
