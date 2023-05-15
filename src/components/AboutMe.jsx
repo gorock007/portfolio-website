@@ -1,7 +1,7 @@
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
 import img from '../images/profile3.jpg'
-import pdf from '../assets/GorakhResume.pdf'
+import pdf from '../assets/Gorakh Resume.pdf'
 
 const rotate = keyframes`
     fom{
