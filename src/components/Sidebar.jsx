@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FaTimes } from 'react-icons/fa'
 import { Link as LinkR } from 'react-router-dom';
-import { Link as scroll } from 'react-scroll';
+import { HashLink as scroll } from 'react-router-hash-link';
 
 const Container = styled.aside`
     position: fixed;
@@ -86,7 +86,6 @@ const HomeRoute = styled(LinkR)`
         color: #fff;
     }
 `
-
 const Sidebar = ({isOpen, toggle}) => {
     const [scrollSide, setScrollSide] = useState(false)
     const changeSide = () => {
@@ -108,20 +107,6 @@ const Sidebar = ({isOpen, toggle}) => {
         });
     };
 
-    const scrollToSection = (event) => {
-        event.preventDefault();
-        const targetSection = event.target.getAttribute("href");
-        const targetPosition = document.querySelector(targetSection).offsetTop;
-        toggle();
-        setTimeout(() => {
-            window.scrollTo({
-                top: targetPosition,
-                behavior: "smooth"
-            });
-        }, 500);
-
-    };
-
   return (
     <Container isOpen={isOpen} onClick={toggle} scrollSide={scrollSide}>
         <Icon onClick={toggle}>
@@ -129,10 +114,10 @@ const Sidebar = ({isOpen, toggle}) => {
         </Icon>
         <Wrapper>
             <Menu>
-                <Link href='#about' onClick={scrollToSection}>About</Link>
-                <Link href='#projects' onClick={scrollToSection}>Projects</Link>
-                <Link href='#skills' onClick={scrollToSection}>Skills</Link>
-                <Link href='#contact' onClick={scrollToSection}>Contact</Link>
+                <Link to='#about' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>About</Link>
+                <Link to='#projects' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Projects</Link>
+                <Link to='#skills' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Skills</Link>
+                <Link to='#contact' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Contact</Link>
             </Menu>
             <HomeButton>
                 <HomeRoute href='/' onClick={toggleHome}>Home</HomeRoute>

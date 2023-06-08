@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
 import {Link as LinkR} from 'react-router-dom';
-import {Link as scroll} from 'react-scroll';
-import { FaUser } from 'react-icons/fa';
-import img from '../images/profile3.jpg'
+import {HashLink as scroll} from 'react-router-hash-link';
 
 const Container = styled.div`
     background-color: ${({scrollNav}) => (scrollNav? '#000' : 'rgba(255,255,255,0)')};
@@ -112,7 +110,6 @@ const HamburgerIcon = styled.div`
     }
 `
 
-
 const Navbar = ({toggle}) => {
     const [scrollNav, setScrollNav] = useState(false);
     const changeNav = () =>{
@@ -134,16 +131,6 @@ const Navbar = ({toggle}) => {
         });
     }
 
-    const scrollToSection = (event) => {
-        event.preventDefault();
-        const targetSection = event.target.getAttribute("href");
-        const targetPosition = document.querySelector(targetSection).offsetTop;
-        window.scrollTo({
-            top: targetPosition,
-            behavior: "smooth"
-        });
-    };
-
   return (
     <Container scrollNav={scrollNav}>
         <Nav>
@@ -158,16 +145,16 @@ const Navbar = ({toggle}) => {
             </HamburgerIcon>
             <Menu>
                 <MenuItem >
-                    <MenuLink href='#about' onClick={scrollToSection}>About Me</MenuLink>
+                    <MenuLink to='#about' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>About Me</MenuLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuLink href='#projects' onClick={scrollToSection}>Projects</MenuLink>
+                    <MenuLink to='#projects' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Projects</MenuLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuLink href='#skills' onClick={scrollToSection}>Skills</MenuLink>
+                    <MenuLink to='#skills' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Skills</MenuLink>
                 </MenuItem>
                 <MenuItem>
-                    <MenuLink href='#contact' onClick={scrollToSection}>Contact</MenuLink>
+                    <MenuLink to='#contact' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Contact</MenuLink>
                 </MenuItem>
             </Menu>
         </Nav>
