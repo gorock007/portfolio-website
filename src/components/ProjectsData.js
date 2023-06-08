@@ -3,7 +3,7 @@ import dbsImg from '../images/dbs.png';
 import aiImg from '../images/imagegenerator.png';
 import cryptoImg from '../images/crypto.png';
 import scorekeeperImg from '../images/scorekeeper.png';
-import summaizeImg from '../images/summaizeImg.png';
+import summaizeImg from '../images/summaize.png';
 
 export const projectsData = [
     {
