@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaHtml5, FaJs, FaBootstrap, FaNodeJs, FaCss3Alt, FaReact, FaObjectGroup, FaGripHorizontal, FaServer, FaDatabase, FaLink, FaJava, FaGit, FaFileCode, FaAndroid } from 'react-icons/fa';
-import { SiVisualstudio, SiStyledcomponents } from 'react-icons/si';
+import { SiVisualstudio, SiStyledcomponents, SiTailwindcss } from 'react-icons/si';
 
 const Container = styled.div`
     background: #07100F;
@@ -85,6 +85,11 @@ const SkillsData = [
         icon: <FaJs />,
         name: 'JavaScript',
         color: '#F7DF1E'
+    },
+    {
+        icon: <SiTailwindcss/>,
+        name: 'Tailwind CSS',
+        color: '#38BDF8'
     },
     {
         icon: <FaBootstrap />,
