@@ -1,10 +1,15 @@
-import { FaHtml5, FaJs, FaBootstrap, FaNodeJs, FaReact, FaCode, FaObjectGroup, FaGripHorizontal, FaServer, FaDatabase, FaLink, FaJava, FaGit, FaFileCode, FaAndroid, FaSass } from 'react-icons/fa';
+import { FaHtml5, FaJs, FaBootstrap, FaNodeJs, FaReact, FaCode, FaObjectGroup, FaGripHorizontal, FaServer, FaDatabase, FaLink, FaJava, FaGit, FaFileCode, FaAndroid, FaSass, SiTailwindcss } from 'react-icons/fa';
 
 export const SkillsData = [
     {
         icon: <FaHtml5/>,
         name: 'HTML5 & CSS',
         color: '#F16529'
+    },
+    {
+        icon: <SiTailwindcss/>,
+        name:'Tailwindcss',
+        color:'#6B7280'
     },
     {
         icon: <FaJs />,
