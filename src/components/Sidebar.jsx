@@ -117,6 +117,7 @@ const Sidebar = ({isOpen, toggle}) => {
                 <Link to='#about' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>About</Link>
                 <Link to='#projects' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Projects</Link>
                 <Link to='#skills' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Skills</Link>
+                <Link to='https://gorock.hashnode.dev/' target="_blank" rel="noopener noreferrer">Blog</Link>
                 <Link to='#contact' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Contact</Link>
             </Menu>
             <HomeButton>
