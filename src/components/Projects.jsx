@@ -15,45 +15,41 @@ const Container = styled.div`
 const Wrapper = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 20px;
+  justify-items: center;
   padding: 0 50px;
 
- @media screen and (max-width: 1000px){
+  @media screen and (max-width: 1000px){
     padding: 0 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
-`
+
+  @media screen and (max-width: 600px){
+    grid-template-columns: 1fr;
+  }
+`;
+
 const Card = styled.div`
-background: #07100F;
-display: flex;
-flex-direction: column;
-margin: 0 20px 30px 20px;
-align-items: center;
-/* border-radius: 10px; */
-max-height: 500px;
-padding: 20px;
-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-transition: all 0.3s ease-in-out;
-flex: 1 1 calc(33.33% - 40px);
+  background: #07100F;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  height: 100%;
 
   &:hover{
-  transform: translateY(-5px);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+`;
 
-@media screen and(max-width: 768px){
-  flex-basis: calc(50% - 20px);
-  margin: 0 10px 30px 10px;
-}
-@media screen and(max-width: 480px){
-  flex-basis: 100%;
-  margin: 0 0 30px 0;
-}
-`
 const Icon = styled.img`
     width: 90%;
     height: auto;

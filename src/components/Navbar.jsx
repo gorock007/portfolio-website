@@ -154,6 +154,9 @@ const Navbar = ({toggle}) => {
                     <MenuLink to='#skills' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Skills</MenuLink>
                 </MenuItem>
                 <MenuItem>
+                      <MenuLink to='https://gorock.hashnode.dev/' target="_blank" rel="noopener noreferrer">Blog</MenuLink>
+                </MenuItem>
+                <MenuItem>
                     <MenuLink to='#contact' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Contact</MenuLink>
                 </MenuItem>
             </Menu>

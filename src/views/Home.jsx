@@ -7,6 +7,7 @@ import Navbar from '../components/Navbar'
 import Projects from '../components/Projects'
 import Sidebar from '../components/Sidebar'
 import Skills from '../components/Skills'
+import BlogSnippets from '../components/BlogSnippets'
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,6 +21,7 @@ export const Home = () => {
         <Hero />
         <AboutMe/>
         <Projects />
+        {/* <BlogSnippets /> */}
         <Skills />
         <Footer />
     </div>
