@@ -132,7 +132,7 @@ const Footer = () => {
                     </Address>
                     <SocialLinks>
                         <a href="mailto:gorock397@gmail.com" target="_blank" rel="noopener noreferrer"><FaEnvelope /></a>
-                        <a href="https://twitter.com/ZeroGravity42" target="_blank" ><FaTwitter /></a>
+                        <a href="https://x.com/gorock_bits" target="_blank" ><FaTwitter /></a>
                         <a href="https://www.linkedin.com/in/gorakhshetty/" target="_blank"><FaLinkedinIn /></a>
                         <a href="https://github.com/gorock007/" target="_blank"> <FaGithub /></a>
                     </SocialLinks>
