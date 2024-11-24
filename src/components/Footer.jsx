@@ -126,9 +126,7 @@ const Footer = () => {
             <FooterWrapper>
                 <div>
                     <Address>
-                        9 Maple Tree Road, Westmead<br />
                         Sydney, Australia<br />
-                        +61 404781370
                     </Address>
                     <SocialLinks>
                         <a href="mailto:gorock397@gmail.com" target="_blank" rel="noopener noreferrer"><FaEnvelope /></a>
