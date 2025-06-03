@@ -1,4 +1,22 @@
-import { FaHtml5, FaJs, FaBootstrap, FaNodeJs, FaReact, FaCode, FaObjectGroup, FaGripHorizontal, FaServer, FaDatabase, FaLink, FaJava, FaGit, FaFileCode, FaAndroid, FaSass, SiTailwindcss } from 'react-icons/fa';
+import {
+    FaHtml5,
+    FaJs,
+    FaBootstrap,
+    FaNodeJs,
+    FaReact,
+    FaCode,
+    FaObjectGroup,
+    FaGripHorizontal,
+    FaServer,
+    FaDatabase,
+    FaLink,
+    FaJava,
+    FaGit,
+    FaFileCode,
+    FaAndroid,
+    FaSass,
+} from 'react-icons/fa';
+import { SiTailwindcss } from 'react-icons/si';
 
 export const SkillsData = [
     {
