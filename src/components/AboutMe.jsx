@@ -4,7 +4,7 @@ import img from '../images/profile3.jpg'
 import pdf from '../assets/Gorakh Resume.pdf'
 
 const rotate = keyframes`
-    fom{
+    from{
         transform: rotate(0deg);
     }
     to{
