@@ -1,131 +1,83 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { FaTimes } from 'react-icons/fa'
-import { Link as LinkR } from 'react-router-dom';
-import { HashLink as scroll } from 'react-router-hash-link';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaTimes } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Container = styled.aside`
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    height: 100%;
-    background: #0d0d0d;
-    display: grid;
-    align-items: center;
-    top: 0;
-    left: 0;
-    transition: 0.3s ease-in-out;
-    opacity: ${({ isOpen }) => (isOpen ? '100%' : '0')};
-    top: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
-`;
-const Icon = styled.div`
-    position: absolute;
-    top:1.2rem;
-    right: 1.5rem;
-    background: transparent;
-    font-size: 2rem;
-    cursor: pointer;
-    outline: none;
-`
-const CloseIcon = styled(FaTimes)`
-    color: #fff;
-`
-const Wrapper = styled.div`
-    color: #fff;
-`
-const Menu = styled.ul`
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 80px);
-    text-align: center;
-    @media screen and (max-width:480px){
-        grid-template-rows: auto(5, 60px);
-    }
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Blog', href: '/blog', internal: true },
+  { label: 'Contact', href: '#contact' },
+];
 
-`
-const Link = styled(scroll)`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    text-decoration: none;
-    list-style: none;
-    transition: 0.2s ease-in-out;
-    color: #fff;
-    cursor: pointer;
-    &:hover{
-        color: #00b140;
-        transition: 0.2s ease-in-out;
-    }
-`
-const HomeButton = styled.div`
-    display: flex;
-    justify-content: center;
-    padding-left: 8%;
-    @media screen and (max-width:480px){
-        padding-left: 0%;
-    }    
-`
-const HomeRoute = styled(LinkR)`
-    color: #fff;
-    padding: 16px 64px;
-    border: none;
-    outline: none;
-    text-decoration: none;
-    border-radius: 50px;
-    font-size: 16px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    box-shadow: 0px 5px 30px rgba(0, 100, 148, 0.5);
-    background: linear-gradient(135deg, #2cc8c0, #1fd313);
-    transition: all 0.4s ease-in-out;
-
-     &:hover{
-        transform: translateY(-20%);
-        color: #fff;
-    }
-`
-const Sidebar = ({isOpen, toggle}) => {
-    const [scrollSide, setScrollSide] = useState(false)
-    const changeSide = () => {
-        if (window.scrollY >= 80) {
-            setScrollSide(true)
-        } else {
-            setScrollSide(false)
-        }
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', changeSide)
-    }, []);
-
-    const toggleHome = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
+const Sidebar = ({ isOpen, toggle }) => {
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    toggle();
+    setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+  };
 
   return (
-    <Container isOpen={isOpen} onClick={toggle} scrollSide={scrollSide}>
-        <Icon onClick={toggle}>
-            <CloseIcon />
-        </Icon>
-        <Wrapper>
-            <Menu>
-                <Link to='#about' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>About</Link>
-                <Link to='#projects' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Projects</Link>
-                <Link to='#skills' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Skills</Link>
-                <Link to='https://gorock.hashnode.dev/' target="_blank" rel="noopener noreferrer">Blog</Link>
-                <Link to='#contact' scroll={el => el.scrollIntoView({ behavior: 'smooth', block: 'start' })}>Contact</Link>
-            </Menu>
-            <HomeButton>
-                <HomeRoute href='/' onClick={toggleHome}>Home</HomeRoute>
-            </HomeButton>
-        </Wrapper>
-    </Container>
-  )
-}
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={toggle}
+            className="fixed inset-0 z-[998] bg-ink/20 backdrop-blur-sm"
+          />
+          <motion.aside
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+            className="fixed top-0 right-0 bottom-0 w-[min(80vw,320px)] z-[999] bg-surface border-l border-border shadow-2xl flex flex-col"
+          >
+            <div className="flex justify-end p-6">
+              <button
+                onClick={toggle}
+                className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-muted hover:text-cyan transition-all cursor-pointer"
+                aria-label="Close menu"
+              >
+                <FaTimes />
+              </button>
+            </div>
+            <ul className="flex-1 flex flex-col justify-center gap-2 px-8">
+              {navLinks.map((link, i) => (
+                <motion.li
+                  key={link.label}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.15 + i * 0.06, type: 'spring', stiffness: 300, damping: 25 }}
+                >
+                  {link.internal ? (
+                    <Link
+                      to={link.href}
+                      onClick={toggle}
+                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-muted hover:text-cyan hover:bg-accent-bg transition-all duration-300"
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-muted hover:text-cyan hover:bg-accent-bg transition-all duration-300"
+                    >
+                      {link.label}
+                    </a>
+                  )}
+                </motion.li>
+              ))}
+            </ul>
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

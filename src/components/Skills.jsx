@@ -1,180 +1,144 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FaHtml5, FaJs, FaBootstrap, FaNodeJs, FaCss3Alt, FaReact, FaObjectGroup, FaGripHorizontal, FaServer, FaDatabase, FaLink, FaJava, FaGit, FaFileCode, FaAndroid } from 'react-icons/fa';
-import { SiVisualstudio, SiStyledcomponents, SiTailwindcss } from 'react-icons/si';
+import { motion } from 'framer-motion';
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaJs, FaDatabase, FaBug, FaProjectDiagram, FaClipboardCheck, FaCode } from 'react-icons/fa';
+import { SiOpenai, SiGoogle, SiZapier, SiNextdotjs, SiTailwindcss } from 'react-icons/si';
+import { TbApi, TbWebhook } from 'react-icons/tb';
+import { VscJson } from 'react-icons/vsc';
+import { BiTestTube } from 'react-icons/bi';
+import openclawImg from '../images/openclaw.png';
+import claudeImg from '../images/claude.png';
 
-const Container = styled.div`
-    background: #07100F;
-    height: auto;
-    min-height: 100vh;
-    display: flex;
-    
-    margin: 0 auto;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    @media screen and (max-width: 768px){
-        height: 1000px;
-    }
-    @media screen and (max-width: 480px){
-        height: 1200px;
-    }
-`
-const Wrapper = styled.div`
-    max-width: 1100px;
-`
-const Top = styled.h1`
-    font-size: 2.5rem;
-    color: #00b140;
-    margin-bottom: 10px;
-    @media screen and (max-width: 480px){
-        font-size: 2rem;
-    }
-`
-const Subtitle = styled.p`
-    font-size: 1rem;
-    text-align: center;
-    color: #ffffff;
-`
-const SkillsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0;
-`;
-
-const Skill = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 1rem;
-`;
-
-const Icon = styled.div`
-  font-size: 4rem;
-  color: ${props => props.color};
-  margin-bottom: 1rem;
-  display: inline-block;
-  margin: 0 10px;
-  transition: transform 0.3s ease-in-out;
-   &:hover {
-    transform: scale(1.2);
-  }
-`;
-
-const SkillName = styled.div`
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-`;
-const SkillsData = [
-    {
-        icon: <FaHtml5 />,
-        name: 'HTML5',
-        color: '#F16529'
-    },
-    {
-        icon: <FaCss3Alt />,
-        name: 'CSS',
-        color: '#1572B6'
-
-    },
-    {
-        icon: <FaJs />,
-        name: 'JavaScript',
-        color: '#F7DF1E'
-    },
-    {
-        icon: <SiTailwindcss/>,
-        name: 'Tailwind CSS',
-        color: '#38BDF8'
-    },
-    {
-        icon: <FaBootstrap />,
-        name: 'Bootstrap',
-        color: '#563D7C'
-    },
-    {
-        icon: <FaReact />,
-        name: 'ReactJS',
-        color: '#61DBFB'
-    },
-    {
-        icon: <FaNodeJs />,
-        name: 'NodeJS',
-        color: '#68A063'
-    },
-    {
-        icon: <FaDatabase />,
-        name: 'MongoDB',
-        color: '#4DB33D'
-    },
-    {
-        icon: <FaLink />,
-        name: 'APIs',
-        color: '#3F3F3F'
-    },
-    {
-        icon: <FaObjectGroup />,
-        name: 'DOM',
-        color: '#F16529'
-    },
-    {
-        icon: <FaGripHorizontal />,
-        name: 'Redux',
-        color: '#764ABC'
-    },
-    {
-        icon: <SiStyledcomponents />,
-        name: 'Styled-Components',
-        color: '#DB7093'
-    },
-    {
-        icon: <FaServer />,
-        name: 'Express',
-        color: '#000000'
-    },
-    {
-        icon: <FaJava />,
-        name: 'Java',
-        color: '#007396'
-    },
-    {
-        icon: <FaGit />,
-        name: 'Git',
-        color: '#F05032'
-    },
-    {
-        icon: <SiVisualstudio />,
-        name: 'Visual Studio Code',
-        color: '#007ACC'
-    },
-    {
-        icon: <FaAndroid />,
-        name: 'Android Studio',
-        color: '#3DDC84'
-    }
+const categories = [
+  {
+    name: 'AI Tools',
+    color: 'cyan',
+    skills: [
+      { name: 'Claude', img: claudeImg, iconColor: '#C87B5B' },
+      { name: 'ChatGPT', icon: SiOpenai, iconColor: '#10a37f' },
+      { name: 'Gemini', icon: SiGoogle, iconColor: '#4285F4' },
+      { name: 'Cursor', icon: FaCode, iconColor: '#00b4d8' },
+      { name: 'OpenClaw', img: openclawImg, iconColor: '#d05a4e' },
+    ],
+  },
+  {
+    name: 'APIs & Automation',
+    color: 'purple',
+    skills: [
+      { name: 'REST APIs', icon: TbApi, iconColor: '#0891b2' },
+      { name: 'JSON', icon: VscJson, iconColor: '#f9e2af' },
+      { name: 'n8n', icon: FaProjectDiagram, iconColor: '#ea4b71' },
+      { name: 'Webhooks', icon: TbWebhook, iconColor: '#7c3aed' },
+      { name: 'Zapier', icon: SiZapier, iconColor: '#FF4A00' },
+    ],
+  },
+  {
+    name: 'Builder Stack',
+    color: 'green',
+    skills: [
+      { name: 'React', icon: FaReact, iconColor: '#61DBFB' },
+      { name: 'Next.js', icon: SiNextdotjs, iconColor: '#808080' },
+      { name: 'JavaScript', icon: FaJs, iconColor: '#F0DB4F' },
+      { name: 'Tailwind', icon: SiTailwindcss, iconColor: '#38BDF8' },
+      { name: 'Node.js', icon: FaNodeJs, iconColor: '#68A063' },
+      { name: 'HTML5', icon: FaHtml5, iconColor: '#F16529' },
+      { name: 'CSS', icon: FaCss3Alt, iconColor: '#1572B6' },
+      { name: 'SQL', icon: FaDatabase, iconColor: '#336791' },
+    ],
+  },
+  {
+    name: 'Support & Debugging',
+    color: 'amber',
+    skills: [
+      { name: 'Troubleshooting', icon: FaBug, iconColor: '#ef4444' },
+      { name: 'Log Analysis', icon: FaClipboardCheck, iconColor: '#f59e0b' },
+      { name: 'System Flows', icon: FaProjectDiagram, iconColor: '#8b5cf6' },
+      { name: 'Incident Support', icon: FaClipboardCheck, iconColor: '#f97316' },
+      { name: 'Testing', icon: BiTestTube, iconColor: '#22d3ee' },
+    ],
+  },
 ];
 
+const colorMap = {
+  cyan: { dot: 'bg-cyan', text: 'text-cyan', pill: 'bg-accent-bg text-cyan border-cyan/[0.15]' },
+  purple: { dot: 'bg-purple', text: 'text-purple', pill: 'bg-purple-bg text-purple border-purple/[0.15]' },
+  green: { dot: 'bg-green', text: 'text-green', pill: 'bg-green-bg text-green border-green/[0.15]' },
+  amber: { dot: 'bg-[#f59e0b]', text: 'text-[#f59e0b]', pill: 'bg-[#f59e0b]/[0.08] text-[#f59e0b] border-[#f59e0b]/[0.15]' },
+};
+
 const Skills = () => {
-    return (
-        <Container id='skills'>
-            <Top>Skills</Top>
-            <Subtitle>My friends that help me bring ideas to life</Subtitle>
-            <Wrapper>
-                <SkillsContainer>
-                    {SkillsData.map(skill => (
-                        <Skill key={skill.name}>
-                            <Icon className="icon-container" color={skill.color}>{skill.icon}</Icon>
-                            <SkillName>{skill.name}</SkillName>
-                        </Skill>
-                    ))}
-                </SkillsContainer>
-            </Wrapper>
-        </Container>
-    );
+  return (
+    <section id="skills" className="relative py-28 px-8 sm:px-12 lg:px-20 dot-grid">
+      <div className="section-divider w-full absolute top-0 left-0" />
+
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <span className="font-mono text-xs text-cyan tracking-widest uppercase">03</span>
+          <div className="h-[1px] w-12 bg-cyan/40" />
+          <span className="font-mono text-xs text-muted tracking-widest uppercase">Skills</span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="font-heading text-3xl md:text-4xl font-800 tracking-tight mb-16 text-ink"
+        >
+          My <span className="gradient-text">toolkit</span>
+        </motion.h2>
+
+        <div className="space-y-10">
+          {categories.map((cat, catIdx) => {
+            const colors = colorMap[cat.color];
+            return (
+              <motion.div
+                key={cat.name}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: catIdx * 0.1 }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-2 h-2 rounded-full ${colors.dot}`} />
+                  <span className={`font-mono text-sm font-medium ${colors.text}`}>{cat.name}</span>
+                  <div className="flex-1 h-[1px] bg-border" />
+                </div>
+
+                <div className="flex flex-wrap gap-2.5">
+                  {cat.skills.map((skill, i) => {
+                    const Icon = skill.icon;
+                    return (
+                      <motion.span
+                        key={skill.name}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: catIdx * 0.1 + i * 0.04, type: 'spring', stiffness: 200, damping: 20 }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium border cursor-default hover:shadow-md transition-all duration-300 ${colors.pill}`}
+                      >
+                        {skill.img ? (
+                          <img src={skill.img} alt={skill.name} className="w-4 h-4 rounded-sm object-cover" />
+                        ) : (
+                          <Icon className="text-base" style={{ color: skill.iconColor }} />
+                        )}
+                        {skill.name}
+                      </motion.span>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Skills;
