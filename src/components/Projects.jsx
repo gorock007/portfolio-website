@@ -1,136 +1,108 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { projectsData } from './ProjectsData';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-
-const TiltCard = ({ children }) => {
-  const ref = useRef(null);
-  const [style, setStyle] = useState({});
-  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
-
-  const handleMouseMove = (e) => {
-    const rect = ref.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -4;
-    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 4;
-    setStyle({ transform: `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)` });
-    setGlowPos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
-  };
-
-  const handleMouseLeave = () => {
-    setStyle({ transform: 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)' });
-    setGlowPos({ x: 50, y: 50 });
-  };
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ ...style, transition: 'transform 0.15s ease-out' }}
-      className="relative group"
-    >
-      <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0"
-        style={{
-          background: `radial-gradient(350px circle at ${glowPos.x}% ${glowPos.y}%, rgba(8, 145, 178, 0.06), transparent 60%)`,
-        }}
-      />
-      {children}
-    </div>
-  );
-};
 
 const Projects = () => {
+  const project = projectsData[0];
+
   return (
-    <section id="projects" className="relative py-28 px-8 sm:px-12 lg:px-20">
-      <div className="section-divider w-full absolute top-0 left-0" />
-
-      <div className="max-w-6xl mx-auto">
+    <section id="work" className="relative section-rhythm border-t border-border-light">
+      <div className="container-editorial">
+        {/* Section label */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="flex items-center gap-3 mb-4"
-        >
-          <span className="font-mono text-xs text-cyan tracking-widest uppercase">02</span>
-          <div className="h-[1px] w-12 bg-cyan/40" />
-          <span className="font-mono text-xs text-muted tracking-widest uppercase">Projects</span>
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="font-heading text-3xl md:text-4xl font-800 tracking-tight mb-16 text-ink"
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-16"
         >
-          Things I've <span className="gradient-text">built</span>
-        </motion.h2>
+          <span className="text-xs text-muted tracking-[0.2em] uppercase">Work</span>
+          <div className="h-px flex-1 bg-border" />
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projectsData.map((project, i) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-            >
-              <TiltCard>
-                <div className="relative z-10 bg-surface rounded-2xl border border-border overflow-hidden hover:border-cyan/30 hover:shadow-lg hover:shadow-cyan/[0.05] transition-all duration-400">
-                  <div className="relative overflow-hidden">
-                    <img
-                      src={project.img}
-                      alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent opacity-60" />
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-ink/60 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-                      <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-white hover:bg-cyan hover:border-cyan transition-all"
-                      >
-                        <FaExternalLinkAlt className="text-xs" />
-                      </a>
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-white hover:bg-ink hover:border-ink transition-all"
-                      >
-                        <FaGithub className="text-sm" />
-                      </a>
-                    </div>
-                  </div>
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start"
+        >
+          {/* Product visual */}
+          <div className="rounded-2xl border border-border bg-surface overflow-hidden shadow-sm">
+            {/* Browser chrome */}
+            <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surface-alt">
+              <span className="w-2.5 h-2.5 rounded-full bg-border" />
+              <span className="w-2.5 h-2.5 rounded-full bg-border" />
+              <span className="w-2.5 h-2.5 rounded-full bg-border" />
+              <span className="ml-3 text-[11px] text-muted">naatiace.com</span>
+            </div>
+            {project.img ? (
+              <img src={project.img} alt={project.title} className="w-full object-cover" />
+            ) : (
+              // TODO: replace placeholder with real screenshot once provided
+              <div className="aspect-[16/10] flex flex-col items-center justify-center gap-2 bg-surface-alt">
+                <span className="font-heading text-4xl font-extrabold text-ink">NaatiAce</span>
+                <span className="text-xs text-muted">product preview</span>
+              </div>
+            )}
+          </div>
 
-                  <div className="p-5">
-                    <h3 className="font-heading text-base font-700 text-ink mb-2 group-hover:text-cyan transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-muted text-sm leading-relaxed mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 rounded-full text-[10px] font-mono text-cyan bg-accent-bg"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </TiltCard>
-            </motion.div>
-          ))}
-        </div>
+          {/* Case study copy */}
+          <div>
+            <h2 className="font-heading text-3xl md:text-[2.4rem] font-bold leading-[1.1] mb-3">
+              {project.title}
+            </h2>
+            <p className="text-ink-light text-lg mb-8">{project.oneLiner}</p>
+
+            <div className="space-y-6 text-[15px] leading-relaxed mb-8">
+              <div>
+                <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">The problem</h3>
+                <p className="text-ink-light">{project.problem}</p>
+              </div>
+              <div>
+                <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">What I built</h3>
+                <p className="text-ink-light">{project.built}</p>
+              </div>
+              <div>
+                <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">Outcome</h3>
+                <p className="text-ink-light">{project.outcome}</p>
+              </div>
+            </div>
+
+            {/* Facts */}
+            <ul className="grid grid-cols-2 gap-x-6 gap-y-2 mb-8 text-sm text-ink-light">
+              {project.facts.map((fact) => (
+                <li key={fact} className="flex items-start gap-2">
+                  <span className="mt-2 w-1 h-1 rounded-full bg-accent shrink-0" />
+                  {fact}
+                </li>
+              ))}
+            </ul>
+
+            {/* Tags + link */}
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 rounded-full text-[12px] text-ink-light border border-border"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 text-sm font-medium text-ink border-b border-ink/30 hover:border-ink pb-0.5 transition-colors"
+              >
+                Try NaatiAce
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </a>
+            </div>
+          </div>
+        </motion.article>
       </div>
     </section>
   );
