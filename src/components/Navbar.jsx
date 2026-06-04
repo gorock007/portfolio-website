@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 
 const navLinks = [
@@ -10,6 +10,8 @@ const navLinks = [
 
 const Navbar = ({ toggle }) => {
   const [scrolled, setScrolled] = useState(false);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY >= 50);
@@ -19,7 +21,19 @@ const Navbar = ({ toggle }) => {
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (pathname === '/') {
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate('/' + href); // e.g. "/#work" — Home scrolls to it on load
+    }
+  };
+
+  const handleLogoClick = () => {
+    if (pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
   };
 
   return (
@@ -31,7 +45,7 @@ const Navbar = ({ toggle }) => {
       <div className="container-editorial !max-w-5xl h-16 flex items-center justify-between">
         {/* Logo */}
         <button
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          onClick={handleLogoClick}
           className="font-heading text-xl font-extrabold tracking-tight cursor-pointer text-ink"
         >
           Gorock<span className="text-accent">.</span>

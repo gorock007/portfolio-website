@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -10,10 +10,17 @@ const navLinks = [
 ];
 
 const Sidebar = ({ isOpen, toggle }) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const handleNavClick = (e, href) => {
     e.preventDefault();
     toggle();
-    setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+    if (pathname === '/') {
+      setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 350);
+    } else {
+      navigate('/' + href); // e.g. "/#work" — Home scrolls to it on load
+    }
   };
 
   return (

@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaTwitter, FaLinkedinIn, FaGithub, FaEnvelope, FaTiktok, FaInstagram } from 'react-icons/fa';
-import resume from '../assets/Gorakh Resume.pdf';
 
 const socialLinks = [
   { icon: FaEnvelope, href: 'mailto:gorock397@gmail.com', label: 'Email' },
@@ -50,14 +49,6 @@ const Footer = () => {
             >
               <FaEnvelope className="text-sm" />
               Email me
-            </a>
-            <a
-              href={resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-ink border-b border-ink/30 hover:border-ink pb-0.5 transition-colors"
-            >
-              Download resume
             </a>
           </div>
 

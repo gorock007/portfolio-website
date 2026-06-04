@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
@@ -14,12 +15,23 @@ export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 600);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // When arriving with a hash (e.g. navigating "/#work" from another page), scroll to it.
+  useEffect(() => {
+    if (location.hash) {
+      const id = setTimeout(() => {
+        document.querySelector(location.hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+      return () => clearTimeout(id);
+    }
+  }, [location]);
 
   return (
     <div className="bg-base min-h-screen relative">

@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import resume from '../assets/Gorakh Resume.pdf';
 
 const Hero = () => {
   const ease = [0.22, 1, 0.36, 1];
@@ -58,14 +57,6 @@ const Hero = () => {
               className="text-sm font-medium text-ink border-b border-ink/30 hover:border-ink pb-0.5 transition-colors"
             >
               Get in touch
-            </a>
-            <a
-              href={resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-muted hover:text-ink pb-0.5 border-b border-transparent hover:border-ink/30 transition-colors"
-            >
-              Resume
             </a>
           </motion.div>
         </div>
