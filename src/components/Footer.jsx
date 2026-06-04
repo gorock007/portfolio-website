@@ -1,12 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTwitter, FaLinkedinIn, FaGithub, FaEnvelope, FaTiktok, FaInstagram } from 'react-icons/fa';
+import { FaLinkedinIn, FaGithub, FaEnvelope, FaTiktok, FaInstagram } from 'react-icons/fa';
+
+// Official X logo (react-icons 4.8 predates fa6's FaXTwitter); inline SVG renders like the others.
+const FaX = (props) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" height="1em" width="1em" aria-hidden="true" {...props}>
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
 
 const socialLinks = [
   { icon: FaEnvelope, href: 'mailto:gorock397@gmail.com', label: 'Email' },
   { icon: FaTiktok, href: 'https://www.tiktok.com/@gorockbits', label: 'TikTok' },
   { icon: FaInstagram, href: 'https://www.instagram.com/gorockbits/', label: 'Instagram' },
-  { icon: FaTwitter, href: 'https://x.com/gorock_bits', label: 'X' },
+  { icon: FaX, href: 'https://x.com/gorockbits', label: 'X' },
   { icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/gorakhshetty/', label: 'LinkedIn' },
   { icon: FaGithub, href: 'https://github.com/gorock007/', label: 'GitHub' },
 ];
