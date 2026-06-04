@@ -4,10 +4,8 @@ import { FaTimes } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Blog', href: '/blog', internal: true },
+  { label: 'Work', href: '#work' },
+  { label: 'Writing', href: '/writings', internal: true },
   { label: 'Contact', href: '#contact' },
 ];
 
@@ -39,7 +37,7 @@ const Sidebar = ({ isOpen, toggle }) => {
             <div className="flex justify-end p-6">
               <button
                 onClick={toggle}
-                className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-muted hover:text-cyan transition-all cursor-pointer"
+                className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-muted hover:text-ink transition-all cursor-pointer"
                 aria-label="Close menu"
               >
                 <FaTimes />
@@ -57,7 +55,7 @@ const Sidebar = ({ isOpen, toggle }) => {
                     <Link
                       to={link.href}
                       onClick={toggle}
-                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-muted hover:text-cyan hover:bg-accent-bg transition-all duration-300"
+                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-ink-light hover:text-ink hover:bg-surface-alt transition-all duration-300"
                     >
                       {link.label}
                     </Link>
@@ -65,7 +63,7 @@ const Sidebar = ({ isOpen, toggle }) => {
                     <a
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-muted hover:text-cyan hover:bg-accent-bg transition-all duration-300"
+                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-ink-light hover:text-ink hover:bg-surface-alt transition-all duration-300"
                     >
                       {link.label}
                     </a>
