@@ -39,7 +39,7 @@ const Navbar = ({ toggle }) => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-base/85 backdrop-blur-md border-b border-border' : 'bg-transparent'
+        scrolled ? 'bg-paper/85 backdrop-blur-md border-b border-border' : 'bg-transparent'
       }`}
     >
       <div className="container-editorial !max-w-5xl h-16 flex items-center justify-between">

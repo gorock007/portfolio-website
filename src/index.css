@@ -2,7 +2,7 @@
 
 @theme {
   /* ── Mono-ink editorial palette ── */
-  --color-base: #fafaf9;          /* warm near-white background */
+  --color-paper: #fafaf9;         /* warm near-white background (renamed from 'base' to avoid Tailwind text-base collision) */
   --color-surface: #ffffff;       /* cards / raised surfaces */
   --color-surface-alt: #f4f3f1;   /* subtle alt fill */
   --color-ink: #1a1a18;           /* near-black text */
@@ -21,12 +21,12 @@
   html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-border) var(--color-base);
+    scrollbar-color: var(--color-border) var(--color-paper);
   }
 
   body {
     font-family: var(--font-body);
-    background-color: var(--color-base);
+    background-color: var(--color-paper);
     color: var(--color-ink);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -42,7 +42,7 @@
   }
 
   ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--color-base); }
+  ::-webkit-scrollbar-track { background: var(--color-paper); }
   ::-webkit-scrollbar-thumb {
     background: var(--color-border);
     border-radius: 10px;

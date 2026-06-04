@@ -27,8 +27,14 @@ const Projects = () => {
           transition={{ duration: 0.6 }}
           className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start"
         >
-          {/* Product visual */}
-          <div className="rounded-2xl border border-border bg-surface overflow-hidden shadow-sm">
+          {/* Product visual — links to the live product */}
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Visit ${project.title}`}
+            className="group block rounded-2xl border border-border bg-surface overflow-hidden shadow-sm transition-all duration-300 hover:border-ink/20 hover:shadow-md"
+          >
             {/* Browser chrome */}
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surface-alt">
               <span className="w-2.5 h-2.5 rounded-full bg-border" />
@@ -45,7 +51,7 @@ const Projects = () => {
                 <span className="text-xs text-muted">product preview</span>
               </div>
             )}
-          </div>
+          </a>
 
           {/* Case study copy */}
           <div>

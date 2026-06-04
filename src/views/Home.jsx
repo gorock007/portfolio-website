@@ -34,7 +34,7 @@ export const Home = () => {
   }, [location]);
 
   return (
-    <div className="bg-base min-h-screen relative">
+    <div className="bg-paper min-h-screen relative">
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
 

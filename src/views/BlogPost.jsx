@@ -16,7 +16,7 @@ const BlogPost = () => {
 
   if (!post) {
     return (
-      <div className="bg-base min-h-screen relative">
+      <div className="bg-paper min-h-screen relative">
         <Sidebar isOpen={isOpen} toggle={toggle} />
         <Navbar toggle={toggle} />
         <main className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24 text-center">
@@ -82,7 +82,7 @@ const BlogPost = () => {
   };
 
   return (
-    <div className="bg-base min-h-screen relative">
+    <div className="bg-paper min-h-screen relative">
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} />
 
