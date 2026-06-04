@@ -16,7 +16,18 @@ const capabilities = [
   },
 ];
 
-const stack = ['React', 'Node.js', 'JavaScript', 'SQL', 'LLM / OpenAI APIs', 'n8n', 'Tailwind', 'Vite'];
+const stack = [
+  'Claude Code',
+  'Codex',
+  'OpenClaw',
+  'Hermes Agent',
+  'JavaScript',
+  'Node.js',
+  'React',
+  'APIs',
+  'Supabase',
+  'Apify',
+];
 
 const Skills = () => {
   return (
