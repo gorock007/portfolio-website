@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTwitter, FaLinkedinIn, FaGithub, FaEnvelope, FaTiktok } from 'react-icons/fa';
+import { FaTwitter, FaLinkedinIn, FaGithub, FaEnvelope, FaTiktok, FaInstagram } from 'react-icons/fa';
 import resume from '../assets/Gorakh Resume.pdf';
 
 const socialLinks = [
   { icon: FaEnvelope, href: 'mailto:gorock397@gmail.com', label: 'Email' },
   { icon: FaTiktok, href: 'https://www.tiktok.com/@gorockbits', label: 'TikTok' },
+  { icon: FaInstagram, href: 'https://www.instagram.com/gorockbits/', label: 'Instagram' },
   { icon: FaTwitter, href: 'https://x.com/gorock_bits', label: 'X' },
   { icon: FaLinkedinIn, href: 'https://www.linkedin.com/in/gorakhshetty/', label: 'LinkedIn' },
   { icon: FaGithub, href: 'https://github.com/gorock007/', label: 'GitHub' },
@@ -81,9 +82,8 @@ const Footer = () => {
         </motion.div>
 
         {/* Copyright */}
-        <div className="mt-20 pt-8 border-t border-border-light flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="mt-20 pt-8 border-t border-border-light">
           <p className="text-muted text-xs">&copy; {new Date().getFullYear()} Gorock Shetty · Sydney, Australia</p>
-          <p className="text-muted text-xs">Built with React + Tailwind</p>
         </div>
       </div>
     </footer>

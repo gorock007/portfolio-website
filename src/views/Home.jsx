@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import Projects from '../components/Projects'
 import Sidebar from '../components/Sidebar'
 import Skills from '../components/Skills'
+import ContentStrip from '../components/ContentStrip'
 import AboutMe from '../components/AboutMe'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaArrowUp } from 'react-icons/fa'
@@ -30,6 +31,7 @@ export const Home = () => {
         <AboutMe />
         <Projects />
         <Skills />
+        <ContentStrip />
         <Footer />
       </main>
 
