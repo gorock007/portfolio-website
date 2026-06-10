@@ -48,7 +48,7 @@ const Blog = () => {
             className="rounded-2xl border border-dashed border-border p-10 text-center"
           >
             <p className="font-heading text-xl font-bold mb-2">Notes coming soon</p>
-            <p className="text-muted text-[15px]">
+            <p className="text-muted text-base">
               I'm writing the first few pieces. Check back shortly.
             </p>
           </motion.div>
@@ -70,7 +70,7 @@ const Blog = () => {
                   <h2 className="font-heading font-bold text-xl sm:text-2xl mb-2 group-hover:text-accent transition-colors duration-300">
                     {post.title}
                   </h2>
-                  <p className="text-ink-light text-[15px] leading-relaxed">{post.excerpt}</p>
+                  <p className="text-ink-light text-base leading-relaxed">{post.excerpt}</p>
                 </Link>
               </motion.article>
             ))}

@@ -19,7 +19,7 @@ const Hero = () => {
             className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-border mb-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            <span className="text-[12px] text-ink-light tracking-wide">
+            <span className="text-xs text-ink-light tracking-wide">
               Building NaatiAce · open to interesting work
             </span>
           </motion.div>
@@ -47,7 +47,7 @@ const Hero = () => {
               href="https://naatiace.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-[#fafaf9] hover:bg-ink-light transition-colors duration-300"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light transition-colors duration-300"
             >
               Try NaatiAce
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

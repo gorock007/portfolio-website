@@ -10,7 +10,7 @@ const Visual = ({ project }) => {
         <span className="w-2.5 h-2.5 rounded-full bg-border" />
         <span className="w-2.5 h-2.5 rounded-full bg-border" />
         <span className="w-2.5 h-2.5 rounded-full bg-border" />
-        <span className="ml-3 text-[11px] text-muted">{project.urlLabel}</span>
+        <span className="ml-3 text-xs text-muted">{project.urlLabel}</span>
       </div>
       {project.img ? (
         <img src={project.img} alt={project.title} className="w-full object-cover" />
@@ -81,14 +81,14 @@ const Projects = () => {
                       {project.title}
                     </h2>
                     {project.badge && (
-                      <span className="px-2.5 py-1 rounded-full text-[11px] tracking-wide text-muted border border-border">
+                      <span className="px-2.5 py-1 rounded-full text-xs tracking-wide text-muted border border-border">
                         {project.badge}
                       </span>
                     )}
                   </div>
                   <p className="text-ink-light text-lg mb-8">{project.oneLiner}</p>
 
-                  <div className="space-y-6 text-[15px] leading-relaxed mb-8">
+                  <div className="space-y-6 text-base leading-relaxed mb-8">
                     <div>
                       <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">The problem</h3>
                       <p className="text-ink-light">{project.problem}</p>
@@ -119,7 +119,7 @@ const Projects = () => {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 rounded-full text-[12px] text-ink-light border border-border"
+                          className="px-3 py-1 rounded-full text-xs text-ink-light border border-border"
                         >
                           {tag}
                         </span>

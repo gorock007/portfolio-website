@@ -52,7 +52,7 @@ const Footer = () => {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-12">
             <a
               href="mailto:gorock397@gmail.com"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-[#fafaf9] hover:bg-ink-light transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light transition-colors duration-300"
             >
               <FaEnvelope className="text-sm" />
               Email me

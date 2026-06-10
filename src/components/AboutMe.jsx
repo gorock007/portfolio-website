@@ -46,7 +46,7 @@ const AboutMe = () => {
               I turn messy real-world problems into working AI products.
             </h2>
 
-            <div className="space-y-5 text-ink-light leading-relaxed text-[17px] max-w-2xl mb-10">
+            <div className="space-y-5 text-ink-light leading-relaxed text-lg max-w-2xl mb-10">
               <p>
                 Idea to shipped — I design, build, and run the whole thing, then put it in front of
                 real people who pay for it. Most recently that's <span className="text-ink font-medium">NaatiAce</span>,
@@ -63,7 +63,7 @@ const AboutMe = () => {
               {highlights.map((skill) => (
                 <span
                   key={skill}
-                  className="px-3 py-1 rounded-full text-[13px] text-ink-light border border-border"
+                  className="px-3 py-1 rounded-full text-xs text-ink-light border border-border"
                 >
                   {skill}
                 </span>

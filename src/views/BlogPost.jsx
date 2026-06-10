@@ -54,7 +54,7 @@ const BlogPost = () => {
       if (/^\d+\.\s/.test(block)) {
         const items = block.split('\n').filter(Boolean);
         return (
-          <ol key={i} className="list-decimal list-inside space-y-2 my-4 text-ink-light text-[16px] leading-relaxed">
+          <ol key={i} className="list-decimal list-inside space-y-2 my-4 text-ink-light text-base leading-relaxed">
             {items.map((item, j) => (
               <li key={j}>{renderInline(item.replace(/^\d+\.\s/, ''))}</li>
             ))}
@@ -65,7 +65,7 @@ const BlogPost = () => {
       if (block.startsWith('- ')) {
         const items = block.split('\n').filter(Boolean);
         return (
-          <ul key={i} className="list-disc list-inside space-y-2 my-4 text-ink-light text-[16px] leading-relaxed">
+          <ul key={i} className="list-disc list-inside space-y-2 my-4 text-ink-light text-base leading-relaxed">
             {items.map((item, j) => (
               <li key={j}>{renderInline(item.replace(/^-\s/, ''))}</li>
             ))}
@@ -74,7 +74,7 @@ const BlogPost = () => {
       }
 
       return (
-        <p key={i} className="text-ink-light text-[16px] leading-[1.85] mb-5">
+        <p key={i} className="text-ink-light text-base leading-[1.85] mb-5">
           {renderInline(block)}
         </p>
       );

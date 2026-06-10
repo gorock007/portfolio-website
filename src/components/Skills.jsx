@@ -55,7 +55,7 @@ const Skills = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <h3 className="font-heading text-xl font-bold mb-3 leading-snug">{cap.title}</h3>
-              <p className="text-ink-light text-[15px] leading-relaxed">{cap.body}</p>
+              <p className="text-ink-light text-base leading-relaxed">{cap.body}</p>
             </motion.div>
           ))}
         </div>
