@@ -84,13 +84,13 @@ const BlogPost = () => {
   return (
     <div className="bg-paper min-h-screen relative">
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} />
+      <Navbar toggle={toggle} isOpen={isOpen} />
 
-      <main className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
+      <main id="main" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
         {/* Back link */}
         <Link
           to="/writings"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300 mb-10"
+          className="relative before:absolute before:-inset-2 before:content-[''] inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300 mb-10"
         >
           <FaArrowLeft className="text-xs" />
           Back to writing
@@ -115,7 +115,7 @@ const BlogPost = () => {
           </div>
 
           {/* Title */}
-          <h1 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.1] mb-8">
+          <h1 className="font-heading font-extrabold text-3xl sm:text-4xl leading-[1.1] mb-8">
             {post.title}
           </h1>
 
@@ -140,7 +140,7 @@ const BlogPost = () => {
         <div className="mt-16 pt-8 border-t border-border">
           <Link
             to="/writings"
-            className="inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300"
+            className="relative before:absolute before:-inset-2 before:content-[''] inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300"
           >
             <FaArrowLeft className="text-xs" />
             All writing

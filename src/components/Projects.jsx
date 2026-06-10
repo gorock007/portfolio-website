@@ -32,7 +32,7 @@ const Visual = ({ project }) => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Visit ${project.title}`}
-      className={`group ${base} hover:border-ink/20 hover:shadow-md`}
+      className={`group ${base} hover:border-ink/20 hover:shadow-md active:scale-[0.99]`}
     >
       {inner}
     </a>
@@ -81,7 +81,7 @@ const Projects = () => {
                       {project.title}
                     </h2>
                     {project.badge && (
-                      <span className="px-2.5 py-1 rounded-full text-xs tracking-wide text-muted border border-border">
+                      <span className="px-3 py-1 rounded-full text-xs tracking-wide text-muted border border-border">
                         {project.badge}
                       </span>
                     )}
@@ -90,15 +90,15 @@ const Projects = () => {
 
                   <div className="space-y-6 text-base leading-relaxed mb-8">
                     <div>
-                      <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">The problem</h3>
+                      <h3 className="text-xs text-muted tracking-[0.2em] uppercase mb-2">The problem</h3>
                       <p className="text-ink-light">{project.problem}</p>
                     </div>
                     <div>
-                      <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">What I built</h3>
+                      <h3 className="text-xs text-muted tracking-[0.2em] uppercase mb-2">What I built</h3>
                       <p className="text-ink-light">{project.built}</p>
                     </div>
                     <div>
-                      <h3 className="text-xs text-muted tracking-[0.18em] uppercase mb-2">Outcome</h3>
+                      <h3 className="text-xs text-muted tracking-[0.2em] uppercase mb-2">Outcome</h3>
                       <p className="text-ink-light">{project.outcome}</p>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ const Projects = () => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 text-sm font-medium text-ink border-b border-ink/30 hover:border-ink pb-0.5 transition-colors"
+                        className="group relative before:absolute before:-inset-x-1 before:-inset-y-3 before:content-[''] inline-flex items-center gap-2 text-sm font-medium text-ink border-b border-ink/40 hover:border-ink pb-0.5 transition-colors"
                       >
                         {project.ctaLabel}
                         <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>

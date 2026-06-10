@@ -52,7 +52,7 @@ const Footer = () => {
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-12">
             <a
               href="mailto:gorock397@gmail.com"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light transition-colors duration-300"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light active:scale-[0.98] transition-all duration-300"
             >
               <FaEnvelope className="text-sm" />
               Email me
@@ -70,7 +70,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/40 transition-all duration-300"
+                  className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/40 active:scale-95 transition-all duration-300"
                 >
                   <Icon className="text-base" />
                 </a>

@@ -11,12 +11,12 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center">
-      <div className="container-editorial py-32">
+      <div className="container-editorial section-rhythm">
         <div className="max-w-3xl">
           {/* Status chip */}
           <motion.div
             {...fade(0.05)}
-            className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-border mb-10"
+            className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-border mb-10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
             <span className="text-xs text-ink-light tracking-wide">
@@ -47,14 +47,14 @@ const Hero = () => {
               href="https://naatiace.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light transition-colors duration-300"
+              className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light active:scale-[0.98] transition-all duration-300"
             >
               Try NaatiAce
               <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </a>
             <a
               href="#contact"
-              className="text-sm font-medium text-ink border-b border-ink/30 hover:border-ink pb-0.5 transition-colors"
+              className="relative before:absolute before:-inset-x-1 before:-inset-y-3 before:content-[''] text-sm font-medium text-ink border-b border-ink/40 hover:border-ink pb-0.5 transition-colors"
             >
               Get in touch
             </a>

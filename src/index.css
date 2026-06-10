@@ -7,7 +7,7 @@
   --color-surface-alt: #f4f3f1;   /* subtle alt fill */
   --color-ink: #1a1a18;           /* near-black text */
   --color-ink-light: #44423d;     /* secondary text */
-  --color-muted: #8a877f;         /* tertiary / meta text */
+  --color-muted: #6f6c64;         /* tertiary / meta text (≥4.7:1 on all surfaces — WCAG AA) */
   --color-border: #e6e4df;        /* hairline borders */
   --color-border-light: #f0efea;  /* faintest dividers */
   --color-accent: #b4540a;        /* single warm accent — use sparingly */
@@ -80,10 +80,4 @@
 
 @utility section-rhythm {
   padding-block: clamp(4.5rem, 12vw, 9rem);
-}
-
-/* ── Subtle scroll fade-in (the one motion we keep in CSS) ── */
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
 }

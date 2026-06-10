@@ -13,13 +13,13 @@ const Blog = () => {
   return (
     <div className="bg-paper min-h-screen relative">
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} />
+      <Navbar toggle={toggle} isOpen={isOpen} />
 
-      <main className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
+      <main id="main" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
         {/* Back link */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300 mb-12"
+          className="relative before:absolute before:-inset-2 before:content-[''] inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300 mb-12"
         >
           <FaArrowLeft className="text-xs" />
           Back to home
@@ -67,7 +67,7 @@ const Blog = () => {
                     <span className="w-1 h-1 rounded-full bg-border" />
                     <span>{post.readTime}</span>
                   </div>
-                  <h2 className="font-heading font-bold text-xl sm:text-2xl mb-2 group-hover:text-accent transition-colors duration-300">
+                  <h2 className="font-heading font-bold text-xl sm:text-2xl mb-2 group-hover:text-accent group-hover:underline underline-offset-4 transition-colors duration-300">
                     {post.title}
                   </h2>
                   <p className="text-ink-light text-base leading-relaxed">{post.excerpt}</p>

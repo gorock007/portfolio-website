@@ -31,7 +31,7 @@ const ContentStrip = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl md:text-[2.4rem] font-bold leading-[1.1] mb-6">
+            <h2 className="font-heading text-3xl md:text-[2.6rem] font-bold leading-[1.1] mb-6">
               I make AI content, in public.
             </h2>
             <p className="text-ink-light text-lg leading-relaxed">
@@ -57,7 +57,7 @@ const ContentStrip = () => {
                   href={c.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 p-5 rounded-2xl bg-surface border border-border hover:border-ink/30 transition-all duration-300"
+                  className="group flex items-center gap-4 p-5 rounded-2xl bg-surface border border-border hover:border-ink/30 active:scale-[0.99] transition-all duration-300"
                 >
                   <span className="w-11 h-11 shrink-0 rounded-full bg-paper border border-border flex items-center justify-center text-ink-light group-hover:text-ink transition-colors">
                     <Icon className="text-lg" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FaTimes } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -12,6 +12,15 @@ const navLinks = [
 const Sidebar = ({ isOpen, toggle }) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') toggle();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, toggle]);
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -44,7 +53,7 @@ const Sidebar = ({ isOpen, toggle }) => {
             <div className="flex justify-end p-6">
               <button
                 onClick={toggle}
-                className="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center text-muted hover:text-ink transition-all cursor-pointer"
+                className="w-11 h-11 rounded-full bg-surface-alt flex items-center justify-center text-muted hover:text-ink active:scale-95 transition-all duration-200 cursor-pointer"
                 aria-label="Close menu"
               >
                 <FaTimes />
@@ -62,7 +71,12 @@ const Sidebar = ({ isOpen, toggle }) => {
                     <Link
                       to={link.href}
                       onClick={toggle}
-                      className="block py-3 px-4 rounded-xl text-lg font-heading font-semibold text-ink-light hover:text-ink hover:bg-surface-alt transition-all duration-300"
+                      aria-current={pathname.startsWith(link.href) ? 'page' : undefined}
+                      className={`block py-3 px-4 rounded-xl text-lg font-heading font-semibold transition-all duration-300 ${
+                        pathname.startsWith(link.href)
+                          ? 'text-ink bg-surface-alt'
+                          : 'text-ink-light hover:text-ink hover:bg-surface-alt'
+                      }`}
                     >
                       {link.label}
                     </Link>

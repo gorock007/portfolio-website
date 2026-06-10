@@ -36,9 +36,9 @@ export const Home = () => {
   return (
     <div className="bg-paper min-h-screen relative">
       <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} />
+      <Navbar toggle={toggle} isOpen={isOpen} />
 
-      <main className="relative z-10">
+      <main id="main" className="relative z-10">
         <Hero />
         <AboutMe />
         <Projects />
@@ -55,7 +55,7 @@ export const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 z-50 w-11 h-11 rounded-full bg-surface border border-border shadow-sm flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/30 transition-all duration-300 cursor-pointer"
+            className="fixed bottom-8 right-8 z-50 w-11 h-11 rounded-full bg-surface border border-border shadow-sm flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/30 active:scale-90 transition-all duration-300 cursor-pointer"
             aria-label="Scroll to top"
           >
             <FaArrowUp className="text-xs" />
