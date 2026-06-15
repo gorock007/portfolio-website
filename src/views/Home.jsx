@@ -8,12 +8,14 @@ import Sidebar from '../components/Sidebar'
 import Skills from '../components/Skills'
 import ContentStrip from '../components/ContentStrip'
 import AboutMe from '../components/AboutMe'
+import Chatbot from '../components/Chatbot'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaArrowUp } from 'react-icons/fa'
 
 export const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const location = useLocation();
 
@@ -47,21 +49,24 @@ export const Home = () => {
         <Footer />
       </main>
 
-      {/* Scroll to top */}
+      {/* Scroll to top — sits above the chat launcher; hidden while the chat panel is open */}
       <AnimatePresence>
-        {showScrollTop && (
+        {showScrollTop && !chatOpen && (
           <motion.button
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-8 right-8 z-50 w-11 h-11 rounded-full bg-surface border border-border shadow-sm flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/30 active:scale-90 transition-all duration-300 cursor-pointer"
+            className="fixed bottom-24 right-4 sm:right-6 z-40 w-11 h-11 rounded-full bg-surface border border-border shadow-sm flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/30 active:scale-90 transition-all duration-300 cursor-pointer"
             aria-label="Scroll to top"
           >
             <FaArrowUp className="text-xs" />
           </motion.button>
         )}
       </AnimatePresence>
+
+      {/* AI assistant */}
+      <Chatbot onOpenChange={setChatOpen} />
     </div>
   )
 }
