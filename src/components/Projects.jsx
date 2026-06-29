@@ -77,7 +77,7 @@ const Projects = () => {
                 {/* Case study copy */}
                 <div className={imageRight ? 'lg:order-1' : ''}>
                   <div className="flex items-center gap-3 mb-3">
-                    <h2 className="font-heading text-3xl md:text-[2.4rem] font-bold leading-[1.1]">
+                    <h2 className="font-heading text-3xl md:text-4xl font-bold leading-[1.1]">
                       {project.title}
                     </h2>
                     {project.badge && (

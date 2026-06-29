@@ -31,7 +31,7 @@ const ContentStrip = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="font-heading text-3xl md:text-[2.6rem] font-bold leading-[1.1] mb-6">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold leading-[1.1] mb-6">
               I make AI content, in public.
             </h2>
             <p className="text-ink-light text-lg leading-relaxed">

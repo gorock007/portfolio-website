@@ -42,7 +42,7 @@ const AboutMe = () => {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="flex-1"
           >
-            <h2 className="font-heading text-3xl md:text-[2.6rem] font-bold leading-[1.1] mb-8 max-w-2xl">
+            <h2 className="font-heading text-3xl md:text-4xl font-bold leading-[1.1] mb-8 max-w-2xl">
               I turn messy real-world problems into working AI products.
             </h2>
 

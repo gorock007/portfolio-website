@@ -41,12 +41,12 @@ const Footer = () => {
           transition={{ duration: 0.6 }}
           className="max-w-2xl"
         >
-          <h2 className="font-heading text-3xl md:text-[2.6rem] font-bold leading-[1.1] mb-6">
-            Have a problem worth solving? Let's talk.
+          <h2 className="font-heading text-3xl md:text-4xl font-bold leading-[1.1] mb-6">
+            Got an AI idea worth shipping? Let's build it.
           </h2>
           <p className="text-ink-light text-lg leading-relaxed mb-10">
             Whether you're building an AI product, exploring an idea, or hiring for interesting
-            work — my inbox is open.
+            work — my inbox is open, and I reply to everyone.
           </p>
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-12">

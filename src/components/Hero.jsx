@@ -32,7 +32,7 @@ const Hero = () => {
             {/* Headline */}
             <motion.h1
               {...fade(0.12)}
-              className="font-heading font-extrabold text-[clamp(2rem,5vw,3.5rem)] leading-[1.05] mb-6"
+              className="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-6"
             >
               I build AI products people actually pay for.
             </motion.h1>
