@@ -7,6 +7,7 @@ export const projectsData = [
     id: 1,
     title: 'NaatiAce',
     img: naatiace,
+    imgAlt: 'NaatiAce mock-exam dashboard with AI scoring and interpretation feedback',
     urlLabel: 'naatiace.com',
     oneLiner: 'An AI platform that helps people pass the NAATI CCL exam.',
     problem:
@@ -31,6 +32,7 @@ export const projectsData = [
     id: 2,
     title: 'CAID',
     img: caid,
+    imgAlt: 'CAID content operations dashboard with planning, analytics, trends, and script generation',
     urlLabel: 'localhost:3001',
     badge: 'Personal tool',
     oneLiner: 'A self-built, AI-powered content-operations dashboard for my gorockbits brand.',

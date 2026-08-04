@@ -2,9 +2,10 @@
 
 Personal portfolio of Gorock Shetty (founder of NaatiAce). React 18 + Vite + Tailwind CSS v4 + Framer Motion, deployed on Netlify.
 
-- Pages live in `src/views/` (Home, Blog, BlogPost), sections in `src/components/`.
+- Pages live in `src/views/` (Home, Blog, BlogPost, NotFound), sections in `src/components/`.
 - All design tokens live in `src/index.css` under `@theme`. There is no tailwind.config — Tailwind v4 CSS-first config.
 - Project/blog content is data-driven: `src/components/ProjectsData.js`, `src/components/BlogData.js`.
+- Runtime: Node.js 22.12 or newer (see `.nvmrc`).
 - Build: `npm run dev` / `npm run build`.
 
 ## Design system rules

@@ -30,7 +30,13 @@ const AboutMe = () => {
             className="shrink-0"
           >
             <div className="w-40 h-40 md:w-52 md:h-52 rounded-2xl overflow-hidden border border-border">
-              <img src={img} alt="Gorock Shetty" className="w-full h-full object-cover" />
+              <img
+                src={img}
+                alt="Gorock Shetty"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
 

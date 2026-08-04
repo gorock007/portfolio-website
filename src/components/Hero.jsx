@@ -98,6 +98,8 @@ const Hero = () => {
               alt="The NaatiAce platform — an AI exam-prep tool for the NAATI CCL test"
               width={1600}
               height={868}
+              fetchpriority="high"
+              decoding="async"
               className="w-full h-auto object-cover"
             />
           </motion.div>

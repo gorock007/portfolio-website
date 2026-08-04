@@ -35,6 +35,15 @@ const Navbar = ({ toggle, isOpen }) => {
     }
   };
 
+  const handleSkipClick = (e) => {
+    e.preventDefault();
+    const main = document.getElementById('main');
+    if (!main) return;
+    window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#main`);
+    main.focus();
+    main.scrollIntoView({ block: 'start' });
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
@@ -43,6 +52,7 @@ const Navbar = ({ toggle, isOpen }) => {
     >
       <a
         href="#main"
+        onClick={handleSkipClick}
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-surface focus:border focus:border-border focus:rounded-full focus:px-4 focus:py-2 text-sm font-medium text-ink"
       >
         Skip to main content
@@ -60,10 +70,12 @@ const Navbar = ({ toggle, isOpen }) => {
 
         {/* Hamburger */}
         <button
+          id="mobile-menu-button"
           onClick={toggle}
           className="md:hidden w-11 h-11 -mr-2.5 flex items-center justify-center text-ink-light text-xl hover:text-ink active:scale-95 transition-all duration-200 cursor-pointer"
-          aria-label="Open menu"
+          aria-label={isOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isOpen}
+          aria-controls="mobile-menu"
         >
           <FaBars />
         </button>

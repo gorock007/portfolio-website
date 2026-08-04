@@ -63,12 +63,13 @@ const Footer = () => {
           <div className="flex flex-wrap items-center gap-3">
             {socialLinks.map((social) => {
               const Icon = social.icon;
+              const opensNewTab = social.href.startsWith('http');
               return (
                 <a
                   key={social.label}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={opensNewTab ? '_blank' : undefined}
+                  rel={opensNewTab ? 'noopener noreferrer' : undefined}
                   aria-label={social.label}
                   className="w-11 h-11 rounded-full border border-border flex items-center justify-center text-ink-light hover:text-ink hover:border-ink/40 active:scale-95 transition-all duration-300"
                 >

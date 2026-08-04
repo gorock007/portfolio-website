@@ -13,7 +13,13 @@ const Visual = ({ project }) => {
         <span className="ml-3 text-xs text-muted">{project.urlLabel}</span>
       </div>
       {project.img ? (
-        <img src={project.img} alt={project.title} className="w-full object-cover" />
+        <img
+          src={project.img}
+          alt={project.imgAlt || project.title}
+          loading="lazy"
+          decoding="async"
+          className="w-full object-cover"
+        />
       ) : (
         <div className="aspect-[16/10] flex flex-col items-center justify-center gap-2 bg-surface-alt">
           <span className="font-heading text-4xl font-extrabold text-ink">{project.title}</span>

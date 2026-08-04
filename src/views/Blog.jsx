@@ -5,6 +5,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import { blogPosts } from '../components/BlogData';
+import PageTitle from '../components/PageTitle';
 
 const Blog = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,10 +13,11 @@ const Blog = () => {
 
   return (
     <div className="bg-paper min-h-screen relative">
+      <PageTitle title="Writing — Gorock Shetty" />
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} isOpen={isOpen} />
 
-      <main id="main" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
+      <main id="main" tabIndex="-1" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
         {/* Back link */}
         <Link
           to="/"

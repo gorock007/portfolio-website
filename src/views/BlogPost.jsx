@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import { blogPosts } from '../components/BlogData';
 import profileImg from '../images/profile3.jpg';
+import PageTitle from '../components/PageTitle';
 
 const BlogPost = () => {
   const { id } = useParams();
@@ -17,9 +18,10 @@ const BlogPost = () => {
   if (!post) {
     return (
       <div className="bg-paper min-h-screen relative">
+        <PageTitle title="Post not found — Gorock Shetty" />
         <Sidebar isOpen={isOpen} toggle={toggle} />
-        <Navbar toggle={toggle} />
-        <main className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24 text-center">
+        <Navbar toggle={toggle} isOpen={isOpen} />
+        <main id="main" tabIndex="-1" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24 text-center">
           <h1 className="font-heading font-extrabold text-3xl mb-4">Post not found</h1>
           <Link to="/writings" className="text-accent hover:underline text-sm">
             Back to writing
@@ -83,10 +85,11 @@ const BlogPost = () => {
 
   return (
     <div className="bg-paper min-h-screen relative">
+      <PageTitle title={`${post.title} — Gorock Shetty`} />
       <Sidebar isOpen={isOpen} toggle={toggle} />
       <Navbar toggle={toggle} isOpen={isOpen} />
 
-      <main id="main" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
+      <main id="main" tabIndex="-1" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
         {/* Back link */}
         <Link
           to="/writings"
