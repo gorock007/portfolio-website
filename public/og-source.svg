@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f2efe7"/>
+  <circle cx="1106" cy="78" r="8" fill="#f04e2f"/>
+  <text x="72" y="88" fill="#181816" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="-1">Gorock<tspan fill="#f04e2f">.</tspan></text>
+  <text x="72" y="220" fill="#181816" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="600" letter-spacing="-5">I build AI products</text>
+  <text x="72" y="310" fill="#181816" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="600" letter-spacing="-5">for problems I</text>
+  <text x="72" y="402" fill="#181816" font-family="Georgia, Times New Roman, serif" font-size="88" font-style="italic" letter-spacing="-4">want solved.</text>
+  <line x1="72" y1="514" x2="1128" y2="514" stroke="#d8d3c8" stroke-width="2"/>
+  <text x="72" y="558" fill="#6c6961" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" letter-spacing="2">NAATIACE · REVISIT</text>
+  <text x="1128" y="558" text-anchor="end" fill="#6c6961" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" letter-spacing="2">SYDNEY</text>
+</svg>

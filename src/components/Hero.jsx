@@ -1,112 +1,54 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import naatiace from '../images/naatiace.jpg';
+import { motion } from 'framer-motion'
 
-const proofPoints = ['55 languages', 'Live with paying customers', 'Built & run solo'];
+const LINKEDIN_URL = 'https://www.linkedin.com/in/gorakhshetty/'
+const ease = [0.22, 1, 0.36, 1]
+
+const reveal = (delay) => ({
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.72, delay, ease },
+})
 
 const Hero = () => {
-  const ease = [0.22, 1, 0.36, 1];
-  const fade = (delay) => ({
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease },
-  });
-
   return (
-    <section id="home" className="relative min-h-screen flex items-center">
-      <div className="container-editorial section-rhythm w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Copy */}
-          <div className="max-w-xl">
-            {/* Status chip */}
-            <motion.div
-              {...fade(0.05)}
-              className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-border mb-8"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
-              <span className="text-xs text-ink-light tracking-wide">
-                Building NaatiAce · open to interesting work
-              </span>
-            </motion.div>
+    <section className="hero-section" aria-labelledby="hero-title">
+      <div className="page-container hero-inner">
+        <motion.div {...reveal(0.04)} className="hero-kicker">
+          <span className="status-dot" aria-hidden="true" />
+          AI-native builder · Sydney
+        </motion.div>
 
-            {/* Headline */}
-            <motion.h1
-              {...fade(0.12)}
-              className="font-heading font-extrabold text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-6"
-            >
-              I build AI products people actually pay for.
-            </motion.h1>
+        <motion.h1 {...reveal(0.12)} id="hero-title" className="hero-title">
+          I build AI products for problems I <em>want solved.</em>
+        </motion.h1>
 
-            {/* Empathy + proof */}
-            <motion.p
-              {...fade(0.22)}
-              className="text-ink-light text-lg md:text-xl leading-relaxed mb-8"
-            >
-              Most AI ideas die as demos. I take them from zero to a live product —
-              design, build, ship, and run the whole thing, most recently{' '}
-              <span className="text-ink font-medium">NaatiAce</span>.
-            </motion.p>
+        <motion.div {...reveal(0.22)} className="hero-bottom">
+          <p className="hero-intro">
+            Endlessly curious, and usually building with Claude Code, Codex, and agent workflows.
+          </p>
 
-            {/* CTAs */}
-            <motion.div {...fade(0.32)} className="flex flex-wrap items-center gap-x-6 gap-y-4 mb-6">
-              <a
-                href="#contact"
-                className="group inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-ink text-base font-medium text-paper hover:bg-ink-light active:scale-[0.98] transition-all duration-300"
-              >
-                Work with me
-                <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-              </a>
-              <a
-                href="https://naatiace.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative before:absolute before:-inset-x-1 before:-inset-y-3 before:content-[''] text-sm font-medium text-ink border-b border-ink/40 hover:border-ink active:text-ink-light pb-0.5 transition-colors"
-              >
-                See NaatiAce
-              </a>
-            </motion.div>
-
-            {/* Proof row */}
-            <motion.ul
-              {...fade(0.42)}
-              className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-ink-light"
+          <div className="hero-actions">
+            <a href="#work" className="button button-primary">
+              See what I’ve built <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link"
             >
-              {proofPoints.map((point, i) => (
-                <li key={point} className="flex items-center gap-3">
-                  {i > 0 && <span className="text-border" aria-hidden="true">·</span>}
-                  {point}
-                </li>
-              ))}
-            </motion.ul>
+              Find me on LinkedIn <span aria-hidden="true">↗</span>
+            </a>
           </div>
+        </motion.div>
 
-          {/* Product visual */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3, ease }}
-            className="rounded-2xl border border-border bg-surface overflow-hidden shadow-sm"
-          >
-            <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surface-alt">
-              <span className="w-2.5 h-2.5 rounded-full bg-border" aria-hidden="true" />
-              <span className="w-2.5 h-2.5 rounded-full bg-border" aria-hidden="true" />
-              <span className="w-2.5 h-2.5 rounded-full bg-border" aria-hidden="true" />
-              <span className="ml-3 text-xs text-muted">naatiace.com</span>
-            </div>
-            <img
-              src={naatiace}
-              alt="The NaatiAce platform — an AI exam-prep tool for the NAATI CCL test"
-              width={1600}
-              height={868}
-              fetchpriority="high"
-              decoding="async"
-              className="w-full h-auto object-cover"
-            />
-          </motion.div>
-        </div>
+        <motion.div {...reveal(0.34)} className="hero-rule" aria-hidden="true">
+          <span>Built, shipped, used.</span>
+          <span>2 live products</span>
+        </motion.div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

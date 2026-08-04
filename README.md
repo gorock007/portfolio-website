@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio for Gorock Shetty, founder of NaatiAce. Built with React 18, Vite, Tailwind CSS v4, and Framer Motion, and deployed to Netlify from `master`.
+Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. Built with React 18, Vite, Tailwind CSS v4, and Framer Motion, and deployed to Netlify from `master`.
 
 ## Local development
 
@@ -17,7 +17,10 @@ Create a production build with `npm run build` and preview it locally with `npm 
 ## Project structure
 
 - Routes and pages: `src/views/`
-- Reusable page sections: `src/components/`
-- Project and writing content: `src/components/ProjectsData.js` and `src/components/BlogData.js`
+- Reusable homepage and writing sections: `src/components/`
+- Featured products: `src/components/ProjectsData.js`
+- Future writing entries: `src/components/BlogData.js`
 - Design tokens and global styles: `src/index.css`
 - Netlify deployment configuration: `netlify.toml`
+
+The writing index intentionally supports an empty state. Add entries to `BlogData.js` when a note is ready to publish; both the homepage preview and writing route update automatically.

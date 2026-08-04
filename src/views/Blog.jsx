@@ -1,86 +1,72 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FaArrowLeft } from 'react-icons/fa';
-import Navbar from '../components/Navbar';
-import Sidebar from '../components/Sidebar';
-import { blogPosts } from '../components/BlogData';
-import PageTitle from '../components/PageTitle';
+import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { blogPosts } from '../components/BlogData'
+import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import PageTitle from '../components/PageTitle'
 
 const Blog = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-
   return (
-    <div className="bg-paper min-h-screen relative">
+    <div className="site-shell min-h-screen">
       <PageTitle title="Writing — Gorock Shetty" />
-      <Sidebar isOpen={isOpen} toggle={toggle} />
-      <Navbar toggle={toggle} isOpen={isOpen} />
+      <Navbar />
 
-      <main id="main" tabIndex="-1" className="relative z-10 container-editorial !max-w-2xl pt-32 pb-24">
-        {/* Back link */}
-        <Link
-          to="/"
-          className="relative before:absolute before:-inset-2 before:content-[''] inline-flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors duration-300 mb-12"
-        >
-          <FaArrowLeft className="text-xs" />
-          Back to home
+      <main id="main" tabIndex="-1" className="page-container writing-page">
+        <Link to="/" className="back-link">
+          <span aria-hidden="true">←</span> Home
         </Link>
 
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
+        <motion.header
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-14"
+          transition={{ duration: 0.6 }}
+          className="writing-page-header"
         >
-          <h1 className="font-heading font-extrabold text-4xl sm:text-5xl mb-4">
-            Writing<span className="text-accent">.</span>
-          </h1>
-          <p className="text-ink-light text-lg leading-relaxed max-w-md">
-            Short pieces on building AI products — what I'm learning as I ship.
-          </p>
-        </motion.div>
+          <p className="section-label">Notebook</p>
+          <h1>Writ<em>ing.</em></h1>
+          <p>Notes on life, AI, tools, workflows, and whatever I’m learning along the way.</p>
+        </motion.header>
 
         {blogPosts.length === 0 ? (
-          <motion.div
+          <motion.section
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="rounded-2xl border border-dashed border-border p-10 text-center"
+            transition={{ duration: 0.5, delay: 0.12 }}
+            className="empty-state"
+            aria-label="No published writing yet"
           >
-            <p className="font-heading text-xl font-bold mb-2">Notes coming soon</p>
-            <p className="text-muted text-base">
-              I'm writing the first few pieces. Check back shortly.
-            </p>
-          </motion.div>
+            <span>Coming soon</span>
+            <div>
+              <h2>First note in progress.</h2>
+              <p>I’m giving it the time it deserves. It’ll appear here when it’s ready.</p>
+            </div>
+          </motion.section>
         ) : (
-          <div className="space-y-10">
-            {blogPosts.map((post, i) => (
+          <div className="post-index">
+            {blogPosts.map((post, index) => (
               <motion.article
                 key={post.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+                transition={{ duration: 0.45, delay: 0.08 + index * 0.06 }}
               >
-                <Link to={`/writings/${post.id}`} className="block group">
-                  <div className="flex items-center gap-3 text-xs text-muted mb-2">
-                    <span>{post.date}</span>
-                    <span className="w-1 h-1 rounded-full bg-border" />
-                    <span>{post.readTime}</span>
+                <Link to={`/writings/${post.id}`} className="post-index-row">
+                  <span className="post-index-date">{post.date}</span>
+                  <div className="post-index-copy">
+                    <h2>{post.title}</h2>
+                    <p>{post.excerpt}</p>
                   </div>
-                  <h2 className="font-heading font-bold text-xl sm:text-2xl mb-2 group-hover:text-accent group-hover:underline underline-offset-4 transition-colors duration-300">
-                    {post.title}
-                  </h2>
-                  <p className="text-ink-light text-base leading-relaxed">{post.excerpt}</p>
+                  <span aria-hidden="true">↗</span>
                 </Link>
               </motion.article>
             ))}
           </div>
         )}
       </main>
-    </div>
-  );
-};
 
-export default Blog;
+      <Footer />
+    </div>
+  )
+}
+
+export default Blog

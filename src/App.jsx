@@ -5,11 +5,13 @@ import { Home } from './views/Home'
 import Blog from './views/Blog'
 import BlogPost from './views/BlogPost'
 import NotFound from './views/NotFound'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Router>
+        <ScrollToTop />
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/writings' element={<Blog/>} />

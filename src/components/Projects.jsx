@@ -1,156 +1,76 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { projectsData } from './ProjectsData';
-
-const Visual = ({ project }) => {
-  const inner = (
-    <>
-      {/* Browser / app chrome */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-surface-alt">
-        <span className="w-2.5 h-2.5 rounded-full bg-border" />
-        <span className="w-2.5 h-2.5 rounded-full bg-border" />
-        <span className="w-2.5 h-2.5 rounded-full bg-border" />
-        <span className="ml-3 text-xs text-muted">{project.urlLabel}</span>
-      </div>
-      {project.img ? (
-        <img
-          src={project.img}
-          alt={project.imgAlt || project.title}
-          loading="lazy"
-          decoding="async"
-          className="w-full object-cover"
-        />
-      ) : (
-        <div className="aspect-[16/10] flex flex-col items-center justify-center gap-2 bg-surface-alt">
-          <span className="font-heading text-4xl font-extrabold text-ink">{project.title}</span>
-          <span className="text-xs text-muted">preview</span>
-        </div>
-      )}
-    </>
-  );
-
-  const base = 'block rounded-2xl border border-border bg-surface overflow-hidden shadow-sm transition-all duration-300';
-
-  // Clickable only when there's a live URL.
-  return project.liveUrl ? (
-    <a
-      href={project.liveUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`Visit ${project.title}`}
-      className={`group ${base} hover:border-ink/20 hover:shadow-md active:scale-[0.99]`}
-    >
-      {inner}
-    </a>
-  ) : (
-    <div className={base}>{inner}</div>
-  );
-};
+import { motion } from 'framer-motion'
+import { projectsData } from './ProjectsData'
 
 const Projects = () => {
   return (
-    <section id="work" className="relative section-rhythm border-t border-border-light">
-      <div className="container-editorial">
-        {/* Section label */}
+    <section id="work" className="section-block" aria-labelledby="work-title">
+      <div className="page-container">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-16"
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.55 }}
+          className="section-heading"
         >
-          <span className="text-xs text-muted tracking-[0.2em] uppercase">Work</span>
-          <div className="h-px flex-1 bg-border" />
+          <p className="section-label">Selected work</p>
+          <h2 id="work-title">Two small bets, out in the world.</h2>
         </motion.div>
 
-        <div className="space-y-24 lg:space-y-32">
-          {projectsData.map((project, i) => {
-            const imageRight = i % 2 === 1;
-            return (
-              <motion.article
-                key={project.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.6 }}
-                className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+        <div className="project-list">
+          {projectsData.map((project, index) => (
+            <motion.article
+              key={project.id}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.68, delay: index * 0.06 }}
+            >
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`project-card project-card-${project.theme}`}
+                aria-label={`Visit ${project.title}`}
               >
-                {/* Visual */}
-                <div className={imageRight ? 'lg:order-2' : ''}>
-                  <Visual project={project} />
-                </div>
-
-                {/* Case study copy */}
-                <div className={imageRight ? 'lg:order-1' : ''}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <h2 className="font-heading text-3xl md:text-4xl font-bold leading-[1.1]">
-                      {project.title}
-                    </h2>
-                    {project.badge && (
-                      <span className="px-3 py-1 rounded-full text-xs tracking-wide text-muted border border-border">
-                        {project.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-ink-light text-lg mb-8">{project.oneLiner}</p>
-
-                  <div className="space-y-6 text-base leading-relaxed mb-8">
-                    <div>
-                      <h3 className="text-xs text-muted tracking-[0.2em] uppercase mb-2">The problem</h3>
-                      <p className="text-ink-light">{project.problem}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-xs text-muted tracking-[0.2em] uppercase mb-2">What I built</h3>
-                      <p className="text-ink-light">{project.built}</p>
-                    </div>
-                    <div>
-                      <h3 className="text-xs text-muted tracking-[0.2em] uppercase mb-2">Outcome</h3>
-                      <p className="text-ink-light">{project.outcome}</p>
-                    </div>
+                <div className="project-copy">
+                  <div className="project-meta">
+                    <span>{project.number}</span>
+                    <span>Live product</span>
                   </div>
 
-                  {/* Facts */}
-                  <ul className="grid grid-cols-2 gap-x-6 gap-y-2 mb-8 text-sm text-ink-light">
-                    {project.facts.map((fact) => (
-                      <li key={fact} className="flex items-start gap-2">
-                        <span className="mt-2 w-1 h-1 rounded-full bg-accent shrink-0" />
-                        {fact}
-                      </li>
-                    ))}
-                  </ul>
+                  <div>
+                    <h3>{project.title}</h3>
+                    <p className="project-description">{project.description}</p>
+                  </div>
 
-                  {/* Tags + optional link */}
-                  <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 rounded-full text-xs text-ink-light border border-border"
-                        >
-                          {tag}
-                        </span>
+                  <div>
+                    <ul className="project-proof" aria-label={`${project.title} highlights`}>
+                      {project.proof.map((item) => (
+                        <li key={item}>{item}</li>
                       ))}
-                    </div>
-                    {project.liveUrl && project.ctaLabel && (
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group relative before:absolute before:-inset-x-1 before:-inset-y-3 before:content-[''] inline-flex items-center gap-2 text-sm font-medium text-ink border-b border-ink/40 hover:border-ink pb-0.5 transition-colors"
-                      >
-                        {project.ctaLabel}
-                        <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                      </a>
-                    )}
+                    </ul>
+                    <span className="project-link">
+                      Visit {project.urlLabel} <span aria-hidden="true">↗</span>
+                    </span>
                   </div>
                 </div>
-              </motion.article>
-            );
-          })}
+
+                <div className={`project-media project-media-${project.id}`}>
+                  <div className="project-window">
+                    <div className="window-bar" aria-hidden="true">
+                      <span className="window-dots"><i /><i /><i /></span>
+                      <span>{project.urlLabel}</span>
+                    </div>
+                    <img src={project.img} alt={project.imgAlt} loading="lazy" decoding="async" />
+                  </div>
+                </div>
+              </a>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Projects;
+export default Projects

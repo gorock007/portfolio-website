@@ -1,111 +1,61 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom'
 
-const navLinks = [
-  { label: 'Work', href: '#work' },
-  { label: 'Writing', href: '/writings', internal: true },
-  { label: 'Contact', href: '#contact' },
-];
+const LINKEDIN_URL = 'https://www.linkedin.com/in/gorakhshetty/'
 
-const Navbar = ({ toggle, isOpen }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+const Navbar = () => {
+  const { pathname } = useLocation()
+  const writingIsActive = pathname.startsWith('/writings')
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY >= 50);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  const handleLogoClick = (event) => {
+    if (pathname !== '/') return
+    event.preventDefault()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    if (pathname === '/') {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      navigate('/' + href); // e.g. "/#work" — Home scrolls to it on load
-    }
-  };
-
-  const handleLogoClick = (e) => {
-    if (pathname === '/') {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleSkipClick = (e) => {
-    e.preventDefault();
-    const main = document.getElementById('main');
-    if (!main) return;
-    window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#main`);
-    main.focus();
-    main.scrollIntoView({ block: 'start' });
-  };
+  const handleSkipClick = (event) => {
+    event.preventDefault()
+    const main = document.getElementById('main')
+    if (!main) return
+    main.focus()
+    main.scrollIntoView({ block: 'start' })
+  }
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-paper/85 backdrop-blur-md border-b border-border' : 'bg-transparent'
-      }`}
-    >
-      <a
-        href="#main"
-        onClick={handleSkipClick}
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:bg-surface focus:border focus:border-border focus:rounded-full focus:px-4 focus:py-2 text-sm font-medium text-ink"
-      >
+    <header className="site-header">
+      <a href="#main" onClick={handleSkipClick} className="skip-link">
         Skip to main content
       </a>
-      <div className="container-editorial !max-w-5xl h-16 flex items-center justify-between">
-        {/* Logo */}
+
+      <nav className="page-container nav-inner" aria-label="Primary navigation">
         <Link
           to="/"
           onClick={handleLogoClick}
-          aria-label="Gorock — home"
-          className="font-heading text-xl font-extrabold tracking-tight text-ink"
+          aria-label="Gorock Shetty — home"
+          className="wordmark"
         >
-          Gorock<span className="text-accent">.</span>
+          Gorock<span aria-hidden="true">.</span>
         </Link>
 
-        {/* Hamburger */}
-        <button
-          id="mobile-menu-button"
-          onClick={toggle}
-          className="md:hidden w-11 h-11 -mr-2.5 flex items-center justify-center text-ink-light text-xl hover:text-ink active:scale-95 transition-all duration-200 cursor-pointer"
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isOpen}
-          aria-controls="mobile-menu"
-        >
-          <FaBars />
-        </button>
+        <div className="nav-links">
+          <Link
+            to="/writings"
+            aria-current={writingIsActive ? 'page' : undefined}
+            className={writingIsActive ? 'nav-link nav-link-active' : 'nav-link'}
+          >
+            Writing
+          </Link>
+          <a
+            href={LINKEDIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link nav-link-external"
+          >
+            LinkedIn <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </nav>
+    </header>
+  )
+}
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => {
-            const isActive = link.internal && pathname.startsWith(link.href);
-            const linkClass = `inline-block py-2 text-sm font-medium transition-colors duration-200 ${
-              isActive ? 'text-ink' : 'text-ink-light hover:text-ink'
-            }`;
-            return (
-              <li key={link.label}>
-                {link.internal ? (
-                  <Link to={link.href} aria-current={isActive ? 'page' : undefined} className={linkClass}>
-                    {link.label}
-                    {isActive && <span className="block h-px bg-accent" />}
-                  </Link>
-                ) : (
-                  <a href={link.href} onClick={(e) => handleNavClick(e, link.href)} className={linkClass}>
-                    {link.label}
-                  </a>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </nav>
-  );
-};
-
-export default Navbar;
+export default Navbar
