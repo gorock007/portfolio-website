@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 
+const GITHUB_URL = 'https://github.com/gorock007/'
 const LINKEDIN_URL = 'https://www.linkedin.com/in/gorakhshetty/'
 
 const Navbar = () => {
@@ -44,6 +45,14 @@ const Navbar = () => {
           >
             Writing
           </Link>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link nav-link-external"
+          >
+            GitHub <span aria-hidden="true">↗</span>
+          </a>
           <a
             href={LINKEDIN_URL}
             target="_blank"
