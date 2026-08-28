@@ -15,6 +15,10 @@ const renderInline = (text) => (
 
 const renderContent = (content) => (
   content.split('\n\n').map((block, index) => {
+    if (block.startsWith('### ')) {
+      return <h3 key={index}>{block.replace('### ', '')}</h3>
+    }
+
     if (block.startsWith('## ')) {
       return <h2 key={index}>{block.replace('## ', '')}</h2>
     }
@@ -89,7 +93,22 @@ const BlogPost = () => {
             </div>
           </header>
 
+          {post.coverImage && (
+            <figure className="article-cover">
+              <img src={post.coverImage} alt={post.coverImageAlt || ''} />
+            </figure>
+          )}
+
           <div className="article-body">{renderContent(post.content)}</div>
+
+          {post.sourceUrl && (
+            <aside className="article-source">
+              <p>Source of inspiration</p>
+              <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
+                {post.sourceLabel || 'Read the original post'} <span aria-hidden="true">↗</span>
+              </a>
+            </aside>
+          )}
         </motion.article>
 
         <div className="article-bottom">
