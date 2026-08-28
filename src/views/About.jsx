@@ -7,7 +7,7 @@ import PortraitTile from '../components/tiles/PortraitTile'
 import SocialTile from '../components/tiles/SocialTile'
 import StackTile from '../components/tiles/StackTile'
 import { aboutBlocks } from '../data/about'
-import { profile } from '../data/siteLinks'
+import { contactHandle, contactUrl, profile } from '../data/siteLinks'
 
 const About = () => (
   <Layout>
@@ -41,10 +41,15 @@ const About = () => (
           <p className="stat-label">Where to find me</p>
           <p className="stat-body">
             I’m in <strong>{profile.location}</strong>. If you’re building something in this
-            space, or you just want to argue about what AI actually changes, the inbox is open.
+            space, or you just want to argue about what AI actually changes, my DMs are open.
           </p>
-          <a className="pill-button" href={`mailto:${profile.email}`}>
-            {profile.email} <span className="link-arrow" aria-hidden="true">→</span>
+          <a
+            className="pill-button"
+            href={contactUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {contactHandle} on X <span className="link-arrow" aria-hidden="true">↗</span>
           </a>
         </div>
       </Tile>

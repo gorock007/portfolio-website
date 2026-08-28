@@ -14,7 +14,7 @@ import StackTile from '../components/tiles/StackTile'
 import Tile from '../components/Tile'
 import WritingTile from '../components/tiles/WritingTile'
 import { featuredProjects, projects } from '../data/projects'
-import { profile } from '../data/siteLinks'
+import { contactHandle, contactUrl } from '../data/siteLinks'
 import { blogPosts } from '../data/writing'
 
 const listItems = [
@@ -75,15 +75,15 @@ export const Home = () => {
             </div>
           </Tile>
 
-          <Tile size="sm" href={`mailto:${profile.email}`}>
+          <Tile size="sm" href={contactUrl}>
             <div className="stat-tile">
               <p className="stat-label">Say hello</p>
               <p className="stat-body">
                 If you’re building something in this space, or want to argue about what AI
-                actually changes — the inbox is open.
+                actually changes, my DMs are open.
               </p>
               <p className="project-url">
-                {profile.email} <span className="link-arrow" aria-hidden="true">→</span>
+                {contactHandle} on X <span className="link-arrow" aria-hidden="true">↗</span>
               </p>
             </div>
           </Tile>

@@ -1,4 +1,4 @@
-// 24×24 line icons, drawn inline so the nav has no icon-font dependency.
+// 24×24 line icons, drawn inline so the footer has no icon-font dependency.
 const base = {
   width: 24,
   height: 24,
@@ -13,13 +13,6 @@ const base = {
 }
 
 const solid = { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': 'true', focusable: 'false' }
-
-export const MailIcon = () => (
-  <svg {...base}>
-    <rect x="2.5" y="4.5" width="19" height="15" rx="3" />
-    <path d="m3.5 7.5 7.2 5.1a2.2 2.2 0 0 0 2.6 0l7.2-5.1" />
-  </svg>
-)
 
 export const GitHubIcon = () => (
   <svg {...solid}>
@@ -69,7 +62,6 @@ export const ListIcon = () => (
 )
 
 export const icons = {
-  mail: MailIcon,
   github: GitHubIcon,
   linkedin: LinkedInIcon,
   x: XIcon,
