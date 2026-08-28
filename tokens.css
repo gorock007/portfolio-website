@@ -1,0 +1,67 @@
+:root {
+  --color-paper: oklch(96% 0.014 82);
+  --color-paper-2: oklch(93% 0.017 82);
+  --color-paper-3: oklch(89% 0.019 82);
+  --color-ink: oklch(18% 0.014 76);
+  --color-ink-2: oklch(29% 0.014 76);
+  --color-neutral: oklch(39% 0.012 76);
+  --color-muted: oklch(43% 0.012 76);
+  --color-rule: oklch(82% 0.018 82);
+  --color-rule-2: oklch(68% 0.019 80);
+  --color-accent: oklch(62% 0.19 36);
+  --color-accent-ink: oklch(98% 0.009 82);
+  --color-focus: oklch(55% 0.2 36);
+
+  --font-display: "Instrument Serif", ui-serif, serif;
+  --font-body: "Instrument Sans", ui-sans-serif, sans-serif;
+  --font-outlier: "Instrument Sans", ui-sans-serif, sans-serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.25rem;
+  --text-lg: 1.5625rem;
+  --text-xl: 1.9531rem;
+  --text-2xl: 2.4414rem;
+  --text-3xl: 3.0518rem;
+  --text-4xl: 3.8147rem;
+  --text-display: clamp(3rem, 6vw + 0.5rem, 5.25rem);
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-xs-negative: -0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --space-4xl: 9rem;
+  --space-5xl: 12rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --rule-hair: 1px;
+  --rule-fine: 2px;
+  --rule-avatar: 2.5px;
+  --radius-card: 0.75rem;
+  --radius-pill: 999px;
+  --radius-input: 0.35rem;
+  --target-touch: 2.75rem;
+  --container-max: 78rem;
+  --reading-max: 48rem;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}

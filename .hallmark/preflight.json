@@ -1,0 +1,10 @@
+{
+  "date": "2026-08-28",
+  "framework": "React 18 + Vite 7 + React Router 7",
+  "styling": "Tailwind CSS 4 plus custom CSS",
+  "font_stack": "Instrument Sans + Instrument Serif",
+  "palette": "warm paper, olive ink, coral accent",
+  "motion": "Framer Motion installed",
+  "spacing": "4-point-compatible custom scale",
+  "preserved": ["framework", "routes", "font pairing", "warm palette", "project data", "writing content"]
+}

@@ -1,11 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="#f2efe7"/>
-  <circle cx="1106" cy="78" r="8" fill="#f04e2f"/>
-  <text x="72" y="88" fill="#181816" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="-1">Gorock<tspan fill="#f04e2f">.</tspan></text>
-  <text x="72" y="220" fill="#181816" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="600" letter-spacing="-5">I build AI products</text>
-  <text x="72" y="310" fill="#181816" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="600" letter-spacing="-5">for problems I</text>
-  <text x="72" y="402" fill="#181816" font-family="Georgia, Times New Roman, serif" font-size="88" font-style="italic" letter-spacing="-4">want solved.</text>
-  <line x1="72" y1="514" x2="1128" y2="514" stroke="#d8d3c8" stroke-width="2"/>
-  <text x="72" y="558" fill="#6c6961" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" letter-spacing="2">NAATIACE · REVISIT</text>
-  <text x="1128" y="558" text-anchor="end" fill="#6c6961" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="600" letter-spacing="2">SYDNEY</text>
+  <rect width="1200" height="630" fill="#f3efe6"/>
+  <text x="72" y="76" fill="#171711" font-family="Instrument Sans, Arial, sans-serif" font-size="26" font-weight="600" letter-spacing="-1">Gorock<tspan fill="#d95534">.</tspan></text>
+
+  <text x="72" y="170" fill="#171711" font-family="Georgia, serif" font-size="54" font-weight="400" letter-spacing="-2"><tspan fill="#d95534">--</tspan>dangeriously skipping</text>
+  <text x="72" y="235" fill="#171711" font-family="Georgia, serif" font-size="54" font-weight="400" letter-spacing="-2">permission, trying to stay</text>
+  <text x="72" y="300" fill="#171711" font-family="Georgia, serif" font-size="54" font-weight="400" letter-spacing="-2">releveant for the post-agi</text>
+  <text x="72" y="365" fill="#171711" font-family="Georgia, serif" font-size="54" font-weight="400" letter-spacing="-2">world.</text>
+
+  <text x="72" y="524" fill="#545148" font-family="Instrument Sans, Arial, sans-serif" font-size="22">
+    learning extensively about AI, optimistic and genuinely excieted about the future.
+  </text>
+  <text x="72" y="572" fill="#171711" font-family="Instrument Sans, Arial, sans-serif" font-size="17" font-weight="600">
+    Read about the AI skills that wont become obselete ↗
+  </text>
+
+  <g transform="translate(930 160)">
+    <ellipse cx="100" cy="257" rx="89" ry="30" fill="#cec9bd"/>
+    <path d="M44 292c4-48 24-72 56-72s52 24 56 72H44Z" fill="#d95534" stroke="#171711" stroke-width="3"/>
+    <path d="M39 111c0-76 24-105 63-105 40 0 62 30 60 106l-4 67c-3 46-25 75-57 75-33 0-55-29-58-75l-4-68Z" fill="#f0eadf" stroke="#171711" stroke-width="3"/>
+    <path d="M41 121C29 49 57 0 104 2c41 2 67 43 58 118-13-37-35-51-65-44-21 5-36 23-56 45Z" fill="#171711"/>
+    <ellipse cx="76" cy="144" rx="6" ry="9" fill="#171711"/>
+    <ellipse cx="126" cy="144" rx="6" ry="9" fill="#171711"/>
+    <path d="M66 125c8-6 18-6 26 0M114 125c8-6 18-6 25 1M101 145c-2 17-4 27 4 31M83 198c11 8 25 8 36-1" fill="none" stroke="#171711" stroke-linecap="round" stroke-width="3"/>
+    <path d="M6 65v26M-7 78h26M191 36v18M182 45h18" fill="none" stroke="#d95534" stroke-linecap="round" stroke-width="3"/>
+  </g>
+
+  <line x1="72" y1="604" x2="1128" y2="604" stroke="#c9c2b5" stroke-width="1"/>
 </svg>
