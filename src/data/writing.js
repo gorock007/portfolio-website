@@ -289,6 +289,6 @@ It will be whether we know **what to ask it to do, why it matters, and whether w
 
 ---
 
-*This article was inspired by a post from [AUTHOR NAME], particularly their framing of understanding the world, first-principles thinking and articulation as three durable fundamentals in an era of rapidly improving AI models. Their post connected these ideas to Rich Sutton's “The Bitter Lesson.” I've expanded on that framework here through my own experience building software with AI agents, particularly around learning through building and the growing importance of judgment.*`,
+*This article was inspired by a post from @kunchenguid on X, particularly their framing of understanding the world, first-principles thinking and articulation as three durable fundamentals in an era of rapidly improving AI models. Their post connected these ideas to Rich Sutton's “The Bitter Lesson.” I've expanded on that framework here through my own experience building software with AI agents, particularly around learning through building and the growing importance of judgment.*`,
   },
 ]
