@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. Built with React 18, Vite, Tailwind CSS v4, and Framer Motion, and deployed to Netlify from `master`.
+Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. A bento-tile site built with React 18, Vite, Tailwind CSS v4, and Framer Motion, deployed to Netlify from `master`.
 
 ## Local development
 
@@ -16,11 +16,11 @@ Create a production build with `npm run build` and preview it locally with `npm 
 
 ## Project structure
 
-- Routes and pages: `src/views/`
-- Reusable homepage and writing sections: `src/components/`
-- Featured products: `src/components/ProjectsData.js`
-- Future writing entries: `src/components/BlogData.js`
-- Design tokens and global styles: `src/index.css`
+- Routes and pages: `src/views/` — Home, About, Work, Writing, WritingPost, NotFound
+- Layout and primitives: `src/components/` — `Nav`, `Layout`, `Tile`, `TileGrid`, `GridTopBar`, `Tooltip`, `Icons`, `ListView`
+- Individual grid tiles: `src/components/tiles/`
+- Content: `src/data/` — `projects.js`, `writing.js`, `about.js`, `manifesto.js`, `siteLinks.js`
+- Design tokens and base layer: `src/index.css`; component styles in `src/styles/`
 - Netlify deployment configuration: `netlify.toml`
 
-The writing index intentionally supports an empty state. Add entries to `BlogData.js` when a note is ready to publish; both the homepage preview and writing route update automatically.
+Adding a project to `src/data/projects.js` or a note to `src/data/writing.js` updates the home grid, the Work page, and the Writing index automatically. The writing index keeps a working empty state.
