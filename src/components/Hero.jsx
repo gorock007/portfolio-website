@@ -4,21 +4,26 @@ import AnimatedAvatar from './AnimatedAvatar'
 const Hero = () => {
   return (
     <section className="revamp-hero" aria-labelledby="hero-title">
-      <div className="revamp-container revamp-hero-grid">
+      <div className="revamp-container compact-container">
+        <div className="profile-lockup">
+          <AnimatedAvatar />
+          <div>
+            <p className="profile-name">Gorock Shetty</p>
+            <p className="profile-note">AI-native builder · Sydney</p>
+          </div>
+        </div>
+
         <div className="revamp-hero-copy">
           <h1 id="hero-title">
             <span aria-hidden="true">--</span>dangeriously skipping permission, trying to stay releveant for the post-agi world.
           </h1>
           <p>learning extensively about AI, optimistic and genuinely excieted about the future.</p>
-          <div className="hero-blog-prompt">
-            <p>Read about the AI skills that wont become obselete</p>
-            <Link className="ink-link hero-blog-link" to="/writings/ai-skills-that-compound">
-              Read it <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
+          <Link className="hero-writing-link" to="/writings/ai-skills-that-compound" aria-label="Read about the AI skills that wont become obselete">
+            <span className="hero-writing-link-long">Read about the AI skills that wont become obselete</span>
+            <span className="hero-writing-link-short" aria-hidden="true">Read the post</span>
+            <span aria-hidden="true">↗</span>
+          </Link>
         </div>
-
-        <AnimatedAvatar />
       </div>
     </section>
   )

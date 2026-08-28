@@ -1,9 +1,9 @@
 import Footer from '../components/Footer'
+import GitHubActivity from '../components/GitHubActivity'
 import Hero from '../components/Hero'
 import Navbar from '../components/Navbar'
 import PageTitle from '../components/PageTitle'
 import Projects from '../components/Projects'
-import WritingPreview from '../components/WritingPreview'
 
 export const Home = () => {
   return (
@@ -14,7 +14,7 @@ export const Home = () => {
       <main id="main" tabIndex="-1">
         <Hero />
         <Projects />
-        <WritingPreview />
+        <GitHubActivity />
       </main>
 
       <Footer />

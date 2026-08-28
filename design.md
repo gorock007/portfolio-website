@@ -1,102 +1,78 @@
 # Design — Gorock Shetty
 
-A locked design system for the portfolio. Every page reads this before visual changes are made.
+A locked design system for the portfolio. Every route shares this compact, personal interface.
 
 ## Genre
 
-Editorial: personal, direct, warm, and lightly technical.
+Modern-minimal: direct, personal, technical without looking like a product landing page.
 
 ## Macrostructure family
 
-- Marketing pages: Marquee Hero; the statement is the main visual, with proof below as an index.
-- Content indexes: Index-First; links and dates are the layout.
-- Content pages: Long Document; readable prose with generous measure and no decorative section labels.
+- Home: Index-First profile — identity, two project cards, recent public activity.
+- Content indexes: Index-First — links and dates provide the structure.
+- Content pages: Long Document — comfortable prose with no decorative labels.
 
 ## Theme
 
-- `--color-paper`: `oklch(96% 0.014 82)`
-- `--color-paper-2`: `oklch(93% 0.017 82)`
-- `--color-paper-3`: `oklch(89% 0.019 82)`
-- `--color-ink`: `oklch(18% 0.014 76)`
-- `--color-ink-2`: `oklch(29% 0.014 76)`
-- `--color-rule`: `oklch(82% 0.018 82)`
-- `--color-accent`: `oklch(62% 0.19 36)`
-- `--color-focus`: `oklch(55% 0.2 36)`
+- `--color-paper`: pure white in light mode, near-black in dark mode.
+- `--color-ink`: near-black in light mode, near-white in dark mode.
+- `--color-rule`: zero-chroma neutral separator.
+- Accent: none. Project imagery may retain its own real product colour.
+- Activity levels: monochrome steps only.
 
 ## Typography
 
-- Display: Instrument Serif, weight 400, roman.
-- Body: Instrument Sans, weight 400.
-- Outlier: Instrument Sans, weight 600, used only for the wordmark and small utility text.
-- Display tracking: `-0.035em`.
-- Display scale anchor: `clamp(3rem, 6vw + 0.5rem, 5.25rem)`.
+- Display / body / utility: Inter, weights 400 / 500 / 600 / 700.
+- Display tracking: `-0.065em`.
+- Home display anchor: `clamp(2rem, 4vw, 3rem)`.
+- Single-font system is intentional: the personal writing and product imagery carry the character.
 
 ## Spacing
 
-4-point named scale. Values live in `tokens.css`; production styles use named tokens rather than raw spacing values.
+4-point named scale in `tokens.css`. Home content is constrained to `--compact-max` so the main story stays visible with little scrolling.
 
 ## Motion
 
-- Easings: `--ease-out`, `--ease-in`, and `--ease-in-out` from `tokens.css`.
-- One page-load reveal, restrained link motion, and one character loop for the requested avatar.
-- Reduced-motion fallback: static avatar and opacity-only transitions at no more than 150 ms.
+- Avatar: a quiet blink and glance.
+- Project cards: one-pixel lift and image scale.
+- Activity: opacity-only arrival.
+- Reduced-motion fallback: all loops stop and transitions shorten.
 
 ## Microinteractions stance
 
-- Focus is immediate and visibly outlined.
-- Hover changes one signal only.
-- Button presses move by one pixel; no bounce or glow.
+- Visible, immediate focus ring.
+- One signal on hover.
+- Presses move one pixel; no glow, bounce, or fake chrome.
 
-## CTA voice
+## Navigation and footer
 
-- Primary CTA: typographic link with an animated underline or ink-swap treatment.
-- Secondary CTA: plain text link with a directional arrow.
+- Nav: N9 edge-aligned, all links always visible; never a dropdown.
+- Footer: Ft2 single-line credit with GitHub and LinkedIn only.
+- Theme control: visible text control, white by default and dark on request.
 
 ## Per-page allowances
 
-- The homepage may use one Tier-B hand-built SVG avatar.
-- About and Writing use typography only.
-- Project images are real screenshots with a hairline edge and no simulated browser chrome.
-
-## What pages must share
-
-- Wordmark, palette, type pairing, navigation, focus treatment, and footer rhythm.
-- Accent occupies no more than a small highlight area in each viewport.
-- Headings remain roman; italics are reserved for running prose.
-
-## What pages may differ on
-
-- Homepage uses the Marquee Hero structure.
-- Writing index uses link rows.
-- About and article pages use long-form prose measures.
+- Home may use the animated portrait, real product captures, and factual GitHub public-event data.
+- About and Writing use typography and rules only.
+- Real product images never receive simulated browser chrome.
 
 ## Exports
 
 ### tokens.css
 
-The canonical implementation is in `tokens.css` at the project root.
+The canonical implementation is [tokens.css](./tokens.css). It defines the light and dark modes plus every typography, spacing, motion, rule, and radius token used by the app.
 
 ### Tailwind v4 `@theme`
 
 ```css
 @theme {
-  --color-paper: oklch(96% 0.014 82);
-  --color-paper-2: oklch(93% 0.017 82);
-  --color-paper-3: oklch(89% 0.019 82);
-  --color-ink: oklch(18% 0.014 76);
-  --color-ink-2: oklch(29% 0.014 76);
-  --color-muted: oklch(43% 0.012 76);
-  --color-rule: oklch(82% 0.018 82);
-  --color-accent: oklch(62% 0.19 36);
-  --color-focus: oklch(55% 0.2 36);
-  --font-display: "Instrument Serif", ui-serif, serif;
-  --font-body: "Instrument Sans", ui-sans-serif, sans-serif;
-  --spacing-sm: 1rem;
+  --color-paper: oklch(100% 0 0);
+  --color-ink: oklch(14% 0 0);
+  --color-rule: oklch(88% 0 0);
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
   --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 2.5rem;
-  --text-md: 1.25rem;
-  --text-xl: 1.9531rem;
+  --text-md: 1.125rem;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 ```
@@ -105,26 +81,14 @@ The canonical implementation is in `tokens.css` at the project root.
 
 ```json
 {
-  "$schema": "https://design-tokens.github.io/community-group/format/",
   "color": {
-    "paper": { "$value": "oklch(96% 0.014 82)", "$type": "color" },
-    "ink": { "$value": "oklch(18% 0.014 76)", "$type": "color" },
-    "accent": { "$value": "oklch(62% 0.19 36)", "$type": "color" },
-    "focus": { "$value": "oklch(55% 0.2 36)", "$type": "color" }
+    "paper": { "$value": "oklch(100% 0 0)", "$type": "color" },
+    "ink": { "$value": "oklch(14% 0 0)", "$type": "color" },
+    "rule": { "$value": "oklch(88% 0 0)", "$type": "color" }
   },
   "font": {
-    "display": { "$value": "Instrument Serif, ui-serif, serif", "$type": "fontFamily" },
-    "body": { "$value": "Instrument Sans, ui-sans-serif, sans-serif", "$type": "fontFamily" }
-  },
-  "space": {
-    "sm": { "$value": "1rem", "$type": "dimension" },
-    "md": { "$value": "1.5rem", "$type": "dimension" },
-    "lg": { "$value": "2rem", "$type": "dimension" }
-  },
-  "duration": {
-    "micro": { "$value": "120ms", "$type": "duration" },
-    "short": { "$value": "220ms", "$type": "duration" },
-    "long": { "$value": "420ms", "$type": "duration" }
+    "display": { "$value": "Inter", "$type": "fontFamily" },
+    "body": { "$value": "Inter", "$type": "fontFamily" }
   }
 }
 ```
@@ -133,19 +97,14 @@ The canonical implementation is in `tokens.css` at the project root.
 
 ```css
 :root {
-  --background: 96% 0.014 82;
-  --foreground: 18% 0.014 76;
-  --card: 93% 0.017 82;
-  --card-foreground: 18% 0.014 76;
-  --primary: 62% 0.19 36;
-  --primary-foreground: 98% 0.009 82;
-  --secondary: 89% 0.019 82;
-  --secondary-foreground: 29% 0.014 76;
-  --muted: 82% 0.018 82;
-  --muted-foreground: 43% 0.012 76;
-  --border: 82% 0.018 82;
-  --input: 82% 0.018 82;
-  --ring: 55% 0.2 36;
-  --radius: 0.75rem;
+  --background: 100% 0 0;
+  --foreground: 14% 0 0;
+  --primary: 14% 0 0;
+  --primary-foreground: 100% 0 0;
+  --muted: 88% 0 0;
+  --muted-foreground: 49% 0 0;
+  --border: 88% 0 0;
+  --ring: 42% 0 0;
+  --radius: 0.65rem;
 }
 ```

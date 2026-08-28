@@ -1,5 +1,13 @@
 [
   {
+    "date": "2026-08-29",
+    "scope": "app",
+    "macrostructure": "Index-First",
+    "theme": "monochrome",
+    "enrichment": "live Revisit product image + factual public GitHub activity",
+    "brief": "Compact personal portfolio with Inter, white and dark modes, flat navigation, two projects, and minimal scrolling"
+  },
+  {
     "date": "2026-08-28",
     "scope": "app",
     "macrostructure": "Marquee Hero",

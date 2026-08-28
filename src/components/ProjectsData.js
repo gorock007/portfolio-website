@@ -1,5 +1,5 @@
 import naatiace from '../images/naatiace.jpg'
-import revisit from '../images/revisit-product.jpg'
+import revisit from '../images/revisit-live.jpg'
 
 export const projectsData = [
   {
@@ -18,10 +18,10 @@ export const projectsData = [
     id: 'revisit',
     number: '02',
     title: 'Revisit',
-    description: 'A local-first Mac scratchpad for keeping the useful parts of AI work.',
+    description: 'A private Mac project inbox that hands the right context to Claude Code, Codex, and other MCP clients.',
     proof: ['One-time purchase', 'Stripe checkout', 'No tracking'],
     img: revisit,
-    imgAlt: 'Revisit Mac app showing saved AI notes in a compact local-first workspace',
+    imgAlt: 'Revisit Mac app showing prompts, useful notes, and a send action inside a project workspace',
     urlLabel: 'revisit.gorockshetty.com',
     liveUrl: 'https://revisit.gorockshetty.com/',
     theme: 'graphite',
