@@ -1,0 +1,677 @@
+/* ---------------------------------------------------------------------------
+   The grid — a 328px module on a 16px gutter, four columns wide.
+--------------------------------------------------------------------------- */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Rows are the module too, so a 2-row tile is exactly 328 + 16 + 328 = 672
+     and short tiles never leave a hole under a tall neighbour. */
+  grid-auto-rows: minmax(var(--spacing-unit), auto);
+  grid-auto-flow: row dense;
+  gap: var(--spacing-gutter);
+  width: 100%;
+  max-width: 1360px;
+}
+
+.tile-grid[data-view="list"] {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: var(--spacing-double);
+  border-top: 1px solid var(--color-hairline);
+}
+
+/* Tile ----------------------------------------------------------------------- */
+.tile {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-tile);
+  border-radius: var(--radius-tile);
+  padding: 24px;
+}
+
+.tile {
+  height: 100%;
+  min-width: 0;
+}
+
+.tile--sm,
+.tile--md {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.tile--md {
+  padding: 32px;
+}
+
+.tile--lg {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.tile--xl {
+  grid-column: span 2;
+  grid-row: span 2;
+  padding: 32px;
+}
+
+.tile--wide {
+  grid-column: span 2;
+  grid-row: span 1;
+  padding: 32px;
+}
+
+/* Lets a tile's row grow past the module when its content needs the room,
+   instead of silently clipping against .tile's overflow: hidden. */
+.tile--grow {
+  height: auto;
+}
+
+/* Long-form panel: full width, grows with its content. */
+.tile--auto {
+  grid-column: 1 / -1;
+  grid-row: span 1;
+  height: auto;
+  overflow: visible;
+  padding: 32px;
+}
+
+/* A tile that is itself a link. A 1px lift alone is too quiet on a flat
+   surface, so the tile also deepens a step on hover. */
+a.tile {
+  display: block;
+  transition: transform 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+}
+
+a.tile:hover,
+a.tile:focus-visible {
+  transform: translateY(-1px);
+  background-color: color-mix(in srgb, var(--color-ink) 5%, var(--color-tile));
+}
+
+a.tile:active {
+  transform: translateY(0);
+  background-color: color-mix(in srgb, var(--color-ink) 8%, var(--color-tile));
+}
+
+.tile-media {
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: var(--color-paper);
+}
+
+.tile-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s var(--ease-out);
+}
+
+a.tile:hover .tile-media img {
+  transform: scale(1.02);
+}
+
+/* Grid top bar ---------------------------------------------------------------- */
+.grid-top-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  width: 100%;
+  max-width: 1360px;
+  margin-bottom: 8px;
+  padding-inline: 32px;
+}
+
+.grid-caption {
+  color: var(--color-ink-body);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.view-controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  background-color: var(--color-tile);
+  border-radius: var(--radius-pill);
+}
+
+.view-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  color: var(--color-ink-body);
+  transition: color 0.2s var(--ease-out), background-color 0.2s var(--ease-out);
+}
+
+.view-control svg {
+  width: 16px;
+  height: 16px;
+}
+
+.view-control:hover {
+  color: var(--color-ink);
+}
+
+.view-control:active {
+  transform: translateY(1px);
+}
+
+.view-control[aria-pressed="true"] {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  box-shadow: var(--shadow-tooltip);
+}
+
+/* List view ------------------------------------------------------------------- */
+.list-row {
+  display: grid;
+  grid-template-columns: 24px 1fr auto;
+  align-items: baseline;
+  gap: 16px;
+  padding: 20px 8px;
+  border-bottom: 1px solid var(--color-hairline);
+  transition: padding-left 0.2s var(--ease-out);
+}
+
+.list-row:hover {
+  padding-left: 16px;
+}
+
+.list-row:active {
+  background-color: var(--color-tile);
+}
+
+.list-index,
+.list-meta {
+  color: var(--color-ink-body);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.list-title {
+  color: var(--color-ink);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.list-desc {
+  color: var(--color-ink-body);
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Tile internals
+--------------------------------------------------------------------------- */
+
+/* Manifesto */
+.manifesto {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.manifesto-lines {
+  flex: 1;
+}
+
+.asterisk {
+  color: var(--color-ink-body);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.asterisk a {
+  box-shadow: inset 0 -1px 0 var(--color-underline);
+  transition: box-shadow 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+
+.asterisk a:hover {
+  color: var(--color-ink);
+  box-shadow: inset 0 -1px 0 var(--color-ink);
+}
+
+/* Project tile */
+.project-tile {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.project-title {
+  color: var(--color-ink);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+
+.project-subtitle {
+  color: var(--color-ink-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.project-url {
+  color: var(--color-ink-body);
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* In ActivityTile this class is the link surface itself, not decoration
+   inside a larger tile link, so it needs its own hover. */
+a.project-url {
+  transition: color 0.2s var(--ease-out);
+}
+
+a.project-url:hover,
+a.project-url:focus-visible {
+  color: var(--color-ink);
+}
+
+.project-tile {
+  justify-content: space-between;
+}
+
+/* Featured tiles: the capture sits on the tile's own bottom edge at full bleed
+   and keeps its native 16:9, so nothing is cropped sideways. The grey between
+   the copy and the screenshot is deliberate. */
+.tile--xl .project-tile .tile-media {
+  flex: none;
+  aspect-ratio: 16 / 9;
+  margin: 24px -32px -32px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.tile--xl .project-tile .tile-media img {
+  object-position: top center;
+}
+
+/* Everything smaller: an inset plate on white, so screenshots with a white
+   background still read as a screenshot and mixed aspect ratios all behave. */
+.tile--sm .project-tile .tile-media,
+.tile--md .project-tile .tile-media,
+.tile--wide .project-tile .tile-media {
+  flex: 1;
+  min-height: 0;
+  margin-top: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--color-hairline);
+}
+
+/* Contain, not cover: these captures have wildly different aspect ratios and a
+   cover crop of a white page header shows nothing at all. */
+.tile--sm .project-tile .tile-media img,
+.tile--md .project-tile .tile-media img,
+.tile--wide .project-tile .tile-media img {
+  object-fit: contain;
+  object-position: center;
+}
+
+/* At this size the domain is noise and it overruns the title. */
+.tile--sm .project-url span,
+.tile--md .project-url span {
+  font-size: 16px;
+}
+
+.tile--sm .project-url-label,
+.tile--md .project-url-label {
+  display: none;
+}
+
+.tile--sm .project-title,
+.tile--md .project-title {
+  font-size: 20px;
+}
+
+.tile--sm .project-subtitle,
+.tile--md .project-subtitle {
+  margin-top: 8px;
+}
+
+.project-fallback {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+  margin-top: 24px;
+}
+
+/* Small stat / label tiles */
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.stat-label {
+  color: var(--color-ink-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.stat-body {
+  color: var(--color-ink-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.stat-body strong {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.stat-body--small {
+  font-size: 14px;
+}
+
+.stat-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.stat-list li {
+  color: var(--color-ink);
+  font-size: 14px;
+  line-height: 1;
+  padding: 8px 12px;
+  background-color: var(--color-paper);
+  border-radius: var(--radius-pill);
+}
+
+/* GitHub activity */
+.activity-grid {
+  transition: opacity 0.25s var(--ease-out);
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  gap: 3px;
+  width: 100%;
+}
+
+.activity-cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background-color: var(--color-paper);
+}
+
+.activity-cell[data-level="1"] {
+  background-color: color-mix(in srgb, var(--color-ink) 22%, var(--color-paper));
+}
+
+.activity-cell[data-level="2"] {
+  background-color: color-mix(in srgb, var(--color-ink) 50%, var(--color-paper));
+}
+
+.activity-cell[data-level="3"] {
+  background-color: var(--color-ink);
+}
+
+.activity-grid.is-loading {
+  opacity: 0.5;
+}
+
+/* Portrait */
+.portrait-tile {
+  padding: 0;
+}
+
+.portrait-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Social card */
+.social-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.social-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.social-name {
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.social-handle {
+  color: var(--color-ink-body);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.social-mark {
+  margin-left: auto;
+  color: var(--color-ink);
+}
+
+.social-body {
+  color: var(--color-ink-body);
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  padding-inline: 20px;
+  background-color: var(--color-paper);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  transition: background-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+}
+
+.pill-button:hover,
+.pill-button:focus-visible {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.pill-button:active {
+  transform: translateY(1px);
+}
+
+/* Writing tile */
+.writing-date {
+  color: var(--color-ink-body);
+  font-size: 14px;
+  line-height: 1;
+}
+
+.writing-title {
+  color: var(--color-ink);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-top: 12px;
+}
+
+.writing-excerpt {
+  color: var(--color-ink-body);
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Writing card — copy left, cover bleeding off the right edge. */
+.writing-card {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 260px);
+  align-items: stretch;
+  gap: 24px;
+  height: 100%;
+}
+
+.writing-card-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.writing-card-copy .writing-excerpt {
+  -webkit-line-clamp: 3;
+  flex: 1;
+}
+
+.writing-card-media {
+  overflow: hidden;
+  border-radius: 16px;
+  margin: -32px -32px -32px 0;
+  border-radius: 0 var(--radius-tile) var(--radius-tile) 0;
+}
+
+.writing-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* About blocks */
+.about-block + .about-block {
+  margin-top: 40px;
+}
+
+.about-block p {
+  color: var(--color-ink-body);
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  line-height: 1.5;
+}
+
+.about-block p + p {
+  margin-top: 20px;
+}
+
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  gap: 12px;
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive
+--------------------------------------------------------------------------- */
+/* The 328px module only survives if the column count drops as the viewport
+   narrows — four 1fr columns at 1100px would be 250px each and the tiles would
+   stop reading as a module. Each band is sized to hold exact 328px columns. */
+@media (max-width: 1391px) {
+  .tile-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1016px;
+  }
+
+  .grid-top-bar {
+    max-width: 1016px;
+  }
+}
+
+@media (max-width: 1059px) {
+  .tile-grid,
+  .grid-top-bar {
+    max-width: var(--spacing-double);
+  }
+
+  .tile-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-top-bar {
+    display: none;
+  }
+
+  .tile-grid {
+    grid-template-columns: 1fr;
+    max-width: var(--spacing-unit);
+  }
+
+
+  .tile--sm,
+  .tile--md,
+  .tile--lg,
+  .tile--xl,
+  .tile--wide,
+  .tile--auto {
+    grid-column: span 1;
+    grid-row: span 1;
+    padding: 24px;
+  }
+
+  .tile--auto,
+  .tile--grow {
+    height: auto;
+    overflow: visible;
+  }
+
+  .project-title {
+    font-size: 22px;
+  }
+
+  .about-block p {
+    font-size: 16px;
+  }
+
+  .writing-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .writing-card-media {
+    display: none;
+  }
+}

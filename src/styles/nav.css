@@ -1,0 +1,181 @@
+/* ---------------------------------------------------------------------------
+   Pill navigation — blurred, floating, with an indicator that slides behind
+   the active item. Docks to the bottom of the viewport on small screens.
+--------------------------------------------------------------------------- */
+.nav-fixed {
+  position: sticky;
+  top: 40px;
+  /* Match the stuck offset so the pill does not jump — or overlap what follows. */
+  margin-top: 40px;
+  z-index: 4444;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  background-color: var(--color-nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-nav);
+  box-shadow: var(--shadow-nav);
+}
+
+.nav-item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 112px;
+  height: 44px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+}
+
+.nav-text {
+  color: var(--color-ink-body);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  transition: color 0.2s var(--ease-out);
+}
+
+.nav-item:hover .nav-text {
+  color: var(--color-ink);
+}
+
+.nav-item:active {
+  transform: translateY(1px);
+}
+
+.nav-item[aria-current="page"] .nav-text {
+  color: var(--color-ink);
+}
+
+.floating-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 0;
+  width: 112px;
+  height: 44px;
+  background-color: var(--color-indicator);
+  border-radius: var(--radius-pill);
+}
+
+/* Wordmark + icon row -------------------------------------------------------- */
+.nav-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Room for a tooltip to rise above the icon row without hitting the name. */
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.nav-logo {
+  color: var(--color-ink);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow: inset 0 -1px 0 transparent;
+  transition: box-shadow 0.2s var(--ease-out);
+}
+
+.nav-logo:hover,
+.nav-logo:focus-visible {
+  box-shadow: inset 0 -1px 0 var(--color-ink);
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-ink-body);
+  transition: color 0.2s var(--ease-out);
+}
+
+.nav-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-icon:hover,
+.nav-icon:focus-visible {
+  color: var(--color-ink);
+}
+
+.nav-icon:active {
+  transform: translateY(1px);
+}
+
+/* Tooltip -------------------------------------------------------------------- */
+.tooltip {
+  position: absolute;
+  /* Sits just above the glyph, inside the icon's 44px hit box. */
+  bottom: calc(100% - 8px);
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: var(--color-tooltip);
+  border-radius: var(--radius-tooltip);
+  box-shadow: var(--shadow-tooltip);
+  color: var(--color-tooltip-ink);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--color-tooltip);
+}
+
+@media (max-width: 767px) {
+  .nav-fixed {
+    position: fixed;
+    inset: auto 0 16px;
+    top: auto;
+    margin-top: 0;
+  }
+
+  .nav-item,
+  .floating-indicator {
+    width: 88px;
+    height: 44px;
+  }
+
+  .nav-text {
+    font-size: 14px;
+  }
+
+  .nav-info {
+    margin-top: 24px;
+  }
+}
