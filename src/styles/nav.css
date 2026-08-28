@@ -70,13 +70,11 @@
   border-radius: var(--radius-pill);
 }
 
-/* Wordmark + icon row -------------------------------------------------------- */
+/* Wordmark -------------------------------------------------------- */
 .nav-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Room for a tooltip to rise above the icon row without hitting the name. */
-  gap: 32px;
   margin-top: 40px;
 }
 
@@ -92,69 +90,6 @@
 .nav-logo:hover,
 .nav-logo:focus-visible {
   box-shadow: inset 0 -1px 0 var(--color-ink);
-}
-
-.nav-icons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-icon {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: var(--color-ink-body);
-  transition: color 0.2s var(--ease-out);
-}
-
-.nav-icon svg {
-  width: 24px;
-  height: 24px;
-}
-
-.nav-icon:hover,
-.nav-icon:focus-visible {
-  color: var(--color-ink);
-}
-
-.nav-icon:active {
-  transform: translateY(1px);
-}
-
-/* Tooltip -------------------------------------------------------------------- */
-.tooltip {
-  position: absolute;
-  /* Sits just above the glyph, inside the icon's 44px hit box. */
-  bottom: calc(100% - 8px);
-  left: 50%;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  background-color: var(--color-tooltip);
-  border-radius: var(--radius-tooltip);
-  box-shadow: var(--shadow-tooltip);
-  color: var(--color-tooltip-ink);
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1;
-  white-space: nowrap;
-  pointer-events: none;
-}
-
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 4px solid transparent;
-  border-top-color: var(--color-tooltip);
 }
 
 @media (max-width: 767px) {
@@ -177,12 +112,5 @@
 
   .nav-info {
     margin-top: 24px;
-  }
-
-  /* Six 44px hit boxes at a 10px gap come to 314px, which does not clear a
-     320px viewport. The glyphs are 24px, so tightening the gap costs no
-     visible breathing room and keeps every target at full size. */
-  .nav-icons {
-    gap: 4px;
   }
 }

@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { navItems, profile, socialLinks } from '../data/siteLinks'
-import { icons } from './Icons'
-import Tooltip from './Tooltip'
+import { navItems, profile } from '../data/siteLinks'
 
 const activeIndex = (pathname) => {
   if (pathname === '/') return 0
@@ -64,31 +62,6 @@ const Nav = () => {
         <Link to="/" className="nav-logo">
           {profile.name}
         </Link>
-
-        <ul className="nav-icons">
-          {socialLinks.map((link) => {
-            const Icon = icons[link.icon]
-            if (!Icon) return null
-            const isExternal = link.href.startsWith('http')
-
-            return (
-              <li key={link.id}>
-                <Tooltip label={link.label}>
-                  <a
-                    href={link.href}
-                    className="nav-icon"
-                    aria-label={link.label}
-                    {...(isExternal
-                      ? { target: '_blank', rel: 'noopener noreferrer' }
-                      : {})}
-                  >
-                    <Icon />
-                  </a>
-                </Tooltip>
-              </li>
-            )
-          })}
-        </ul>
       </div>
     </header>
   )

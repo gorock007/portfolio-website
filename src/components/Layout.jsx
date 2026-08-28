@@ -1,3 +1,4 @@
+import Footer from './Footer'
 import Nav from './Nav'
 
 const Layout = ({ children }) => (
@@ -6,6 +7,7 @@ const Layout = ({ children }) => (
     <main id="main" tabIndex="-1" className="grid-section">
       <div className="container">{children}</div>
     </main>
+    <Footer />
   </>
 )
 
