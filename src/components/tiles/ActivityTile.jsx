@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import Tile from '../Tile'
 
 const GITHUB_EVENTS_URL = 'https://api.github.com/users/gorock007/events/public?per_page=100'
 const DAY_COUNT = 84
@@ -30,7 +31,7 @@ const getLevel = (count) => {
   return 3
 }
 
-const GitHubActivity = () => {
+const ActivityTile = () => {
   const [events, setEvents] = useState([])
   const [status, setStatus] = useState('loading')
 
@@ -61,20 +62,20 @@ const GitHubActivity = () => {
   const activeDays = days.filter((day) => day.count > 0).length
 
   return (
-    <section className="activity-section" aria-labelledby="activity-title">
-      <div className="revamp-container compact-container">
-        <div className="activity-heading">
-          <h2 id="activity-title">Activity</h2>
-          <a href="https://github.com/gorock007" target="_blank" rel="noopener noreferrer">
-            @gorock007 <span aria-hidden="true">↗</span>
-          </a>
-        </div>
+    <Tile size="sm">
+      <div className="stat-tile">
+        <p className="stat-label">Public activity</p>
 
         {status === 'error' ? (
-          <p className="activity-status">GitHub activity is taking a break. The profile link still works.</p>
+          <p className="stat-body" role="status">
+            GitHub is taking a break. The profile link still works.
+          </p>
         ) : (
           <>
-            <div className={`activity-grid${status === 'loading' ? ' is-loading' : ''}`} aria-hidden="true">
+            <div
+              className={`activity-grid${status === 'loading' ? ' is-loading' : ''}`}
+              aria-hidden="true"
+            >
               {days.map((day) => (
                 <span
                   key={day.key}
@@ -84,16 +85,25 @@ const GitHubActivity = () => {
                 />
               ))}
             </div>
-            <p className="activity-status" aria-live="polite">
+            <p className="stat-body stat-body--small" aria-live="polite">
               {status === 'loading'
-                ? 'Loading recent public GitHub activity…'
-                : `${events.length} recent public events across ${activeDays} days.`}
+                ? 'Loading the last 12 weeks…'
+                : `${events.length} public events across ${activeDays} days.`}
             </p>
           </>
         )}
+
+        <a
+          className="project-url"
+          href="https://github.com/gorock007"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          @gorock007 <span className="link-arrow" aria-hidden="true">↗</span>
+        </a>
       </div>
-    </section>
+    </Tile>
   )
 }
 
-export default GitHubActivity
+export default ActivityTile
