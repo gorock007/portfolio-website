@@ -1,27 +1,26 @@
 import { useEffect, useMemo, useState } from 'react'
 import Tile from '../Tile'
 
-const GITHUB_EVENTS_URL = 'https://api.github.com/users/gorock007/events/public?per_page=100'
+// GitHub's own contribution graph is only exposed through the authenticated
+// GraphQL API, so the real counts come from this public read-only mirror of it.
+// The REST events endpoint this used to call reports public events, which is a
+// different and much narrower number.
+const CONTRIBUTIONS_URL =
+  'https://github-contributions-api.jogruber.de/v4/gorock007?y=last'
 const DAY_COUNT = 84
 
 const toDateKey = (date) => date.toISOString().slice(0, 10)
 
-const buildDays = (events = []) => {
-  const counts = events.reduce((result, event) => {
-    const key = event.created_at?.slice(0, 10)
-    if (key) result[key] = (result[key] || 0) + 1
-    return result
-  }, {})
+// Keeps the grid at full size while the request is in flight, so the tile does
+// not collapse and then jump when the data lands.
+const placeholderDays = Array.from({ length: DAY_COUNT }, (_, index) => ({
+  date: `placeholder-${index}`,
+  count: 0,
+}))
 
-  const today = new Date()
-  today.setHours(12, 0, 0, 0)
-
-  return Array.from({ length: DAY_COUNT }, (_, index) => {
-    const date = new Date(today)
-    date.setDate(today.getDate() - (DAY_COUNT - 1 - index))
-    const key = toDateKey(date)
-    return { key, count: counts[key] || 0 }
-  })
+const lastWeeks = (contributions = []) => {
+  const today = toDateKey(new Date())
+  return contributions.filter((day) => day.date <= today).slice(-DAY_COUNT)
 }
 
 const getLevel = (count) => {
@@ -32,7 +31,7 @@ const getLevel = (count) => {
 }
 
 const ActivityTile = () => {
-  const [events, setEvents] = useState([])
+  const [contributions, setContributions] = useState([])
   const [status, setStatus] = useState('loading')
 
   useEffect(() => {
@@ -40,14 +39,14 @@ const ActivityTile = () => {
 
     const loadActivity = async () => {
       try {
-        const response = await fetch(GITHUB_EVENTS_URL, {
-          headers: { Accept: 'application/vnd.github+json' },
+        const response = await fetch(CONTRIBUTIONS_URL, {
+          headers: { Accept: 'application/json' },
           signal: controller.signal,
         })
 
         if (!response.ok) throw new Error('GitHub activity unavailable')
         const data = await response.json()
-        setEvents(Array.isArray(data) ? data : [])
+        setContributions(lastWeeks(data?.contributions))
         setStatus('ready')
       } catch (error) {
         if (error.name !== 'AbortError') setStatus('error')
@@ -58,8 +57,18 @@ const ActivityTile = () => {
     return () => controller.abort()
   }, [])
 
-  const days = useMemo(() => buildDays(events), [events])
-  const activeDays = days.filter((day) => day.count > 0).length
+  const days = contributions.length ? contributions : placeholderDays
+  const { total, activeDays } = useMemo(
+    () =>
+      contributions.reduce(
+        (result, day) => ({
+          total: result.total + day.count,
+          activeDays: result.activeDays + (day.count > 0 ? 1 : 0),
+        }),
+        { total: 0, activeDays: 0 },
+      ),
+    [contributions],
+  )
 
   return (
     <Tile size="sm">
@@ -78,17 +87,17 @@ const ActivityTile = () => {
             >
               {days.map((day) => (
                 <span
-                  key={day.key}
+                  key={day.date}
                   className="activity-cell"
                   data-level={getLevel(day.count)}
-                  title={`${day.key}: ${day.count} public event${day.count === 1 ? '' : 's'}`}
+                  title={`${day.date}: ${day.count} contribution${day.count === 1 ? '' : 's'}`}
                 />
               ))}
             </div>
             <p className="stat-body stat-body--small" aria-live="polite">
               {status === 'loading'
                 ? 'Loading the last 12 weeks…'
-                : `${events.length} public events across ${activeDays} days.`}
+                : `${total} contributions across ${activeDays} days.`}
             </p>
           </>
         )}
