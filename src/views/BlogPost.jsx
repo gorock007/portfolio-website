@@ -6,15 +6,25 @@ import Navbar from '../components/Navbar'
 import PageTitle from '../components/PageTitle'
 
 const renderInline = (text) => (
-  text.split(/(\*\*.*?\*\*)/).map((part, index) => (
-    part.startsWith('**') && part.endsWith('**')
-      ? <strong key={index}>{part.slice(2, -2)}</strong>
-      : part
-  ))
+  text.split(/(\*\*.*?\*\*|\*.*?\*)/).map((part, index) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong key={index}>{part.slice(2, -2)}</strong>
+    }
+
+    if (part.startsWith('*') && part.endsWith('*')) {
+      return <em key={index}>{part.slice(1, -1)}</em>
+    }
+
+    return part
+  })
 )
 
 const renderContent = (content) => (
   content.split('\n\n').map((block, index) => {
+    if (block === '---') {
+      return <hr key={index} className="article-divider" />
+    }
+
     if (block.startsWith('### ')) {
       return <h3 key={index}>{block.replace('### ', '')}</h3>
     }
