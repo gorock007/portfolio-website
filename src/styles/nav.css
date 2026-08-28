@@ -178,4 +178,11 @@
   .nav-info {
     margin-top: 24px;
   }
+
+  /* Six 44px hit boxes at a 10px gap come to 314px, which does not clear a
+     320px viewport. The glyphs are 24px, so tightening the gap costs no
+     visible breathing room and keeps every target at full size. */
+  .nav-icons {
+    gap: 4px;
+  }
 }
