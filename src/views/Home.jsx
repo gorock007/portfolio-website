@@ -67,11 +67,10 @@ export const Home = () => {
             <div className="stat-tile">
               <p className="stat-label">Work</p>
               <p className="stat-body">
-                Everything I’ve shipped — the two products people pay for, and the small
-                things I built while learning.
+                The two products people pay for, designed, built, and run end to end.
               </p>
               <p className="project-url">
-                See all {projects.length} <span className="link-arrow" aria-hidden="true">→</span>
+                See the work <span className="link-arrow" aria-hidden="true">→</span>
               </p>
             </div>
           </Tile>
