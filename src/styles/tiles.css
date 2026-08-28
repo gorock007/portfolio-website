@@ -451,6 +451,19 @@ a.project-url:focus-visible {
   object-fit: cover;
 }
 
+/* The second frame sits on top of the first and fades in on hover. `.tile`
+   is already position: relative with overflow: hidden, so it needs no help. */
+.portrait-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.portrait-tile:hover .portrait-hover {
+  opacity: 1;
+}
+
 /* Social card */
 .social-head {
   display: flex;
