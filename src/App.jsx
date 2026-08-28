@@ -1,28 +1,27 @@
-import React from 'react'
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
-import { Home } from './views/Home'
-import About from './views/About'
-import Blog from './views/Blog'
-import BlogPost from './views/BlogPost'
-import NotFound from './views/NotFound'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
+import About from './views/About'
+import Home from './views/Home'
+import NotFound from './views/NotFound'
+import Work from './views/Work'
+import Writing from './views/Writing'
+import WritingPost from './views/WritingPost'
 
-function App() {
-  return (
-    <MotionConfig reducedMotion="user">
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/about' element={<About/>} />
-          <Route path='/writings' element={<Blog/>} />
-          <Route path='/writings/:id' element={<BlogPost/>} />
-          <Route path='*' element={<NotFound/>} />
-        </Routes>
-      </Router>
-    </MotionConfig>
-  )
-}
+const App = () => (
+  <MotionConfig reducedMotion="user">
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/work" element={<Work />} />
+        <Route path="/writings" element={<Writing />} />
+        <Route path="/writings/:id" element={<WritingPost />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
+  </MotionConfig>
+)
 
 export default App

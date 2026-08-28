@@ -1,23 +1,26 @@
 import { Link } from 'react-router-dom'
-import Navbar from '../components/Navbar'
+import Layout from '../components/Layout'
 import PageTitle from '../components/PageTitle'
+import Tile from '../components/Tile'
+import TileGrid from '../components/TileGrid'
 
-const NotFound = () => {
-  return (
-    <div className="site-shell min-h-screen">
-      <PageTitle title="Page not found — Gorock Shetty" />
-      <Navbar />
+const NotFound = () => (
+  <Layout>
+    <PageTitle title="Not found — Gorock Shetty" />
 
-      <main id="main" tabIndex="-1" className="revamp-container not-found-page">
-        <p className="not-found-code">404</p>
-        <h1>Wrong turn.</h1>
-        <p>The page you’re looking for doesn’t exist, but the useful stuff is one click away.</p>
-        <Link to="/" className="ink-link">
-          Back home <span aria-hidden="true">→</span>
-        </Link>
-      </main>
-    </div>
-  )
-}
+    <TileGrid>
+      <Tile size="wide">
+        <div className="not-found">
+          <p className="stat-label">404</p>
+          <h1 className="page-h1">This page doesn’t exist.</h1>
+          <p className="page-h2">It may have moved, or it was never here to begin with.</p>
+          <Link className="pill-button" to="/">
+            Back home <span className="link-arrow" aria-hidden="true">→</span>
+          </Link>
+        </div>
+      </Tile>
+    </TileGrid>
+  </Layout>
+)
 
 export default NotFound

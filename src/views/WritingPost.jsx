@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion'
 import { Link, useParams } from 'react-router-dom'
-import { blogPosts } from '../components/BlogData'
-import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import Layout from '../components/Layout'
 import PageTitle from '../components/PageTitle'
+import Tile from '../components/Tile'
+import TileGrid from '../components/TileGrid'
+import { blogPosts } from '../data/writing'
 
-const renderInline = (text) => (
+const renderInline = (text) =>
   text.split(/(\*\*.*?\*\*|\*.*?\*)/).map((part, index) => {
     if (part.startsWith('**') && part.endsWith('**')) {
       return <strong key={index}>{part.slice(2, -2)}</strong>
@@ -17,9 +18,8 @@ const renderInline = (text) => (
 
     return part
   })
-)
 
-const renderContent = (content) => (
+const renderContent = (content) =>
   content.split('\n\n').map((block, index) => {
     if (block === '---') {
       return <hr key={index} className="article-divider" />
@@ -55,52 +55,59 @@ const renderContent = (content) => (
 
     return <p key={index}>{renderInline(block)}</p>
   })
-)
 
-const BlogPost = () => {
+const WritingPost = () => {
   const { id } = useParams()
   const post = blogPosts.find((entry) => String(entry.id) === id)
 
   if (!post) {
     return (
-      <div className="site-shell min-h-screen">
-        <PageTitle title="Post not found — Gorock Shetty" />
-        <Navbar />
-        <main id="main" tabIndex="-1" className="page-container not-found-page">
-          <p className="section-label">404</p>
-          <h1>Note not found.</h1>
-          <p>This note doesn’t exist yet, or it may have moved.</p>
-          <Link to="/writings" className="button button-primary">Back to writing</Link>
-        </main>
-      </div>
+      <Layout>
+        <PageTitle title="Note not found — Gorock Shetty" />
+        <TileGrid>
+          <Tile size="wide">
+            <div className="not-found">
+              <p className="stat-label">404</p>
+              <h1 className="page-h1">Note not found.</h1>
+              <p className="page-h2">This note doesn’t exist yet, or it may have moved.</p>
+              <Link className="pill-button" to="/writings">
+                All writing <span className="link-arrow" aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </Tile>
+        </TileGrid>
+      </Layout>
     )
   }
 
   return (
-    <div className="site-shell min-h-screen">
+    <Layout>
       <PageTitle title={`${post.title} — Gorock Shetty`} />
-      <Navbar />
 
-      <main id="main" tabIndex="-1" className="page-container article-page">
+      <article className="article">
         <Link to="/writings" className="back-link">
           <span aria-hidden="true">←</span> All writing
         </Link>
 
-        <motion.article
+        <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
           <header className="article-header">
             <div className="article-tags">
-              {post.tags.map((tag) => <span key={tag}>{tag}</span>)}
+              {post.tags.map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
             </div>
+
             <h1 className="article-title">{post.title}</h1>
-            <div className="article-byline">
+
+            <p className="article-byline">
               <strong>Gorock Shetty</strong>
               <span>{post.date}</span>
               <span>{post.readTime}</span>
-            </div>
+            </p>
           </header>
 
           {post.coverImage && (
@@ -115,22 +122,21 @@ const BlogPost = () => {
             <aside className="article-source">
               <p>Source of inspiration</p>
               <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
-                {post.sourceLabel || 'Read the original post'} <span aria-hidden="true">↗</span>
+                {post.sourceLabel || 'Read the original post'}{' '}
+                <span className="link-arrow" aria-hidden="true">↗</span>
               </a>
             </aside>
           )}
-        </motion.article>
+        </motion.div>
 
         <div className="article-bottom">
           <Link to="/writings" className="back-link">
             <span aria-hidden="true">←</span> All writing
           </Link>
         </div>
-      </main>
-
-      <Footer />
-    </div>
+      </article>
+    </Layout>
   )
 }
 
-export default BlogPost
+export default WritingPost
