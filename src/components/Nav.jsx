@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { navItems, profile } from '../data/siteLinks'
+import { navItems } from '../data/siteLinks'
 
 // The pill takes its geometry from whichever tab is active, so nothing here
 // assumes the tabs are all the same width.
@@ -99,12 +99,6 @@ const Nav = () => {
             )
           })}
         </nav>
-      </div>
-
-      <div className="nav-info">
-        <Link to="/" className="nav-logo">
-          {profile.name}
-        </Link>
       </div>
     </header>
   )
