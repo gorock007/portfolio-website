@@ -55,16 +55,20 @@
   transform: translateY(1px);
 }
 
+/* The active label darkens on the pill's own curve and duration, so the colour
+   arrives at the moment the pill does rather than ahead of it. Hover keeps the
+   quicker 0.2s above. */
 .nav-item[aria-current="page"] .nav-text {
   color: var(--color-ink);
+  transition: color 0.4s var(--ease-pill);
 }
 
+/* left and width are measured from the active tab and set by Framer Motion;
+   only the fixed axis lives here. */
 .floating-indicator {
   position: absolute;
   top: 4px;
-  left: 4px;
   z-index: 0;
-  width: 112px;
   height: 44px;
   background-color: var(--color-indicator);
   border-radius: var(--radius-pill);
@@ -100,10 +104,8 @@
     margin-top: 0;
   }
 
-  .nav-item,
-  .floating-indicator {
+  .nav-item {
     width: 88px;
-    height: 44px;
   }
 
   .nav-text {
