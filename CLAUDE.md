@@ -2,7 +2,7 @@
 
 Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). React 18 + Vite + Tailwind CSS v4 + Framer Motion, deployed on Netlify.
 
-- Pages live in `src/views/` (Home, About, Work, Writing, WritingPost, NotFound). `Layout` wraps every page with the nav and the footer social row.
+- Pages live in `src/views/` (Home, About, Work, Writing, WritingPost, NotFound). `Layout` renders the `<main>` region; `App` renders the nav and footer around `<Routes>` so they persist across navigation.
 - Reusable primitives in `src/components/`; individual grid tiles in `src/components/tiles/`.
 - All content is data-driven: `src/data/` (`projects.js`, `writing.js`, `about.js`, `manifesto.js`, `siteLinks.js`). `archivedProjects.js` holds projects that are off the site; nothing imports it, so its images stay out of the bundle.
 - Styles: `src/index.css` holds the `@theme` tokens and base layer, and imports `src/styles/{nav,footer,tiles,prose}.css`. There is no tailwind.config — Tailwind v4 CSS-first config.
