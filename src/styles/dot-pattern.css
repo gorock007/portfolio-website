@@ -1,0 +1,48 @@
+/* ---------------------------------------------------------------------------
+   Dot pattern — a background field for a tile to sit its content on top of.
+--------------------------------------------------------------------------- */
+.dot-pattern {
+  position: absolute;
+  inset: 0;
+  /* Decoration only: never take a click meant for what is underneath. */
+  pointer-events: none;
+}
+
+/* Carried by the wrapper so it applies to the lit layer as well, which keeps
+   the cursor light from ending on a hard edge. */
+.dot-pattern--fade {
+  mask-image: radial-gradient(78% 78% at 50% 50%, #000 45%, transparent 100%);
+  -webkit-mask-image: radial-gradient(78% 78% at 50% 50%, #000 45%, transparent 100%);
+}
+
+/* Behind the whole page: pinned to the viewport, so the grid scrolls over a
+   field that stays put. z-index -1 puts it under every tile and under the
+   footer, but still above the white canvas. */
+.dot-pattern--page {
+  position: fixed;
+  z-index: -1;
+}
+
+/* A real vignette, sized inside the viewport rather than past it: the field is
+   densest behind the middle of the grid and has dissolved well before the
+   edges of the screen, so it never reads as a full-bleed texture. */
+.dot-pattern--page.dot-pattern--fade {
+  mask-image: radial-gradient(92% 80% at 50% 45%, #000 12%, transparent 100%);
+  -webkit-mask-image: radial-gradient(92% 80% at 50% 45%, #000 12%, transparent 100%);
+}
+
+.dot-pattern-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* Mixed from ink the way the activity heatmap is, rather than introducing a
+     colour. Under 1% of the area is ink, which is what keeps the field
+     readable as texture rather than as a surface. */
+  fill: color-mix(in srgb, var(--color-ink) 16%, transparent);
+}
+
+/* The same dots again, brighter, revealed only where the cursor's light falls. */
+.dot-pattern-layer--lit {
+  fill: color-mix(in srgb, var(--color-ink) 38%, transparent);
+}

@@ -1,5 +1,6 @@
 import { MotionConfig } from 'framer-motion'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import DotPattern from './components/DotPattern'
 import Footer from './components/Footer'
 import Nav from './components/Nav'
 import ScrollToTop from './components/ScrollToTop'
@@ -15,6 +16,8 @@ import WritingPost from './views/WritingPost'
 // the nav pill with nothing to animate from — it mounted already in place.
 const App = () => (
   <MotionConfig reducedMotion="user">
+    <DotPattern className="dot-pattern--page" interactive />
+
     <Router>
       <ScrollToTop />
       <Nav />
