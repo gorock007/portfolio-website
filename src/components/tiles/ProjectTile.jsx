@@ -6,7 +6,7 @@ const ProjectTile = ({ project, size }) => (
     href={project.url}
     aria-label={`${project.title} — ${project.subtitle}`}
   >
-    <article className="project-tile">
+    <article className={`project-tile project-tile--${project.id}`}>
       <div className="project-head">
         <div>
           <h2 className="project-title">{project.title}</h2>

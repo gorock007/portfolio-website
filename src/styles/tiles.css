@@ -294,15 +294,20 @@ a.project-url:focus-visible {
   justify-content: space-between;
 }
 
-/* Featured tiles: the capture sits on the tile's own bottom edge at full bleed
-   and keeps its native 16:9, so nothing is cropped sideways. The grey between
-   the copy and the screenshot is deliberate. */
+/* Featured tiles: the capture sits on the tile's own bottom edge at full bleed.
+   The grey between the copy and the screenshot is deliberate. */
 .tile--xl .project-tile .tile-media {
   flex: none;
   aspect-ratio: 16 / 9;
   margin: 24px -32px -32px;
   border-radius: 0;
   background-color: transparent;
+}
+
+/* Revisit's canonical social preview is 1200×630. Match that ratio so the
+   typography and product windows remain fully visible instead of being cropped. */
+.tile--xl .project-tile--revisit .tile-media {
+  aspect-ratio: 40 / 21;
 }
 
 .tile--xl .project-tile .tile-media img {
