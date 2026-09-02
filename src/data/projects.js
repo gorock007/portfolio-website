@@ -1,5 +1,5 @@
 import naatiace from '../images/naatiace.jpg'
-import revisit from '../images/revisit-live.jpg'
+import revisit from '../images/revisit-social-preview.png'
 
 // `size` maps to a tile class; both of these carry the home grid.
 export const projects = [
@@ -25,7 +25,7 @@ export const projects = [
       'Hands the right context to Claude Code, Codex, and other MCP clients. One-time purchase, Stripe checkout, no tracking.',
     proof: ['One-time purchase', 'Stripe checkout', 'No tracking'],
     img: revisit,
-    imgAlt: 'Revisit Mac app showing prompts, useful notes, and a send action inside a project workspace',
+    imgAlt: 'Revisit — Capture the thought. Let your agent continue.',
     urlLabel: 'revisit.gorockshetty.com',
     url: 'https://revisit.gorockshetty.com/',
     size: 'xl',
