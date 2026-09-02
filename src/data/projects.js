@@ -1,5 +1,6 @@
 import naatiace from '../images/naatiace.jpg'
 import revisit from '../images/revisit-social-preview.png'
+import dontMakeItUgly from '../images/dont-make-it-ugly-social-preview.png'
 
 // `size` maps to a tile class; both of these carry the home grid.
 export const projects = [
@@ -28,6 +29,20 @@ export const projects = [
     imgAlt: 'Revisit — Capture the thought. Let your agent continue.',
     urlLabel: 'revisit.gorockshetty.com',
     url: 'https://revisit.gorockshetty.com/',
+    size: 'xl',
+    featured: true,
+  },
+  {
+    id: 'dont-make-it-ugly',
+    title: "Don't Make It Ugly",
+    subtitle: "Good design references for whatever you're building.",
+    detail:
+      'A curated directory of design inspiration, components, libraries, repositories, prompts, and agent resources for people building software with coding agents.',
+    proof: ['Curated resources', 'Agent-friendly', 'Built end to end'],
+    img: dontMakeItUgly,
+    imgAlt: "Don't Make It Ugly — Good design references for whatever you're building.",
+    urlLabel: 'dontmakeitugly.com',
+    url: 'https://dontmakeitugly.com/',
     size: 'xl',
     featured: true,
   },

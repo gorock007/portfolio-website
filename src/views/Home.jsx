@@ -36,7 +36,6 @@ const listItems = [
 
 export const Home = () => {
   const [view, setView] = useViewMode()
-  const [naatiace, revisit] = featuredProjects
   const latestPost = blogPosts[0]
 
   return (
@@ -50,10 +49,11 @@ export const Home = () => {
         <TileGrid>
           {/* The products come first. Dense packing promotes whatever is
               early enough to fill a gap, so listing the small tiles ahead of
-              these would put trivia above the work people pay for. */}
+              these would put trivia above the work. */}
           <ManifestoTile />
-          {naatiace && <ProjectTile project={naatiace} />}
-          {revisit && <ProjectTile project={revisit} />}
+          {featuredProjects.map((project) => (
+            <ProjectTile key={project.id} project={project} />
+          ))}
 
           <WritingTile post={latestPost} />
           <NowTile />
@@ -67,7 +67,7 @@ export const Home = () => {
             <div className="stat-tile">
               <p className="stat-label">Work</p>
               <p className="stat-body">
-                The two products people pay for, designed, built, and run end to end.
+                Products and tools designed, built, and run end to end.
               </p>
               <p className="project-url">
                 See the work <span className="link-arrow" aria-hidden="true">→</span>

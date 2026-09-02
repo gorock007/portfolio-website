@@ -32,7 +32,7 @@ const Work = () => {
           <Tile size="wide">
             <h1 className="page-h1">Work.</h1>
             <p className="page-h2">
-              Two products people pay for, designed, built, and run end to end.
+              Products and tools designed, built, and run end to end.
             </p>
           </Tile>
 

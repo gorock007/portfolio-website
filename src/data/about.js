@@ -15,7 +15,7 @@ export const aboutBlocks = [
   {
     label: 'What I do now',
     paragraphs: [
-      'I build and run AI products from Sydney. NaatiAce is a subscription exam-practice product with paying customers across 55 languages. Revisit is a one-time-purchase Mac app that hands the right project context to Claude Code, Codex, and other MCP clients.',
+      'I build and run AI products from Sydney. NaatiAce is a subscription exam-practice product with paying customers across 55 languages. Revisit is a one-time-purchase Mac app that hands the right project context to Claude Code, Codex, and other MCP clients. Don’t Make It Ugly is a curated directory of design resources for people building software with coding agents.',
       'I learn in reverse: build something real first, then go back and investigate the fundamentals the product forces me to confront.',
     ],
   },
