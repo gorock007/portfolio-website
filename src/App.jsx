@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import DotPattern from './components/DotPattern'
 import Footer from './components/Footer'
 import Nav from './components/Nav'
+import ReadingRoom from './components/ReadingRoom'
 import ScrollToTop from './components/ScrollToTop'
 import About from './views/About'
 import Home from './views/Home'
@@ -20,6 +21,7 @@ const App = () => (
 
     <Router>
       <ScrollToTop />
+      <ReadingRoom />
       <Nav />
       <Routes>
         <Route path="/" element={<Home />} />

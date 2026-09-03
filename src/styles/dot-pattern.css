@@ -46,3 +46,50 @@
 .dot-pattern-layer--lit {
   fill: color-mix(in srgb, var(--color-ink) 38%, transparent);
 }
+
+/* ---------------------------------------------------------------------------
+   Reading room — the field withdraws from under long-form text.
+
+   A column of paper the width of the article plus its margins, sitting on the
+   field and under the type. Same z-index as the field but later in the DOM, so
+   it paints over the dots and beneath everything in flow. Fixed, because the
+   note scrolls through it. ReadingRoom.jsx opens it on a note's route.
+--------------------------------------------------------------------------- */
+.reading-room {
+  /* The article column plus 64px of clear paper either side. Everything
+     outside it is falloff, so on a narrow screen the room simply widens to the
+     edges and the field sits the note out; no breakpoint needed. */
+  --reading-room-core: 800px;
+
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: -1;
+  width: min(100%, 1280px);
+  transform: translateX(-50%);
+  background: var(--color-paper);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.55s var(--ease-out);
+  /* A mask rather than a gradient background: a white-to-transparent fill
+     would be interpolating a colour across the reading column. */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 calc(50% - var(--reading-room-core) / 2),
+    #000 calc(50% + var(--reading-room-core) / 2),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    #000 calc(50% - var(--reading-room-core) / 2),
+    #000 calc(50% + var(--reading-room-core) / 2),
+    transparent 100%
+  );
+}
+
+.reading-room--open {
+  opacity: 1;
+}

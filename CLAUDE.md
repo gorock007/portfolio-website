@@ -37,6 +37,10 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 - Compose new tiles with `<Tile size="…">`; don't hand-roll a panel.
 - Empty space inside a tile is intentional — the reference is airy. Don't fill it.
 
+### Background
+- A dot field sits behind the whole page (`DotPattern`, `.dot-pattern--page`), pinned to the viewport and vignetted so it dissolves before the edges of the screen. It is one SVG pattern, not hundreds of nodes, and a second brighter copy is revealed through a mask that follows the cursor.
+- It never runs under long-form text. On a note's route `ReadingRoom` fades in a column of paper (`.reading-room`) — the 672px article plus 64px either side, dissolving into the margins — that hides the dots where the body copy is. The field stays lit out in the margins; the crossfade is what makes arriving at a note read as the room going quiet.
+
 ### Motion
 - Framer Motion only. Tiles enter with the shared variant in `Tile.jsx`: `opacity 0→1`, `y 48→0`, `scale .8→1`, `viewport={{ once: true }}`.
 - The app is wrapped in `<MotionConfig reducedMotion="user">` and `src/index.css` has a `prefers-reduced-motion` block — keep both intact.
