@@ -3,6 +3,7 @@ import Tile from '../Tile'
 const ProjectTile = ({ project, size }) => (
   <Tile
     size={size || project.size}
+    className="project-card"
     href={project.url}
     aria-label={`${project.title} — ${project.subtitle}`}
   >

@@ -28,9 +28,11 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 - All-caps with letterspacing is reserved for small section labels (`.stat-label` / `.work-label`).
 
 ### Grid & tiles
-- The module is **328px on a 16px gutter**. Rows are `minmax(328px, auto)` so a two-row tile is exactly 672px.
+- The module is **328px on a 16px gutter**. Rows are `minmax(328px, auto)` so a two-row tile is exactly 672px, and a row grows past the module when a content-height tile in it is taller.
 - Column bands: 4 columns ≥1392px (max 1360), 3 columns ≥1060px (max 1016), 2 columns ≥768px (max 672), 1 column below (max 328).
 - Tile footprints: `sm`/`md` 1×1, `lg` 1×2, `wide` 2×1, `xl` 2×2, `auto` full-width and content-height.
+- The two-column tiles that carry a full-bleed capture — the project cards and the manifesto — hug their content instead of holding the 672px height (`.tile--xl.project-card`, `.tile--xl.tile--grow`). A 1200×630 capture is only 353px tall at 672px wide, so a fixed 2×2 footprint opens a band of dead grey between the copy and the screenshot. Whatever shares their row stretches to match.
+- An image inside a 1×1 tile must sit out of flow (`position: absolute; inset: 0`) and cover-crop. In flow its intrinsic ratio sizes the row, which stretches every tile beside it — that is what the 533×800 portrait was doing to its whole row. Crop the photo to the module rather than let it set the height.
 - Every tile is `--color-tile` with `--radius-tile` (32px). Don't introduce other card treatments, borders, or shadows on tiles.
 - Compose new tiles with `<Tile size="…">`; don't hand-roll a panel.
 - Empty space inside a tile is intentional — the reference is airy. Don't fill it.
