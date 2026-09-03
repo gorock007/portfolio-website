@@ -40,7 +40,8 @@ export const projects = [
       'A curated directory of design inspiration, components, libraries, repositories, prompts, and agent resources for people building software with coding agents.',
     proof: ['Curated resources', 'Agent-friendly', 'Built end to end'],
     img: dontMakeItUgly,
-    imgAlt: "Don't Make It Ugly — Good design references for whatever you're building.",
+    imgAlt:
+      "Don't Make It Ugly — good design references for whatever you're building, beside a fanned stack of design site screenshots",
     urlLabel: 'dontmakeitugly.com',
     url: 'https://dontmakeitugly.com/',
     size: 'xl',
