@@ -1,3 +1,4 @@
+import agiSmearCover from '../images/agi-smear-cover.svg'
 import aiSkillsCover from '../images/ai-skills-cover.jpg'
 
 // Writing entries. Add new notes here; the homepage and writing index update automatically.
@@ -9,6 +10,8 @@ export const blogPosts = [
     date: '7 September 2026',
     readTime: '5 min read',
     tags: ['AI', 'AGI', 'Essays'],
+    coverImage: agiSmearCover,
+    coverImageAlt: 'A wide band of dots, dense at the left and dissolving into bare paper at the right, with three markers standing at different points along it',
     sourceUrl: 'https://youtu.be/5bxp78i96S8',
     sourceLabel: 'Paul Graham on AGI, in conversation',
     content: `In a recent talk, Paul Graham said something about AGI that I haven’t been able to put down.
