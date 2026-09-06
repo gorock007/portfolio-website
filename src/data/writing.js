@@ -3,6 +3,105 @@ import aiSkillsCover from '../images/ai-skills-cover.jpg'
 // Writing entries. Add new notes here; the homepage and writing index update automatically.
 export const blogPosts = [
   {
+    id: 'agi-is-a-smear',
+    title: 'AGI Is a Smear, Not a Finish Line',
+    excerpt: 'Paul Graham calls AGI a smear rather than a threshold — something with width, that we are already standing on. Which part you are standing on decides what you believe.',
+    date: '7 September 2026',
+    readTime: '5 min read',
+    tags: ['AI', 'AGI', 'Essays'],
+    sourceUrl: 'https://youtu.be/5bxp78i96S8',
+    sourceLabel: 'Paul Graham on AGI, in conversation',
+    content: `In a recent talk, Paul Graham said something about AGI that I haven’t been able to put down.
+
+AGI is not a finish line.
+
+It is more like a **smear**. And we are already on it.
+
+A smear has width. Where you are standing on it decides what you see.
+
+So AGI isn’t an event. It’s an era.
+
+## We may have already reached it, and not reached it, at the same time
+
+Everyone talks about AGI as a threshold. A door we walk through. A morning where humanity wakes up and says: *yesterday wasn’t AGI, today is.*
+
+I don’t think that morning is coming.
+
+“We have reached AGI” is probably the wrong way to put it. But so is “we haven’t.”
+
+We are already in the AGI era — especially with models like Claude Fable 5.1 and GPT-6 Astra — in roughly the same way we are all on the same blue planet.
+
+In some parts of the world there are robotaxis. In other parts there isn’t a proper road, or any reliable way to travel between two towns.
+
+Humanity is in the same era. Individuals are not.
+
+## The same is true inside a single model
+
+This isn’t only about geography. It’s true of the systems themselves.
+
+A model can be superhuman on one axis and strangely incompetent on another.
+
+That’s essentially what Paul points to. We now hear about AI doing extraordinarily difficult mathematics — and the same systems can struggle to reliably tell you when a restaurant is open.
+
+If intelligence arrived as a single quantity, that would be a contradiction. It isn’t one. The capability surface is jagged, and the smear runs across it too.
+
+## The Turing test is the tell
+
+Paul says one of the signs that made him feel we were getting close was that he had to go back and look up **exactly what the Turing test was**.
+
+That’s a beautiful detail.
+
+The Turing test was supposed to be the milestone. The bright line. And it was crossed so quietly that the people closest to it had to check the definition afterwards to see whether it had happened.
+
+Thresholds don’t feel like thresholds from inside them. They feel like a Tuesday.
+
+## Both sides are telling the truth
+
+For someone who spends most of their day building with frontier models:
+
+*“This is obviously intelligence.”*
+
+For someone doing messy real-world work and watching it fail spectacularly at something a teenager would get right:
+
+*“AGI? Are you kidding?”*
+
+Both observations are correct from where they’re standing. That is what a smear does — it makes the disagreement about position rather than about facts.
+
+Even the labs are standing on different parts of it. Two days before I wrote this, OpenAI shipped GPT-6 Astra and its president called it a generational leap that might eventually be seen as the arrival of AGI. A company launching a model and saying *this might be the thing* is exactly what you’d expect at a threshold — and exactly what you’d expect halfway along a smear, too. The claim doesn’t settle anything. It’s another data point about where the person making it happens to be standing.
+
+Which is why I wouldn’t personally say “AGI has arrived” yet. I’d say something closer to Paul:
+
+**The transition to AGI may already be happening. We just expected the transition to be an event.**
+
+## From far away, transitions look like points
+
+That’s the part I find most interesting.
+
+From a distance, technological transitions look like dates in a history book. The Industrial Revolution. The internet. Electricity.
+
+Up close they are messy periods — decades long, unevenly distributed, obvious to some people and invisible to others living at the same time.
+
+We are inside one of those periods right now, and inside is the one place you can’t see its shape.
+
+## The uneven part is the part that worries me
+
+I think this era will create a polarised world.
+
+Tokens are expensive. Access to intelligence is not going to be equally distributed — at least not soon, and not by default. I hope we figure that out, because “who is standing on which part of the smear” is going to be a question about money and infrastructure long before it’s a question about capability.
+
+For those of us fully immersed in this — who know what can be achieved and roughly where it’s heading — we’re already in the AGI era for maybe 90% of what we do.
+
+That number is a guess. Could be more, could be less. You get the point.
+
+For someone else, the question is still: *what is AI?*
+
+Same era. Same planet. Different width of the same smear.
+
+---
+
+*Written after a talk by Paul Graham on why AGI is better understood as a period than a threshold. The framing of the smear, the width, and the Turing test anecdote are his; the rest is where those ideas landed for me.*`,
+  },
+  {
     id: 'ai-skills-that-compound',
     title: 'The AI Skills That Won’t Become Obsolete',
     excerpt: 'As AI makes implementation cheaper, understanding reality, thinking clearly, articulating intent, and judgment become more valuable.',
