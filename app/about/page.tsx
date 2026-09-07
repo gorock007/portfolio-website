@@ -1,18 +1,27 @@
-import Layout from '../components/Layout'
-import PageTitle from '../components/PageTitle'
-import Tile from '../components/Tile'
-import TileGrid from '../components/TileGrid'
-import ActivityTile from '../components/tiles/ActivityTile'
-import PortraitTile from '../components/tiles/PortraitTile'
-import SocialTile from '../components/tiles/SocialTile'
-import StackTile from '../components/tiles/StackTile'
-import { aboutBlocks } from '../data/about'
-import { contactHandle, contactUrl, profile } from '../data/siteLinks'
+import type { Metadata } from 'next'
+import Layout from '@/components/Layout'
+import Tile from '@/components/Tile'
+import TileGrid from '@/components/TileGrid'
+import ActivityTile from '@/components/tiles/ActivityTile'
+import PortraitTile from '@/components/tiles/PortraitTile'
+import SocialTile from '@/components/tiles/SocialTile'
+import StackTile from '@/components/tiles/StackTile'
+import { aboutBlocks } from '@/data/about'
+import { contactHandle, contactUrl, profile } from '@/data/siteLinks'
 
-const About = () => (
+const description =
+  'Who Gorock Shetty is, how he thinks, what he is building from Sydney, and what he is after.'
+
+export const metadata: Metadata = {
+  title: 'About',
+  description,
+  alternates: { canonical: '/about' },
+  openGraph: { title: 'About — Gorock Shetty', description, url: '/about' },
+  twitter: { title: 'About — Gorock Shetty', description },
+}
+
+const AboutPage = () => (
   <Layout>
-    <PageTitle title="About — Gorock Shetty" />
-
     <TileGrid>
       <Tile size="auto">
         <h1 className="display-heading">
@@ -57,4 +66,4 @@ const About = () => (
   </Layout>
 )
 
-export default About
+export default AboutPage

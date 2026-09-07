@@ -1,13 +1,24 @@
-import GridTopBar from '../components/GridTopBar'
-import Layout from '../components/Layout'
-import ListView from '../components/ListView'
-import PageTitle from '../components/PageTitle'
-import Tile from '../components/Tile'
-import TileGrid from '../components/TileGrid'
-import { useViewMode } from '../components/useViewMode'
-import { blogPosts } from '../data/writing'
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Layout from '@/components/Layout'
+import ListView, { type ListItem } from '@/components/ListView'
+import Tile from '@/components/Tile'
+import TileGrid from '@/components/TileGrid'
+import ViewSwitcher from '@/components/ViewSwitcher'
+import { blogPosts } from '@/data/writing'
 
-const listItems = blogPosts.map((post) => ({
+const description =
+  'Notes on life, AI, tools, workflows, and whatever I’m learning along the way.'
+
+export const metadata: Metadata = {
+  title: 'Writing',
+  description,
+  alternates: { canonical: '/writings' },
+  openGraph: { title: 'Writing — Gorock Shetty', description, url: '/writings' },
+  twitter: { title: 'Writing — Gorock Shetty', description },
+}
+
+const listItems: ListItem[] = blogPosts.map((post) => ({
   id: post.id,
   to: `/writings/${post.id}`,
   title: post.title,
@@ -15,24 +26,18 @@ const listItems = blogPosts.map((post) => ({
   meta: post.date,
 }))
 
-const Writing = () => {
-  const [view, setView] = useViewMode()
-
-  return (
-    <Layout>
-      <PageTitle title="Writing — Gorock Shetty" />
-
-      <GridTopBar view={view} onViewChange={setView} caption="Notes, not takes…" />
-
-      {view === 'list' && blogPosts.length > 0 ? (
-        <ListView items={listItems} />
-      ) : (
+const WritingPage = () => (
+  <Layout>
+    <ViewSwitcher
+      caption="Notes, not takes…"
+      // No notes means nothing to list, and the toggle falls back to the grid,
+      // which carries the empty state.
+      list={blogPosts.length > 0 ? <ListView items={listItems} /> : undefined}
+      grid={
         <TileGrid>
           <Tile size="wide">
             <h1 className="page-h1">Writing.</h1>
-            <p className="page-h2">
-              Notes on life, AI, tools, workflows, and whatever I’m learning along the way.
-            </p>
+            <p className="page-h2">{description}</p>
           </Tile>
 
           {blogPosts.length === 0 ? (
@@ -62,11 +67,11 @@ const Writing = () => {
 
                   {post.coverImage && (
                     <figure className="writing-card-media">
-                      <img
+                      <Image
                         src={post.coverImage}
                         alt={post.coverImageAlt || ''}
-                        loading="lazy"
-                        decoding="async"
+                        fill
+                        sizes="(max-width: 767px) 100vw, 260px"
                       />
                     </figure>
                   )}
@@ -75,9 +80,9 @@ const Writing = () => {
             ))
           )}
         </TileGrid>
-      )}
-    </Layout>
-  )
-}
+      }
+    />
+  </Layout>
+)
 
-export default Writing
+export default WritingPage
