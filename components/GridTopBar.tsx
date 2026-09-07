@@ -1,6 +1,13 @@
 import { GridIcon, ListIcon } from './Icons'
+import type { ViewMode } from './useViewMode'
 
-const GridTopBar = ({ view, onViewChange, caption }) => (
+type GridTopBarProps = {
+  view: ViewMode
+  onViewChange: (view: ViewMode) => void
+  caption?: string
+}
+
+const GridTopBar = ({ view, onViewChange, caption }: GridTopBarProps) => (
   <div className="grid-top-bar">
     {caption && <p className="grid-caption">{caption}</p>}
 

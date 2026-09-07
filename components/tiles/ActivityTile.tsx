@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
 import Tile from '../Tile'
 
@@ -9,21 +11,23 @@ const CONTRIBUTIONS_URL =
   'https://github-contributions-api.jogruber.de/v4/gorock007?y=last'
 const DAY_COUNT = 84
 
-const toDateKey = (date) => date.toISOString().slice(0, 10)
+type ContributionDay = { date: string; count: number }
+
+const toDateKey = (date: Date) => date.toISOString().slice(0, 10)
 
 // Keeps the grid at full size while the request is in flight, so the tile does
 // not collapse and then jump when the data lands.
-const placeholderDays = Array.from({ length: DAY_COUNT }, (_, index) => ({
+const placeholderDays: ContributionDay[] = Array.from({ length: DAY_COUNT }, (_, index) => ({
   date: `placeholder-${index}`,
   count: 0,
 }))
 
-const lastWeeks = (contributions = []) => {
+const lastWeeks = (contributions: ContributionDay[] = []) => {
   const today = toDateKey(new Date())
   return contributions.filter((day) => day.date <= today).slice(-DAY_COUNT)
 }
 
-const getLevel = (count) => {
+const getLevel = (count: number) => {
   if (count === 0) return 0
   if (count === 1) return 1
   if (count <= 3) return 2
@@ -31,8 +35,8 @@ const getLevel = (count) => {
 }
 
 const ActivityTile = () => {
-  const [contributions, setContributions] = useState([])
-  const [status, setStatus] = useState('loading')
+  const [contributions, setContributions] = useState<ContributionDay[]>([])
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
 
   useEffect(() => {
     const controller = new AbortController()
@@ -49,7 +53,7 @@ const ActivityTile = () => {
         setContributions(lastWeeks(data?.contributions))
         setStatus('ready')
       } catch (error) {
-        if (error.name !== 'AbortError') setStatus('error')
+        if ((error as Error).name !== 'AbortError') setStatus('error')
       }
     }
 

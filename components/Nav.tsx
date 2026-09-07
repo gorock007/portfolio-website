@@ -1,29 +1,31 @@
+'use client'
+
 import { motion, useReducedMotion } from 'framer-motion'
-import { useCallback, useLayoutEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { navItems } from '../data/siteLinks'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useCallback, useLayoutEffect, useRef, useState, type MouseEvent } from 'react'
+import { navItems } from '@/data/siteLinks'
 
 // The pill takes its geometry from whichever tab is active, so nothing here
 // assumes the tabs are all the same width.
 const PILL_DURATION = 0.4
-const PILL_EASE = [0.65, 0, 0.35, 1]
+const PILL_EASE = [0.65, 0, 0.35, 1] as const
 
-const activeIndex = (pathname) => {
+const activeIndex = (pathname: string) => {
   if (pathname === '/') return 0
-  const match = navItems.findIndex(
-    (item) => item.to !== '/' && pathname.startsWith(item.to),
-  )
-  return match
+  return navItems.findIndex((item) => item.to !== '/' && pathname.startsWith(item.to))
 }
 
+type Pill = { left: number; width: number }
+
 const Nav = () => {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const index = activeIndex(pathname)
   const reduceMotion = useReducedMotion()
 
-  const navRef = useRef(null)
-  const itemRefs = useRef([])
-  const [pill, setPill] = useState(null)
+  const navRef = useRef<HTMLElement>(null)
+  const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const [pill, setPill] = useState<Pill | null>(null)
 
   const measure = useCallback(() => {
     const item = itemRefs.current[index]
@@ -48,7 +50,7 @@ const Nav = () => {
     return () => observer.disconnect()
   }, [measure])
 
-  const handleSkip = (event) => {
+  const handleSkip = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
     const main = document.getElementById('main')
     if (!main) return
@@ -87,7 +89,7 @@ const Nav = () => {
             return (
               <Link
                 key={item.to}
-                to={item.to}
+                href={item.to}
                 className="nav-item"
                 aria-current={isCurrent ? 'page' : undefined}
                 ref={(element) => {

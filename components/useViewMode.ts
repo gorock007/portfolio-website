@@ -1,6 +1,10 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 
 const MOBILE_QUERY = '(max-width: 767px)'
+
+export type ViewMode = 'grid' | 'list'
 
 /**
  * Grid/list state for a tile page.
@@ -10,7 +14,7 @@ const MOBILE_QUERY = '(max-width: 767px)'
  * with no control to get back. Force grid whenever the toggle isn't reachable.
  */
 export const useViewMode = () => {
-  const [view, setView] = useState('grid')
+  const [view, setView] = useState<ViewMode>('grid')
 
   useEffect(() => {
     const media = window.matchMedia(MOBILE_QUERY)
@@ -24,5 +28,5 @@ export const useViewMode = () => {
     return () => media.removeEventListener('change', sync)
   }, [])
 
-  return [view, setView]
+  return [view, setView] as const
 }

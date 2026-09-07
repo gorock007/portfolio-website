@@ -10,9 +10,9 @@ const base = {
   strokeLinejoin: 'round',
   'aria-hidden': 'true',
   focusable: 'false',
-}
+} as const
 
-const solid = { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': 'true', focusable: 'false' }
+const solid = { width: 24, height: 24, viewBox: '0 0 24 24', fill: 'currentColor', 'aria-hidden': 'true', focusable: 'false' } as const
 
 export const GitHubIcon = () => (
   <svg {...solid}>

@@ -1,4 +1,4 @@
-import { profile } from '../../data/siteLinks'
+import { profile } from '@/data/siteLinks'
 import Tile from '../Tile'
 
 const NowTile = () => (

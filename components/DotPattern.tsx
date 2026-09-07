@@ -1,3 +1,5 @@
+'use client'
+
 import {
   motion,
   useMotionTemplate,
@@ -5,7 +7,7 @@ import {
   useReducedMotion,
   useSpring,
 } from 'framer-motion'
-import { useEffect, useId, useRef } from 'react'
+import { useEffect, useId, useRef, type RefObject } from 'react'
 
 // How far the cursor's light reaches, and how lazily it follows. The spring is
 // the whole effect: the light arrives a beat after the pointer, so moving
@@ -23,7 +25,7 @@ const PARKED = -9999
  * scroll and resize instead of being read per move, which would force a layout
  * on every pointer event.
  */
-const usePointerLight = (ref, enabled) => {
+const usePointerLight = (ref: RefObject<HTMLElement | null>, enabled: boolean) => {
   const x = useMotionValue(PARKED)
   const y = useMotionValue(PARKED)
   const springX = useSpring(x, LIGHT_SPRING)
@@ -33,13 +35,14 @@ const usePointerLight = (ref, enabled) => {
     const element = ref.current
     if (!enabled || !element) return undefined
 
-    let rect = null
+    let rect: DOMRect | null = null
     const readRect = () => {
       rect = element.getBoundingClientRect()
     }
 
-    const handleMove = (event) => {
+    const handleMove = (event: PointerEvent) => {
       if (!rect) readRect()
+      if (!rect) return
       x.set(event.clientX - rect.left)
       y.set(event.clientY - rect.top)
     }
@@ -51,9 +54,9 @@ const usePointerLight = (ref, enabled) => {
       y.set(PARKED)
     }
 
-    const listen = (on) => {
-      const method = on ? 'addEventListener' : 'removeEventListener'
-      window[method]('pointermove', handleMove, { passive: true })
+    const listen = (on: boolean) => {
+      const method = on ? ('addEventListener' as const) : ('removeEventListener' as const)
+      window[method]('pointermove', handleMove as EventListener, { passive: true })
       window[method]('scroll', readRect, { passive: true })
       window[method]('resize', readRect)
       document[method]('pointerleave', handleLeave)
@@ -80,7 +83,17 @@ const usePointerLight = (ref, enabled) => {
   return { springX, springY }
 }
 
-const DotField = ({ id, width, height, x, y, cx, cy, r }) => (
+type Geometry = {
+  width: number
+  height: number
+  x: number
+  y: number
+  cx: number
+  cy: number
+  r: number
+}
+
+const DotField = ({ id, width, height, x, y, cx, cy, r }: Geometry & { id: string }) => (
   <>
     <defs>
       <pattern
@@ -108,6 +121,12 @@ const DotField = ({ id, width, height, x, y, cx, cy, r }) => (
  * through a mask that follows the cursor. Both layers share their geometry, so
  * the bright dots sit exactly on the quiet ones.
  */
+type DotPatternProps = Partial<Geometry> & {
+  fade?: boolean
+  interactive?: boolean
+  className?: string
+}
+
 const DotPattern = ({
   width = 24,
   height = 24,
@@ -120,9 +139,9 @@ const DotPattern = ({
   interactive = false,
   className = '',
   ...rest
-}) => {
+}: DotPatternProps) => {
   const id = useId()
-  const ref = useRef(null)
+  const ref = useRef<HTMLSpanElement>(null)
   const reduceMotion = useReducedMotion()
 
   // A light chasing the cursor is exactly the kind of movement a reduced-motion
@@ -132,7 +151,7 @@ const DotPattern = ({
 
   const mask = useMotionTemplate`radial-gradient(${LIGHT_RADIUS}px circle at ${springX}px ${springY}px, #000 0%, rgba(0, 0, 0, 0.35) 45%, transparent 72%)`
 
-  const geometry = { width, height, x, y, cx, cy, r }
+  const geometry: Geometry = { width, height, x, y, cx, cy, r }
 
   return (
     <span

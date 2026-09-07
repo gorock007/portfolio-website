@@ -1,6 +1,8 @@
+import Image from 'next/image'
+import type { Project, TileSize } from '@/data/types'
 import Tile from '../Tile'
 
-const ProjectTile = ({ project, size }) => (
+const ProjectTile = ({ project, size }: { project: Project; size?: TileSize }) => (
   <Tile
     size={size || project.size}
     className="project-card"
@@ -21,7 +23,12 @@ const ProjectTile = ({ project, size }) => (
 
       {project.img ? (
         <figure className="tile-media">
-          <img src={project.img} alt={project.imgAlt} loading="lazy" decoding="async" />
+          <Image
+            src={project.img}
+            alt={project.imgAlt ?? ''}
+            fill
+            sizes="(max-width: 767px) 100vw, 672px"
+          />
         </figure>
       ) : (
         // No capture to show — the claims carry the tile instead of empty grey.

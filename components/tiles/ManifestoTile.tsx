@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
-import { manifestoFootnote, manifestoLines } from '../../data/manifesto'
-import { profile } from '../../data/siteLinks'
+import Link from 'next/link'
+import { manifestoFootnote, manifestoLines } from '@/data/manifesto'
+import { profile } from '@/data/siteLinks'
 import Tile from '../Tile'
 
 const ManifestoTile = () => (
@@ -31,7 +31,7 @@ const ManifestoTile = () => (
 
       <p className="asterisk">
         <span aria-hidden="true">* </span>
-        <Link to={manifestoFootnote.href} className="inline-link">
+        <Link href={manifestoFootnote.href} className="inline-link">
           {manifestoFootnote.text}
         </Link>
       </p>

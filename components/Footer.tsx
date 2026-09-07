@@ -1,4 +1,4 @@
-import { socialLinks } from '../data/siteLinks'
+import { socialLinks } from '@/data/siteLinks'
 import { icons } from './Icons'
 import Tooltip from './Tooltip'
 

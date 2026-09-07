@@ -1,5 +1,7 @@
+'use client'
+
 import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 
 /**
  * Wraps a single interactive child and lifts a dark label above it.
@@ -7,7 +9,7 @@ import { useState } from 'react'
  * affordance. The label is aria-hidden because the trigger already carries the
  * same text as its aria-label — exposing both makes screen readers say it twice.
  */
-const Tooltip = ({ label, children }) => {
+const Tooltip = ({ label, children }: { label: string; children: ReactNode }) => {
   const [open, setOpen] = useState(false)
 
   return (

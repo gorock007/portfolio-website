@@ -1,4 +1,4 @@
-import { stack } from '../../data/siteLinks'
+import { stack } from '@/data/siteLinks'
 import Tile from '../Tile'
 
 const StackTile = () => (

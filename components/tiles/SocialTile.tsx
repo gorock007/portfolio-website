@@ -1,5 +1,6 @@
-import avatar from '../../images/avatar-x.png'
-import { profile } from '../../data/siteLinks'
+import Image from 'next/image'
+import avatar from '@/assets/images/avatar-x.png'
+import { profile } from '@/data/siteLinks'
 import { XIcon } from '../Icons'
 import Tile from '../Tile'
 
@@ -7,7 +8,14 @@ const SocialTile = () => (
   <Tile size="sm">
     <div className="stat-tile">
       <div className="social-head">
-        <img className="social-avatar" src={avatar} alt="" loading="lazy" decoding="async" />
+        <Image
+          className="social-avatar"
+          src={avatar}
+          alt=""
+          width={44}
+          height={44}
+          sizes="44px"
+        />
         <div>
           <p className="social-name">{profile.name}</p>
           <p className="social-handle">@gorockbits</p>

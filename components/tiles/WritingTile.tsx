@@ -1,6 +1,7 @@
+import type { BlogPost } from '@/data/types'
 import Tile from '../Tile'
 
-const WritingTile = ({ post }) => {
+const WritingTile = ({ post }: { post?: BlogPost }) => {
   if (!post) {
     return (
       <Tile size="sm" to="/writings">

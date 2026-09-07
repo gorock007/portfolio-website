@@ -1,11 +1,28 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+'use client'
+
+import { motion, type Variants } from 'framer-motion'
+import Link from 'next/link'
+import type { ReactNode } from 'react'
+import type { TileSize } from '@/data/types'
 
 const MotionLink = motion.create(Link)
 
-const enter = {
+const enter: Variants = {
   hidden: { opacity: 0, y: 48, scale: 0.8 },
   visible: { opacity: 1, y: 0, scale: 1 },
+}
+
+type TileProps = {
+  size?: TileSize
+  className?: string
+  to?: string
+  href?: string
+  children?: ReactNode
+  /* A tile renders as a div, an anchor or a Link depending on its props, and
+     the three disagree about their event handlers. Rather than union the lot,
+     only the attributes tiles actually pass through are accepted. */
+  id?: string
+  'aria-label'?: string
 }
 
 /**
@@ -14,7 +31,7 @@ const enter = {
  * auto (2 wide, content height). Pass `to` for an internal link tile, `href`
  * for an external one, or neither for a static panel.
  */
-const Tile = ({ size = 'sm', className = '', to, href, children, ...rest }) => {
+const Tile = ({ size = 'sm', className = '', to, href, children, ...rest }: TileProps) => {
   const classes = ['tile', `tile--${size}`, className].filter(Boolean).join(' ')
 
   const motionProps = {
@@ -24,11 +41,11 @@ const Tile = ({ size = 'sm', className = '', to, href, children, ...rest }) => {
     whileInView: 'visible',
     viewport: { once: true, margin: '-40px' },
     transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
-  }
+  } as const
 
   if (to) {
     return (
-      <MotionLink {...motionProps} to={to} {...rest}>
+      <MotionLink {...motionProps} href={to} {...rest}>
         {children}
       </MotionLink>
     )

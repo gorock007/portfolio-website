@@ -1,5 +1,7 @@
-import { useLocation } from 'react-router-dom'
-import { blogPosts } from '../data/writing'
+'use client'
+
+import { usePathname } from 'next/navigation'
+import { blogPosts } from '@/data/writing'
 
 // Only a note that exists. The writing index is a tile grid and tiles carry
 // their own surface, so the field behind them reads as texture, not noise —
@@ -14,10 +16,10 @@ const readingRoutes = new Set(blogPosts.map((post) => `/writings/${post.id}`))
  * body copy, where a 1px dot every 24px sits right on the x-height and fights
  * the text. It crossfades rather than switching, so arriving at a note reads as
  * the room going quiet and leaving it as the room coming back. The transition
- * is CSS, which the `prefers-reduced-motion` block in index.css already covers.
+ * is CSS, which the `prefers-reduced-motion` block in globals.css already covers.
  */
 const ReadingRoom = () => {
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const reading = readingRoutes.has(pathname)
 
   return (
