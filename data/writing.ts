@@ -1,8 +1,9 @@
-import agiSmearCover from '../images/agi-smear-cover.svg'
-import aiSkillsCover from '../images/ai-skills-cover.jpg'
+import type { BlogPost } from './types'
+import agiSmearCover from '@/assets/images/agi-smear-cover.svg'
+import aiSkillsCover from '@/assets/images/ai-skills-cover.jpg'
 
 // Writing entries. Add new notes here; the homepage and writing index update automatically.
-export const blogPosts = [
+export const blogPosts: BlogPost[] = [
   {
     id: 'agi-is-a-smear',
     title: 'AGI Is a Smear, Not a Finish Line',

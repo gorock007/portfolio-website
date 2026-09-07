@@ -1,14 +1,15 @@
+import type { Project } from './types'
 // Projects that are not on the site right now. Nothing imports this file, so
-// none of these images are bundled; move an entry back into `projects.js`
+// none of these images are bundled; move an entry back into `projects.ts`
 // (with its image import) to put it back on the grid.
-import summaize from '../images/summaize.png'
-import imagegenerator from '../images/imagegenerator.png'
-import crypto from '../images/crypto.png'
-import podcast from '../images/podcast.jpeg'
-import scorekeeper from '../images/scorekeeper.png'
-import dbs from '../images/dbs.png'
+import summaize from '@/assets/images/summaize.png'
+import imagegenerator from '@/assets/images/imagegenerator.png'
+import crypto from '@/assets/images/crypto.png'
+import podcast from '@/assets/images/podcast.jpeg'
+import scorekeeper from '@/assets/images/scorekeeper.png'
+import dbs from '@/assets/images/dbs.png'
 
-export const archivedProjects = [
+export const archivedProjects: Project[] = [
   {
     id: 'make-product-viral',
     title: 'make-product-viral',

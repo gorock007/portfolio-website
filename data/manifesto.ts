@@ -1,6 +1,6 @@
 // The home tile. Structure mirrors the reference: one display line naming what
 // is being built, a rule, then a stack of quieter lines, then a footnote.
-export const manifestoLines = [
+export const manifestoLines: string[] = [
   'i build things.',
   'i think building is how you understand things.',
   'i think the fastest way to learn something is to ship it, then go back and find out why it works.',

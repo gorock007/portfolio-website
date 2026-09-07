@@ -1,15 +1,26 @@
+import type { icons } from '@/components/Icons'
+
+export type SocialIcon = keyof typeof icons
+
 export const profile = {
   name: 'Gorock Shetty',
   location: 'Sydney, Australia',
   building: { label: 'NaatiAce', url: 'https://naatiace.com/' },
-}
+} as const
 
 // The X profile doubles as the contact route now that email is off the site.
 export const contactUrl = 'https://x.com/gorockbits'
 export const contactHandle = '@gorockbits'
 
+export type SocialLink = {
+  id: string
+  label: string
+  href: string
+  icon: SocialIcon
+}
+
 // Only links with a real destination are rendered in the footer icon row.
-export const socialLinks = [
+export const socialLinks: SocialLink[] = [
   // Labels name the platform as well as the handle: three of these share
   // @gorockbits, and identical link names pointing at different places are
   // ambiguous in a tooltip and unusable in a screen reader's link list.
@@ -20,7 +31,9 @@ export const socialLinks = [
   { id: 'tiktok', label: 'TikTok @gorockbits', href: 'https://www.tiktok.com/@gorockbits', icon: 'tiktok' },
 ]
 
-export const navItems = [
+export type NavItem = { to: string; label: string }
+
+export const navItems: NavItem[] = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/work', label: 'Work' },

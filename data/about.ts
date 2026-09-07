@@ -1,4 +1,6 @@
-export const aboutBlocks = [
+export type AboutBlock = { label: string; paragraphs: string[] }
+
+export const aboutBlocks: AboutBlock[] = [
   {
     label: 'Who I am',
     paragraphs: [

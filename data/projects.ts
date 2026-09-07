@@ -1,9 +1,10 @@
-import naatiace from '../images/naatiace.jpg'
-import revisit from '../images/revisit-social-preview.png'
-import dontMakeItUgly from '../images/dont-make-it-ugly-social-preview.png'
+import type { Project } from './types'
+import naatiace from '@/assets/images/naatiace.jpg'
+import revisit from '@/assets/images/revisit-social-preview.png'
+import dontMakeItUgly from '@/assets/images/dont-make-it-ugly-social-preview.png'
 
 // `size` maps to a tile class; both of these carry the home grid.
-export const projects = [
+export const projects: Project[] = [
   {
     id: 'naatiace',
     title: 'NaatiAce',
