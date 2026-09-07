@@ -3,7 +3,7 @@ name: ai-slop-check
 description: Detect and fix generic AI-design tropes — aggressive gradients, decorative emoji, default card templates, off-token colors and spacing, silent default fonts, the unexamined warm-editorial look. Use when asked to check for AI slop or generic design.
 ---
 
-> Project context: React 18 + Tailwind v4 (Vite). Design tokens live in `src/index.css` under `@theme`. Components are in `src/components/` and pages in `src/views/`. Animations use Framer Motion.
+> Project context: Next.js 16 App Router + React 19 + TypeScript + Tailwind v4. Design tokens live in `styles/globals.css` under `@theme`. Components are in `components/` and routes in `app/`. Animations use Framer Motion.
 
 # AI Slop Check: Detect and Fix Generic AI Aesthetics
 

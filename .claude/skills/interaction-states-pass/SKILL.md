@@ -3,7 +3,7 @@ name: interaction-states-pass
 description: Verify every interactive element has complete states — default, hover, active, disabled, focus, loading — plus 0.15–0.3s transitions and visible action feedback. Add whatever is missing. Use before shipping interactive UI.
 ---
 
-> Project context: React 18 + Tailwind v4 (Vite). Design tokens live in `src/index.css` under `@theme`. Components are in `src/components/` and pages in `src/views/`. Animations use Framer Motion.
+> Project context: Next.js 16 App Router + React 19 + TypeScript + Tailwind v4. Design tokens live in `styles/globals.css` under `@theme`. Components are in `components/` and routes in `app/`. Animations use Framer Motion.
 
 # Interaction States Pass
 

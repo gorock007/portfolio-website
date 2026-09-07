@@ -1,13 +1,16 @@
 # Portfolio Website
 
-Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). React 18 + Vite + Tailwind CSS v4 + Framer Motion, deployed on Netlify.
+Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). Next.js 16 App Router + React 19 + TypeScript + Tailwind CSS v4 + Framer Motion, deployed on Vercel at gorakh.sh.
 
-- Pages live in `src/views/` (Home, About, Work, Writing, WritingPost, NotFound). `Layout` renders the `<main>` region; `App` renders the nav and footer around `<Routes>` so they persist across navigation.
-- Reusable primitives in `src/components/`; individual grid tiles in `src/components/tiles/`.
-- All content is data-driven: `src/data/` (`projects.js`, `writing.js`, `about.js`, `manifesto.js`, `siteLinks.js`). `archivedProjects.js` holds projects that are off the site; nothing imports it, so its images stay out of the bundle.
-- Styles: `src/index.css` holds the `@theme` tokens and base layer, and imports `src/styles/{nav,footer,tiles,prose}.css`. There is no tailwind.config — Tailwind v4 CSS-first config.
+- Routes live in `app/` (`/`, `/about`, `/work`, `/writings`, `/writings/[id]`, `not-found.tsx`). `Layout` renders the `<main>` region; `app/layout.tsx` renders the nav and footer around the route slot so they persist across navigation.
+- Reusable primitives in `components/`; individual grid tiles in `components/tiles/`.
+- Server components by default. The client boundaries are `Providers`, `Tile`, `Nav`, `DotPattern`, `Tooltip`, `ReadingRoom`, `RouteFocus`, `FadeIn`, `ActivityTile`, and `ViewSwitcher` — which owns the grid/list toggle so the pages around it can stay on the server and keep exporting `metadata`.
+- All content is data-driven: `data/` (`projects.ts`, `writing.ts`, `about.ts`, `manifesto.ts`, `siteLinks.ts`, shapes in `types.ts`). `archivedProjects.ts` holds projects that are off the site; nothing imports it, so its images stay out of the bundle.
+- Site-wide constants in `lib/site.ts` — the canonical origin, Open Graph and Twitter defaults, read by every page's metadata plus `sitemap.ts` and `robots.ts`. Never hard-code the domain anywhere else.
+- Styles: `styles/globals.css` holds the `@theme` tokens and base layer, and imports `styles/{nav,footer,dot-pattern,tiles,prose}.css`. There is no tailwind.config — Tailwind v4 CSS-first config, wired through `@tailwindcss/postcss`.
+- Images live in `assets/images/` and are imported statically so `next/image` gets their dimensions at build time.
 - Runtime: Node.js 22.12 or newer (see `.nvmrc`).
-- Build: `npm run dev` / `npm run build`.
+- Build: `npm run dev` / `npm run build` / `npm run typecheck`.
 
 ## Design system rules
 
@@ -32,7 +35,7 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 - Column bands: 4 columns ≥1392px (max 1360), 3 columns ≥1060px (max 1016), 2 columns ≥768px (max 672), 1 column below (max 328).
 - Tile footprints: `sm`/`md` 1×1, `lg` 1×2, `wide` 2×1, `xl` 2×2, `auto` full-width and content-height.
 - The two-column tiles that carry a full-bleed capture — the project cards and the manifesto — hug their content instead of holding the 672px height (`.tile--xl.project-card`, `.tile--xl.tile--grow`). A 1200×630 capture is only 353px tall at 672px wide, so a fixed 2×2 footprint opens a band of dead grey between the copy and the screenshot. Whatever shares their row stretches to match.
-- An image inside a 1×1 tile must sit out of flow (`position: absolute; inset: 0`) and cover-crop. In flow its intrinsic ratio sizes the row, which stretches every tile beside it — that is what the 533×800 portrait was doing to its whole row. Crop the photo to the module rather than let it set the height.
+- An image inside a 1×1 tile must sit out of flow (`position: absolute; inset: 0`, which is what `next/image`'s `fill` gives you) and cover-crop. In flow its intrinsic ratio sizes the row, which stretches every tile beside it — that is what the 533×800 portrait was doing to its whole row. Crop the photo to the module rather than let it set the height.
 - Every tile is `--color-tile` with `--radius-tile` (32px). Don't introduce other card treatments, borders, or shadows on tiles.
 - Compose new tiles with `<Tile size="…">`; don't hand-roll a panel.
 - Empty space inside a tile is intentional — the reference is airy. Don't fill it.
@@ -42,18 +45,18 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 - It never runs under long-form text. On a note's route `ReadingRoom` fades in a column of paper (`.reading-room`) — the 672px article plus 64px either side, dissolving into the margins — that hides the dots where the body copy is. The field stays lit out in the margins; the crossfade is what makes arriving at a note read as the room going quiet.
 
 ### Motion
-- Framer Motion only. Tiles enter with the shared variant in `Tile.jsx`: `opacity 0→1`, `y 48→0`, `scale .8→1`, `viewport={{ once: true }}`.
-- The app is wrapped in `<MotionConfig reducedMotion="user">` and `src/index.css` has a `prefers-reduced-motion` block — keep both intact.
+- Framer Motion only. Tiles enter with the shared variant in `Tile.tsx`: `opacity 0→1`, `y 48→0`, `scale .8→1`, `viewport={{ once: true }}`.
+- The app is wrapped in `<MotionConfig reducedMotion="user">` (`components/Providers.tsx`) and `styles/globals.css` has a `prefers-reduced-motion` block — keep both intact.
 - State-change transitions (hover, focus, nav indicator) stay in the 0.2–0.3s range.
 
 ### Accessibility (non-negotiable)
-- Never remove focus outlines. The global `:focus-visible` style in `src/index.css` is the floor.
-- Tooltips must open on **focus as well as hover** — see `Tooltip.jsx`.
+- Never remove focus outlines. The global `:focus-visible` style in `styles/globals.css` is the floor.
+- Tooltips must open on **focus as well as hover** — see `Tooltip.tsx`.
 - Semantic HTML: `<button>` for actions, `<a>` for navigation, one `<h1>` per page, no skipped heading levels.
 - Every meaningful image gets descriptive `alt`; decorative ones get `alt=""`.
 - Hit targets ≥ 44×44px (nav icons are a 44px box around a 24px glyph; the view toggle buttons are 44×44). Inline text links are exempt.
 - Never put `border-radius` on `:focus-visible` — there is no `outline-radius`, so it reshapes the element it outlines.
-- Route changes move focus into `<main>` (see `ScrollToTop.jsx`); keep that behaviour when touching routing.
+- Route changes move focus into `<main>` (see `RouteFocus.tsx`); keep that behaviour when touching routing.
 
 ### Banned patterns (AI slop)
 - Decorative emoji in headlines, buttons, or lists.
@@ -73,3 +76,13 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 - `polish-pass` — umbrella quality gate; run before shipping any redesigned page
 
 After meaningful visual changes, run `polish-pass` (or the relevant narrower skill) before considering the work done.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

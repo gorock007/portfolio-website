@@ -3,7 +3,7 @@ name: polish-pass
 description: End-of-design quality gate: run accessibility, AI-slop, hierarchy/rhythm, and interaction-state reviews via parallel agents, then fix all blockers and quality issues. Use as the final check before a page ships.
 ---
 
-> Project context: React 18 + Tailwind v4 (Vite). Design tokens live in `src/index.css` under `@theme`. Components are in `src/components/` and pages in `src/views/`. Animations use Framer Motion.
+> Project context: Next.js 16 App Router + React 19 + TypeScript + Tailwind v4. Design tokens live in `styles/globals.css` under `@theme`. Components are in `components/` and routes in `app/`. Animations use Framer Motion.
 
 # Polish Pass: End-of-Design Quality Gate
 

@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. A bento-tile site built with React 18, Vite, Tailwind CSS v4, and Framer Motion, deployed to Netlify from `master`.
+Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. A bento-tile site built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, and Framer Motion, deployed to Vercel from `master` at [gorakh.sh](https://gorakh.sh).
 
 ## Local development
 
@@ -12,15 +12,24 @@ npm ci
 npm run dev
 ```
 
-Create a production build with `npm run build` and preview it locally with `npm run preview`.
+Create a production build with `npm run build` and serve it locally with `npm run start`. `npm run typecheck` runs TypeScript on its own.
 
 ## Project structure
 
-- Routes and pages: `src/views/` — Home, About, Work, Writing, WritingPost, NotFound
-- Layout and primitives: `src/components/` — `Nav`, `Layout`, `Tile`, `TileGrid`, `GridTopBar`, `Tooltip`, `Icons`, `ListView`
-- Individual grid tiles: `src/components/tiles/`
-- Content: `src/data/` — `projects.js`, `writing.js`, `about.js`, `manifesto.js`, `siteLinks.js`
-- Design tokens and base layer: `src/index.css`; component styles in `src/styles/`
-- Netlify deployment configuration: `netlify.toml`
+- Routes: `app/` — `/`, `/about`, `/work`, `/writings`, `/writings/[id]`, plus `not-found.tsx`, `sitemap.ts`, and `robots.ts`
+- Layout and primitives: `components/` — `Nav`, `Layout`, `Tile`, `TileGrid`, `ViewSwitcher`, `GridTopBar`, `Tooltip`, `Icons`, `ListView`
+- Individual grid tiles: `components/tiles/`
+- Content: `data/` — `projects.ts`, `writing.ts`, `about.ts`, `manifesto.ts`, `siteLinks.ts`, with the shared shapes in `types.ts`
+- Site-wide constants and the font: `lib/` — `site.ts` (canonical origin, Open Graph, Twitter), `fonts.ts`, `renderContent.tsx`
+- Design tokens and base layer: `styles/globals.css`; component styles alongside it in `styles/`
+- Images: `assets/images/`, imported statically so `next/image` gets their dimensions at build time
 
-Adding a project to `src/data/projects.js` or a note to `src/data/writing.js` updates the home grid, the Work page, and the Writing index automatically. The writing index keeps a working empty state.
+Adding a project to `data/projects.ts` or a note to `data/writing.ts` updates the home grid, the Work page, the Writing index, and the sitemap automatically. The writing index keeps a working empty state.
+
+## Rendering
+
+Everything is a server component by default. The client boundaries are the ones that need them: `Providers` (`MotionConfig`), `Tile`, `Nav`, `DotPattern`, `Tooltip`, `ReadingRoom`, `RouteFocus`, `FadeIn`, `ActivityTile`, and `ViewSwitcher`, which owns the grid/list toggle so the pages around it stay on the server. Every route prerenders to static HTML, so each one is directly addressable and refresh-safe.
+
+## Deployment
+
+Vercel builds the project natively — no `vercel.json` and no adapter. `next build` is the whole build step.
