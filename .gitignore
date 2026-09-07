@@ -13,8 +13,11 @@ node_modules
 .next
 out
 next-env.d.ts
-.vercel
 *.tsbuildinfo
+
+# Vercel — the local project link and the env files it pulls
+.vercel
+.env*
 
 # Editor directories and files
 .vscode/*
