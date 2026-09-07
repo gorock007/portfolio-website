@@ -53,7 +53,7 @@
    A column of paper the width of the article plus its margins, sitting on the
    field and under the type. Same z-index as the field but later in the DOM, so
    it paints over the dots and beneath everything in flow. Fixed, because the
-   note scrolls through it. ReadingRoom.jsx opens it on a note's route.
+   note scrolls through it. ReadingRoom.tsx opens it on a note’s route.
 --------------------------------------------------------------------------- */
 .reading-room {
   /* The article column plus 64px of clear paper either side. Everything

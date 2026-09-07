@@ -106,6 +106,10 @@ a.tile:active {
 }
 
 .tile-media {
+  /* Positioned so the capture inside can be laid out with next/image's `fill`:
+     the box's height comes from the aspect-ratio or flex rules below, never
+     from the image's own intrinsic ratio. */
+  position: relative;
   overflow: hidden;
   border-radius: 16px;
   background-color: var(--color-paper);
@@ -599,6 +603,8 @@ a.project-url:focus-visible {
 }
 
 .writing-card-media {
+  /* Positioned for next/image's `fill` — the height is the grid row's. */
+  position: relative;
   overflow: hidden;
   border-radius: 16px;
   margin: -32px -32px -32px 0;

@@ -1,16 +1,18 @@
 @import "tailwindcss";
-@import "./styles/nav.css";
-@import "./styles/footer.css";
-@import "./styles/dot-pattern.css";
-@import "./styles/tiles.css";
-@import "./styles/prose.css";
+@import "./nav.css";
+@import "./footer.css";
+@import "./dot-pattern.css";
+@import "./tiles.css";
+@import "./prose.css";
 
 /* ---------------------------------------------------------------------------
    Design tokens — a white page, one grey tile, black ink.
    Values measured from the reference site's stylesheet.
 --------------------------------------------------------------------------- */
 @theme {
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Geist is loaded by next/font in app/layout.tsx, which self-hosts it and
+     hands the family over as --font-geist. */
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --color-paper: #ffffff;
   --color-tile: #f7f7f9;
