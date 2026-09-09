@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. A bento-tile site built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, and Framer Motion, deployed to Vercel from `master` at [gorakh.sh](https://gorakh.sh).
+Personal portfolio for Gorock Shetty: an AI-native product builder and maker of NaatiAce and Revisit. A bento-tile site built with Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, and Framer Motion, deployed to Vercel from `master` at [gorock.sh](https://gorock.sh).
 
 ## Local development
 

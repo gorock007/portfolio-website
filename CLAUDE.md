@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). Next.js 16 App Router + React 19 + TypeScript + Tailwind CSS v4 + Framer Motion, deployed on Vercel at gorakh.sh.
+Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). Next.js 16 App Router + React 19 + TypeScript + Tailwind CSS v4 + Framer Motion, deployed on Vercel at gorock.sh.
 
 - Routes live in `app/` (`/`, `/about`, `/work`, `/writings`, `/writings/[id]`, `not-found.tsx`). `Layout` renders the `<main>` region; `app/layout.tsx` renders the nav and footer around the route slot so they persist across navigation.
 - Reusable primitives in `components/`; individual grid tiles in `components/tiles/`.
