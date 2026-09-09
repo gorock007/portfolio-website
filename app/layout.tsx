@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import DotPattern from '@/components/DotPattern'
 import Footer from '@/components/Footer'
 import Nav from '@/components/Nav'
+import PersonSchema from '@/components/PersonSchema'
 import Providers from '@/components/Providers'
 import ReadingRoom from '@/components/ReadingRoom'
 import RouteFocus from '@/components/RouteFocus'
@@ -17,6 +18,12 @@ export const metadata: Metadata = {
     template: '%s — Gorock Shetty',
   },
   description: site.description,
+  // Both spellings, so a search for either name has something to match.
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.url }],
+  creator: site.name,
+  publisher: site.name,
+  keywords: [site.name, site.alternateName, 'NaatiAce', 'Revisit', 'AI products', 'Sydney'],
   alternates: { canonical: '/' },
   icons: {
     icon: '/favicon.png',
@@ -49,6 +56,7 @@ export const viewport: Viewport = {
 const RootLayout = ({ children }: { children: ReactNode }) => (
   <html lang="en" className={geist.variable}>
     <body>
+      <PersonSchema />
       <Providers>
         <DotPattern className="dot-pattern--page" interactive />
 
