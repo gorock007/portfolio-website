@@ -46,6 +46,7 @@ const HomePage = () => {
     <Layout>
       <ViewSwitcher
         caption="Look around…"
+        heading={<h1 className="page-h1 list-heading">{site.name}.</h1>}
         list={<ListView items={listItems} />}
         grid={
           <TileGrid>

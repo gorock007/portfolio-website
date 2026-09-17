@@ -5,10 +5,12 @@ type GridTopBarProps = {
   view: ViewMode
   onViewChange: (view: ViewMode) => void
   caption?: string
+  /** Matches the bar's width to a `tile-grid--pairs` grid at the 3-column band. */
+  pairs?: boolean
 }
 
-const GridTopBar = ({ view, onViewChange, caption }: GridTopBarProps) => (
-  <div className="grid-top-bar">
+const GridTopBar = ({ view, onViewChange, caption, pairs }: GridTopBarProps) => (
+  <div className={`grid-top-bar${pairs ? ' grid-top-bar--pairs' : ''}`}>
     {caption && <p className="grid-caption">{caption}</p>}
 
     <div className="view-controls" role="group" aria-label="Layout">

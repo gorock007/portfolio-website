@@ -43,9 +43,19 @@ const Tile = ({ size = 'sm', className = '', to, href, children, ...rest }: Tile
     transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
   } as const
 
+  /* The lift and the press have to live here, not in the stylesheet. The entry
+     variant settles on y: 0, scale: 1 — all defaults — so Framer writes the
+     literal `transform: none` inline and keeps it there, and an inline
+     declaration outranks `a.tile:hover { transform: ... }`. MotionConfig's
+     reducedMotion="user" drops both for anyone who asks for less motion. */
+  const interaction = {
+    whileHover: { y: -1 },
+    whileTap: { y: 0 },
+  } as const
+
   if (to) {
     return (
-      <MotionLink {...motionProps} href={to} {...rest}>
+      <MotionLink {...motionProps} {...interaction} href={to} {...rest}>
         {children}
       </MotionLink>
     )
@@ -58,6 +68,7 @@ const Tile = ({ size = 'sm', className = '', to, href, children, ...rest }: Tile
     return (
       <motion.a
         {...motionProps}
+        {...interaction}
         href={href}
         {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         {...rest}

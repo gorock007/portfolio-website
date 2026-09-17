@@ -29,9 +29,11 @@ const WorkPage = () => (
   <Layout>
     <ViewSwitcher
       caption="Everything I’ve shipped…"
+      heading={<h1 className="page-h1 list-heading">Work.</h1>}
+      pairs
       list={<ListView items={listItems} />}
       grid={
-        <TileGrid>
+        <TileGrid className="tile-grid--pairs">
           <Tile size="wide">
             <h1 className="page-h1">Work.</h1>
             <p className="page-h2">{description}</p>

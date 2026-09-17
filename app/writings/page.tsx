@@ -30,11 +30,13 @@ const WritingPage = () => (
   <Layout>
     <ViewSwitcher
       caption="Notes, not takes…"
+      heading={<h1 className="page-h1 list-heading">Writing.</h1>}
+      pairs
       // No notes means nothing to list, and the toggle falls back to the grid,
       // which carries the empty state.
       list={blogPosts.length > 0 ? <ListView items={listItems} /> : undefined}
       grid={
-        <TileGrid>
+        <TileGrid className="tile-grid--pairs">
           <Tile size="wide">
             <h1 className="page-h1">Writing.</h1>
             <p className="page-h2">{description}</p>

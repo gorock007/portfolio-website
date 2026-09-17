@@ -21,7 +21,8 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 - There is no accent colour. Product screenshots keep their own real colours; nothing else is coloured.
 - No dark mode. `#f7f7f9` tiles on `#ffffff` is the whole palette.
 - Maintain WCAG AA contrast: 4.5:1 for normal text, 3:1 for large text and UI elements. **Measure against `--color-tile` (`#f7f7f9`), not white** — almost all text sits on a tile, and that costs about 0.3 of a ratio point.
-- There are exactly two greys. `--color-ink-display` (`#8a8a8a`, 3.23:1 on tile) is reserved for display type at 24px and above and must never be used at body size. `--color-ink-body` (`#6e6e6e`, 4.77:1 on tile) carries everything else.
+- There are exactly two greys. `--color-ink-display` (`#8a8a8a`, 3.23:1 on tile) is reserved for display type at 24px and above and must never be used at body size. `--color-ink-body` (`#696969`, 5.13:1 on tile) carries everything else.
+- Measure body text against the **hovered** tile, not the resting one. A link tile deepens to `#ebebed` under the cursor, which costs another 0.5 of a ratio point — that is why `--color-ink-body` is budgeted at 5.13:1 at rest, and why the hover mix is capped at 5% ink. Display type never sits inside a link tile, so it is exempt.
 - Never communicate state by colour alone.
 
 ### Typography
@@ -33,6 +34,7 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 ### Grid & tiles
 - The module is **328px on a 16px gutter**. Rows are `minmax(328px, auto)` so a two-row tile is exactly 672px, and a row grows past the module when a content-height tile in it is taller.
 - Column bands: 4 columns ≥1392px (max 1360), 3 columns ≥1060px (max 1016), 2 columns ≥768px (max 672), 1 column below (max 328).
+- A grid whose every tile spans two tracks gets `tile-grid--pairs` (`/work`, `/writings`). At the 3-column band nothing can fill the third track and `dense` has nothing narrower to promote, so the page would run row after row with a 328px hole down the right, sitting left of optical centre inside its own centred box. The modifier drops it to the pair for that band only.
 - Tile footprints: `sm`/`md` 1×1, `lg` 1×2, `wide` 2×1, `xl` 2×2, `auto` full-width and content-height.
 - The two-column tiles that carry a full-bleed capture — the project cards and the manifesto — hug their content instead of holding the 672px height (`.tile--xl.project-card`, `.tile--xl.tile--grow`). A 1200×630 capture is only 353px tall at 672px wide, so a fixed 2×2 footprint opens a band of dead grey between the copy and the screenshot. Whatever shares their row stretches to match.
 - An image inside a 1×1 tile must sit out of flow (`position: absolute; inset: 0`, which is what `next/image`'s `fill` gives you) and cover-crop. In flow its intrinsic ratio sizes the row, which stretches every tile beside it — that is what the 533×800 portrait was doing to its whole row. Crop the photo to the module rather than let it set the height.
@@ -46,10 +48,12 @@ The site is a **bento-tile portfolio**: a white page carrying a modular grid of 
 
 ### Motion
 - Framer Motion only. Tiles enter with the shared variant in `Tile.tsx`: `opacity 0→1`, `y 48→0`, `scale .8→1`, `viewport={{ once: true }}`.
+- A link tile's hover lift and press live in `Tile.tsx` as `whileHover`/`whileTap`, **not** in the stylesheet. The entry variant settles on `y: 0, scale: 1` — all defaults — so Framer writes the literal `transform: none` inline and leaves it, and an inline declaration beats any `transform` a CSS rule sets. The stylesheet owns the colour half of the state only.
 - The app is wrapped in `<MotionConfig reducedMotion="user">` (`components/Providers.tsx`) and `styles/globals.css` has a `prefers-reduced-motion` block — keep both intact.
 - State-change transitions (hover, focus, nav indicator) stay in the 0.2–0.3s range.
 
 ### Accessibility (non-negotiable)
+- A list of claims or links inside a tile needs `role="list"` on the `<ul>`: the global `list-style: none` makes Safari drop the list role, and on a captureless tile those chips are the whole body.
 - Never remove focus outlines. The global `:focus-visible` style in `styles/globals.css` is the floor.
 - Tooltips must open on **focus as well as hover** — see `Tooltip.tsx`.
 - Semantic HTML: `<button>` for actions, `<a>` for navigation, one `<h1>` per page, no skipped heading levels.

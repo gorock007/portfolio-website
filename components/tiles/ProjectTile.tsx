@@ -5,7 +5,10 @@ import Tile from '../Tile'
 const ProjectTile = ({ project, size }: { project: Project; size?: TileSize }) => (
   <Tile
     size={size || project.size}
-    className="project-card"
+    // No capture means the tile is all copy, which reflows several lines longer
+    // as the grid narrows. The auto row track already grows to fit it; this also
+    // lifts .tile's overflow at one column, where the margin is thinnest.
+    className={`project-card${project.img ? '' : ' tile--grow'}`}
     href={project.url}
     aria-label={`${project.title} — ${project.subtitle}`}
   >
@@ -35,7 +38,7 @@ const ProjectTile = ({ project, size }: { project: Project; size?: TileSize }) =
         <div className="project-fallback">
           {project.detail && <p className="stat-body">{project.detail}</p>}
           {project.proof && (
-            <ul className="stat-list">
+            <ul className="stat-list" role="list">
               {project.proof.map((item) => (
                 <li key={item}>{item}</li>
               ))}

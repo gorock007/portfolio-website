@@ -19,11 +19,15 @@
   --color-ink: #000000;
   /* Text sits on #f7f7f9 tiles, not on white, so every ratio below is measured
      against the tile. --color-ink-display is 3.23:1 and is therefore reserved
-     for display type at 24px and above; --color-ink-body is 4.77:1 and carries
+     for display type at 24px and above; --color-ink-body is 5.13:1 and carries
      everything else. There is no third grey — the earlier #747474/#767676 pair
-     read as the same colour and both failed AA on a tile. */
+     read as the same colour and both failed AA on a tile.
+     --color-ink-body is budgeted for the hovered tile, not the resting one: a
+     link tile deepens to #ebebed under the cursor, where the old #6e6e6e fell
+     to 4.27:1. #696969 holds 4.61:1 there. Display type never sits inside a
+     link tile, so it keeps its value. */
   --color-ink-display: #8a8a8a;
-  --color-ink-body: #6e6e6e;
+  --color-ink-body: #696969;
   --color-indicator: #f2f2f2;
   --color-hairline: rgba(0, 0, 0, 0.1);
   /* Strong enough to be seen as a link underline at rest. */
