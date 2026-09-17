@@ -58,7 +58,7 @@ export const projects: Project[] = [
     proof: ['On-device only', 'No clipboard monitoring', 'One press to capture'],
     img: klypst,
     imgAlt:
-      'The Klypst mascot, a stack of orange cards with a face, beside the words “Your clipboard remembers.”',
+      'The Klypst landing page: the mascot, a friendly stack of orange cards, beside “Your clipboard remembers.” and a Coming soon button, with saved clips floating around the edges.',
     urlLabel: 'klypst.vercel.app',
     url: 'https://klypst.vercel.app/',
     size: 'xl',
