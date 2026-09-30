@@ -1,9 +1,533 @@
 import type { BlogPost } from './types'
 import agiSmearCover from '@/assets/images/agi-smear-cover.svg'
 import aiSkillsCover from '@/assets/images/ai-skills-cover.jpg'
+import futureLoopCover from '@/assets/images/future-loop-cover.svg'
 
 // Writing entries. Add new notes here; the homepage and writing index update automatically.
 export const blogPosts: BlogPost[] = [
+  {
+    id: 'the-future-creates-the-present',
+    title: 'The Future Creates the Present',
+    excerpt: 'We say today creates tomorrow. But the tomorrow you imagine is what decides what you do today — a strange loop, and a reason to choose your future carefully.',
+    date: '30 September 2026',
+    readTime: '11 min read',
+    tags: ['Ambition', 'Time', 'Essays'],
+    coverImage: futureLoopCover,
+    coverImageAlt: 'A figure-eight loop of dots, faint on the left and dense on the right, with a solid marker at the crossing and an open ring on the right-hand lobe',
+    content: `We like to think time works in one direction.
+
+The past happened.
+
+We are here now.
+
+And whatever we do today creates our future.
+
+Past → Present → Future.
+
+Simple.
+
+But I’m starting to think humans don’t actually experience time that way.
+
+At least not psychologically.
+
+Because a strange thing happens when you seriously imagine your future.
+
+That future starts changing what you do today.
+
+And suddenly the arrow looks more like this:
+
+Future → Present → Future.
+
+The future hasn’t happened yet.
+
+It doesn’t exist.
+
+And somehow, it is already influencing you.
+
+## The person who doesn’t exist yet
+
+Think about someone who wants to become a doctor.
+
+For years before they actually become one, they organise their life around a person who technically does not exist yet.
+
+They study for exams.
+
+They sacrifice weekends.
+
+They choose universities.
+
+They tolerate years of training.
+
+They may move cities.
+
+They may take on debt.
+
+Why?
+
+Because somewhere in their head exists a future version of themselves wearing a white coat.
+
+That imaginary person has enormous power over the real person sitting at a desk at 2 a.m. studying anatomy.
+
+The future doctor doesn’t exist.
+
+But the idea of the future doctor does.
+
+And that idea is enough to change behaviour in the present.
+
+This happens everywhere.
+
+An athlete wakes up at 5 a.m. because they can imagine standing on a podium years from now.
+
+Someone saves part of every paycheck because they imagine owning a house.
+
+Someone goes to the gym because they can already picture the body they want.
+
+Someone learns programming after work because they imagine themselves working in technology.
+
+Someone starts writing online with twelve followers because they imagine eventually having an audience.
+
+None of those futures are real yet.
+
+But they are real enough to influence behaviour.
+
+That is strange when you think about it.
+
+## We say the present creates the future
+
+And obviously it does.
+
+If you exercise consistently, you become fitter.
+
+If you invest consistently, your money compounds.
+
+If you practise something for thousands of hours, you usually become better at it.
+
+So we naturally say:
+
+Your actions today determine your future.
+
+But there is another half of the equation that we rarely talk about.
+
+Why did you take those actions in the first place?
+
+Often because of some future you had already imagined.
+
+So perhaps the causal chain is not simply:
+
+today’s behaviour → tomorrow’s outcome
+
+It is closer to:
+
+imagined future → today’s behaviour → actual future
+
+The future is not literally travelling backwards through time.
+
+But a simulation of the future exists inside your mind today.
+
+And simulations can cause real things to happen.
+
+## A small form of time travel
+
+This is what makes it feel almost like a time-travel paradox.
+
+Imagine that at 20 years old you become obsessed with the idea of building a company.
+
+You start reading about startups.
+
+You learn to code.
+
+You meet founders.
+
+You build terrible products.
+
+You learn sales.
+
+You learn design.
+
+You fail a few times.
+
+Ten years later, you build a successful company.
+
+Now ask a strange question:
+
+Did your actions create that future?
+
+Of course.
+
+But what created the actions?
+
+The future.
+
+Or more accurately, the idea of the future.
+
+The founder you imagined at 20 influenced the person you became at 30.
+
+A fictional version of you changed the behaviour of the real you.
+
+And eventually the real you became closer to the fictional one.
+
+There is something almost paradoxical about that.
+
+You created the future.
+
+But in some sense, the future also created you.
+
+## JFK announced the future before it existed
+
+One of the clearest large-scale examples is the Apollo program.
+
+In 1961, John F. Kennedy told the United States that the country should commit to landing a man on the Moon before the decade was over.
+
+At the time, the capability required to do it did not exist.
+
+NASA had not figured everything out.
+
+The rockets weren’t ready.
+
+The computers weren’t ready.
+
+Thousands of engineering problems had not yet been solved.
+
+The destination came before the path.
+
+But once the destination became concrete, it started reorganising behaviour in the present.
+
+Budgets changed.
+
+Engineers were hired.
+
+Research priorities changed.
+
+Technologies were developed.
+
+Institutions coordinated around something that had not happened yet.
+
+Then in 1969, humans walked on the Moon.
+
+Of course, saying something ambitious did not magically make Apollo 11 happen.
+
+Thousands of people did extraordinarily difficult work.
+
+But the imagined future came first.
+
+The future provided a direction around which present-day action could organise itself.
+
+Without the imagined Moon landing, many of those actions would never have happened.
+
+## Arnold Schwarzenegger had already seen himself there
+
+Arnold Schwarzenegger has repeatedly described how, long before becoming one of the world’s most famous bodybuilders, he had a very clear picture of who he wanted to become.
+
+Growing up in Austria, the gap between his present reality and his imagined future was enormous.
+
+He wanted to become the greatest bodybuilder in the world.
+
+Then he wanted to become a movie star.
+
+Then, eventually, he entered politics.
+
+Look at those ambitions from the starting point and they sound almost absurd.
+
+An Austrian teenager imagining himself becoming Mr. Universe and then one of Hollywood’s biggest actors?
+
+Reasonable people might have suggested something more realistic.
+
+But perhaps realism would have produced a completely different life.
+
+The important part wasn’t that Schwarzenegger could predict the future.
+
+He couldn’t.
+
+It was that the scale of the imagined future changed the scale of his present behaviour.
+
+This is where ambition gets interesting.
+
+## Maybe being slightly delusional is useful
+
+We usually treat delusion as entirely negative.
+
+And obviously, genuine detachment from reality is dangerous.
+
+But there is another kind of “delusion” that ambitious people often seem to possess.
+
+They believe in an outcome long before the available evidence justifies their confidence.
+
+A founder with ten users believes they might one day have ten million.
+
+An unknown musician believes people might someday fill stadiums to hear them.
+
+An athlete who has never competed internationally believes they can become an Olympian.
+
+A student from an ordinary background believes they can build an extraordinary career.
+
+From the outside, these beliefs can look irrational.
+
+Sometimes they are.
+
+Most ambitious dreams fail.
+
+But here’s the interesting question:
+
+Could an unreasonable goal produce better behaviour than a reasonable one?
+
+Imagine two equally capable people.
+
+One says:
+
+“I want a comfortable job and a slightly better salary.”
+
+The other says:
+
+“I want to build a company used by a million people.”
+
+The second goal requires a completely different person.
+
+To have any chance of reaching it, that person might need to learn engineering, sales, writing, hiring, leadership, finance, negotiation, product design and distribution.
+
+They may never build the million-user company.
+
+But after ten years of attempting it, who have they become?
+
+Perhaps much more capable than the version of themselves who selected the safer target.
+
+This is why extreme goals can be useful even when you miss them.
+
+Sometimes the goal is valuable because of what achieving it requires you to become.
+
+## The danger of confusing ambition with fantasy
+
+There is an important distinction here.
+
+You can be unrealistic about the destination.
+
+You cannot be unrealistic about reality.
+
+There is a version of ambition that says:
+
+“I believe I can build something enormous, therefore I need to become extraordinarily good.”
+
+And there is another version that says:
+
+“I believe I am destined for something enormous, therefore feedback doesn’t matter.”
+
+The first is powerful.
+
+The second is stupidity dressed up as confidence.
+
+If customers hate your product, believing harder won’t fix it.
+
+If your business is running out of money, positive thinking doesn’t change the bank balance.
+
+If your technique is wrong, visualising yourself as a champion doesn’t replace training.
+
+Reality still gets the final vote.
+
+So perhaps the useful formula is:
+
+Be unreasonable about the destination and extremely reasonable about the path.
+
+Hold the vision tightly.
+
+Hold your assumptions loosely.
+
+## Goals are not just destinations
+
+We tend to think of goals as points on a map.
+
+You are here.
+
+The goal is there.
+
+And you slowly walk toward it.
+
+But maybe a goal does something more interesting.
+
+Maybe a sufficiently vivid goal reaches backward and begins reorganising the present.
+
+Suppose you decide that five years from now you want to be someone who writes for a living.
+
+Suddenly books become more interesting.
+
+Writing every morning becomes rational.
+
+Publishing something that only twenty people read no longer feels pointless.
+
+Meeting writers becomes useful.
+
+Studying storytelling becomes useful.
+
+You start noticing things your previous self would have ignored.
+
+The world itself seems to change.
+
+But the world didn’t change.
+
+Your future changed what your present mind considered important.
+
+That is one of the most powerful properties of a goal.
+
+It changes what you notice.
+
+And what you notice changes what you do.
+
+## Your future creates constraints
+
+Imagine telling yourself:
+
+“In ten years, I want complete financial independence.”
+
+That statement immediately places constraints on the present.
+
+Maybe you shouldn’t inflate your lifestyle every time your salary increases.
+
+Maybe you should learn how investing works.
+
+Maybe you should build another source of income.
+
+Maybe you should acquire skills the market rewards.
+
+A future state begins governing present choices.
+
+In software, constraints often make systems easier to design.
+
+Once you know what a system must eventually do, many present decisions become obvious.
+
+Life might work similarly.
+
+When the future is blurry, almost every path looks equally reasonable.
+
+When the future becomes clear, many decisions make themselves.
+
+## This is probably why mediocre goals produce mediocre energy
+
+There is nothing wrong with wanting a normal, peaceful life.
+
+For many people, that genuinely is the goal.
+
+But sometimes we choose small goals not because they are what we truly want, but because they feel defensible.
+
+They don’t expose us to embarrassment.
+
+Nobody laughs if you say:
+
+“I’d like a slightly better job next year.”
+
+But saying:
+
+“I want to build one of the best companies in this industry”
+
+creates risk.
+
+Now you might fail publicly.
+
+So we negotiate with our own ambition.
+
+We shrink the future until it becomes believable.
+
+And then we wonder why it doesn’t generate much energy.
+
+A mediocre future usually doesn’t demand radical present-day behaviour.
+
+A sufficiently ambitious future does.
+
+This doesn’t mean everyone should aim to become a billionaire or world champion.
+
+The point isn’t the size according to society.
+
+The point is whether the future is large enough relative to you that it requires transformation.
+
+A goal should probably demand a version of you that does not exist yet.
+
+Otherwise it may simply be a task.
+
+## The strange loop
+
+The more I think about this, the more I like the paradox.
+
+You imagine a person who doesn’t exist.
+
+That person begins influencing your decisions.
+
+Those decisions slowly change you.
+
+And years later, you look back and realise you have become surprisingly similar to the person you invented.
+
+So which came first?
+
+Did you become that person because of your actions?
+
+Yes.
+
+Did you take those actions because you imagined becoming that person?
+
+Also yes.
+
+The imagined future created the behaviour.
+
+The behaviour created the actual future.
+
+Future → Present → Future.
+
+A strange loop.
+
+No laws of physics are broken.
+
+Nothing actually travels backwards through time.
+
+And yet humans seem capable of allowing possible futures to influence the present.
+
+Perhaps that is one of our strangest abilities.
+
+We don’t only remember worlds that already existed.
+
+We can imagine worlds that do not exist yet.
+
+And then behave as though they might.
+
+## Choose your future carefully
+
+This is why the future you repeatedly imagine might matter more than we realise.
+
+You are not simply fantasising about some distant version of your life.
+
+You may be programming the criteria by which your present self makes decisions.
+
+What should I learn?
+
+Who should I spend time with?
+
+What opportunities should I pursue?
+
+What discomfort is worth tolerating?
+
+What should I say no to?
+
+What should I start?
+
+The answers depend partly on where you believe you are going.
+
+So maybe the traditional advice—
+
+Your actions today create your future
+
+—is only half the story.
+
+The other half is:
+
+The future you believe is possible creates your actions today.
+
+And perhaps that is why it can occasionally be useful to dream beyond what the evidence currently supports.
+
+Not because imagining something makes it magically appear.
+
+But because an ambitious future can demand more from the person standing in the present.
+
+You imagine the future.
+
+The future changes you.
+
+And then you build it.`,
+  },
   {
     id: 'agi-is-a-smear',
     title: 'AGI Is a Smear, Not a Finish Line',
