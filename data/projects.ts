@@ -235,7 +235,7 @@ export const projects: Project[] = [
   {
     id: 'scorekeeper',
     title: 'Ping Pong ScoreKeeper',
-    subtitle: 'The first thing I ever shipped.',
+    subtitle: 'The first thing I shipped on the web.',
     urlLabel: 'github.com/gorock007/PingPong-ScoreKeeper',
     url: 'https://github.com/gorock007/PingPong-ScoreKeeper',
     tier: 'earlier',

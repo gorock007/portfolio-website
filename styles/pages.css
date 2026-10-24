@@ -1,6 +1,7 @@
 /* ---------------------------------------------------------------------------
-   Type. Five sizes do all the work: 12 (mono, measured things), 14 (meta and
-   captions), 16–17 (interface and lists), 20–22 (lead), and display.
+   Type. Sizes do all the work in a few steps: 12 (mono, measured things),
+   14 (labels and captions), 16 and 18 (interface, lists, body), 22 (lead),
+   and the display classes below.
 --------------------------------------------------------------------------- */
 .display {
   font-size: clamp(52px, 8.4vw, 112px);
@@ -18,9 +19,19 @@
   text-wrap: balance;
 }
 
+/* Titles of things in a list or an entry: products, notes, read-next. */
+.entry-title,
+.note-title {
+  font-size: clamp(28px, 2.6vw, 36px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
 .lead {
   max-width: 32em;
-  font-size: clamp(19px, 1.6vw, 22px);
+  font-size: clamp(18px, 1.6vw, 22px);
   line-height: 1.45;
   letter-spacing: -0.01em;
   text-wrap: pretty;
@@ -34,9 +45,13 @@
   color: var(--ink-2);
 }
 
+.lead a {
+  color: var(--ink);
+}
+
 .caption {
   max-width: 44em;
-  margin-top: 20px;
+  margin-top: var(--s-5);
   font-size: 14px;
   line-height: 1.6;
   color: var(--ink-2);
@@ -44,47 +59,61 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Home — the statement beside the loop.
+   Home — the statement, the loop, the creed. On narrow screens the loop comes
+   straight after the statement, so the idea is on the first screen.
 --------------------------------------------------------------------------- */
 .hero {
   display: grid;
-  gap: 48px;
-  padding-block: clamp(24px, 6vw, 72px) 72px;
+  grid-template-areas:
+    "title"
+    "figure"
+    "creed";
+  row-gap: var(--s-7);
+  padding-block: clamp(16px, 4vw, 48px) var(--s-7);
+}
+
+.hero-title {
+  grid-area: title;
+}
+
+.hero-figure {
+  grid-area: figure;
+  min-width: 0;
+  max-width: 760px;
+}
+
+.hero-creed {
+  grid-area: creed;
 }
 
 @media (min-width: 1100px) {
   .hero {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 32px;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "title figure"
+      "creed figure";
+    column-gap: var(--col-gap);
     align-items: start;
   }
 
-  .hero-text {
-    position: sticky;
-    top: 40px;
+  .hero-figure {
+    max-width: none;
   }
 }
 
-.hero-name {
-  display: block;
-  margin-bottom: 28px;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.005em;
-  color: var(--ink-2);
+.figure-head {
+  margin-bottom: var(--s-2);
 }
 
 .creed {
   display: grid;
-  gap: 14px;
+  gap: var(--s-4);
   max-width: 26em;
-  margin-top: 44px;
   font-size: clamp(18px, 1.5vw, 20px);
   line-height: 1.4;
   letter-spacing: -0.01em;
   color: var(--ink-2);
-  counter-reset: creed;
 }
 
 .creed li {
@@ -93,7 +122,7 @@
 
 .creed-foot {
   max-width: 26em;
-  margin-top: 28px;
+  margin-top: var(--s-6);
   font-size: 14px;
   line-height: 1.55;
   color: var(--ink-2);
@@ -103,31 +132,14 @@
   color: var(--ink);
 }
 
-.hero-figure {
-  min-width: 0;
-}
-
 /* ---------------------------------------------------------------------------
    Ledger — label column, body column, a rule between sections.
 --------------------------------------------------------------------------- */
 .ledger {
   display: grid;
-  gap: 20px;
-  padding-block: 40px 56px;
+  gap: var(--s-3);
+  padding-block: var(--s-6) var(--s-7);
   border-top: 1px solid var(--rule);
-}
-
-@media (min-width: 900px) {
-  .ledger {
-    grid-template-columns: var(--label-col) minmax(0, 1fr);
-    gap: 32px;
-  }
-
-  .ledger-label {
-    position: sticky;
-    top: 32px;
-    align-self: start;
-  }
 }
 
 .ledger-label {
@@ -137,19 +149,45 @@
   color: var(--ink-2);
 }
 
+@media (min-width: 900px) {
+  .ledger {
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    gap: var(--col-gap);
+  }
+
+  .ledger > .ledger-label {
+    position: sticky;
+    top: var(--s-6);
+    align-self: start;
+  }
+
+  /* Each label drops to the first line of what it labels. */
+  .ledger:has(> .ledger-body > .index:first-child) > .ledger-label {
+    padding-top: 20px;
+  }
+
+  .ledger:has(> .ledger-body > .lead:first-child) > .ledger-label,
+  .ledger:has(> .ledger-body > .about-copy:first-child) > .ledger-label,
+  .ledger:has(> .ledger-body > .chips:first-child) > .ledger-label,
+  .ledger:has(> .ledger-body > .notes:first-child) > .ledger-label {
+    padding-top: var(--s-1);
+  }
+}
+
 .ledger-more {
-  margin-top: 24px;
+  margin-top: var(--s-4);
   font-size: 16px;
 }
 
 .ledger-more a {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--s-2);
   min-height: 44px;
 }
 
-.ledger-more a:hover .arrow {
+.ledger-more a:hover .arrow,
+.ledger-more a:focus-visible .arrow {
   transform: translateX(3px);
 }
 
@@ -171,11 +209,11 @@
     "stamp title arrow"
     "stamp desc desc"
     "stamp meta meta";
-  column-gap: 16px;
-  row-gap: 2px;
+  column-gap: var(--s-4);
+  row-gap: var(--s-1);
   align-items: baseline;
-  margin-inline: -12px;
-  padding: 16px 12px;
+  margin-inline: calc(var(--s-3) * -1);
+  padding: var(--s-4) var(--s-3);
   text-decoration: none;
   transition: background-color 0.2s ease;
 }
@@ -183,12 +221,11 @@
 .index-row .sun-stamp {
   grid-area: stamp;
   align-self: start;
-  margin-top: 1px;
 }
 
 .index-title {
   grid-area: title;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: -0.01em;
@@ -203,7 +240,7 @@
 
 .index-meta {
   grid-area: meta;
-  margin-top: 4px;
+  margin-top: var(--s-1);
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-2);
@@ -216,8 +253,12 @@
   color: var(--ink-2);
 }
 
-.index-row:hover {
+.index-row:focus-visible {
   background-color: var(--wash);
+}
+
+.index-row:active {
+  background-color: var(--press);
 }
 
 .index-row:hover > .arrow,
@@ -232,18 +273,24 @@
   fill: var(--sun);
 }
 
-@media (min-width: 1000px) {
+@media (hover: hover) {
+  .index-row:hover {
+    background-color: var(--wash);
+  }
+}
+
+/* One line per row only once the body column can hold a description beside
+   its title without folding it into a narrow tower. */
+@media (min-width: 1240px) {
   .index-row {
     grid-template-columns: 20px minmax(0, 13em) minmax(0, 1fr) auto 16px;
     grid-template-areas: "stamp title desc meta arrow";
-    align-items: center;
-    column-gap: 24px;
+    column-gap: var(--s-5);
     min-height: 64px;
   }
 
   .index-row .sun-stamp {
     align-self: center;
-    margin-top: 0;
   }
 
   .index-meta {
@@ -254,18 +301,18 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Page openings — /work, /writings, /about.
+   Page openings — /work, /writings, /about, the 404s.
 --------------------------------------------------------------------------- */
 .page-head {
   display: grid;
-  gap: 28px;
-  padding-block: clamp(24px, 6vw, 72px) 64px;
+  gap: var(--s-5);
+  padding-block: clamp(16px, 4vw, 48px) var(--s-7);
 }
 
 @media (min-width: 900px) {
   .page-head {
     grid-template-columns: var(--label-col) minmax(0, 1fr);
-    gap: 32px;
+    column-gap: var(--col-gap);
   }
 
   .page-head > * {
@@ -278,20 +325,20 @@
 --------------------------------------------------------------------------- */
 .product {
   display: grid;
-  gap: 24px;
-  scroll-margin-top: 24px;
+  gap: var(--s-5);
+  scroll-margin-top: var(--s-5);
 }
 
 .product + .product {
-  margin-top: 72px;
-  padding-top: 40px;
+  margin-top: var(--s-7);
+  padding-top: var(--s-7);
   border-top: 1px solid var(--rule);
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1240px) {
   .product {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 40px;
+    gap: var(--s-7);
     align-items: start;
   }
 }
@@ -303,55 +350,39 @@
   /* An edge, not a shadow: most captures are white and would bleed into the
      page without one. */
   box-shadow: 0 0 0 1px var(--rule);
-  transition: box-shadow 0.25s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .product-shot img {
   width: 100%;
   filter: var(--image-dim);
-  transition: transform 0.6s var(--ease-out);
 }
 
 .product-shot:hover {
   box-shadow: 0 0 0 1px var(--ink-2);
 }
 
-.product-shot:hover img {
-  transform: scale(1.015);
-}
-
 .entry-stamp {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
 }
 
 .entry-stamp .sun-stamp {
   height: 40px;
 }
 
-.entry-stamp .sun-stamp-sun {
-  fill: var(--sun);
-}
-
-.entry-title {
-  font-size: clamp(28px, 2.6vw, 36px);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-}
-
 .entry-subtitle {
-  margin-top: 10px;
-  font-size: 19px;
+  margin-top: var(--s-3);
+  font-size: 18px;
   line-height: 1.4;
   color: var(--ink-2);
   text-wrap: pretty;
 }
 
 .entry-detail {
-  margin-top: 18px;
+  margin-top: var(--s-4);
   font-size: 16px;
   line-height: 1.6;
   text-wrap: pretty;
@@ -360,8 +391,8 @@
 .proof {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
-  margin-top: 18px;
+  gap: var(--s-1) var(--s-4);
+  margin-top: var(--s-4);
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-2);
@@ -370,36 +401,47 @@
 .entry-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--s-2);
   min-height: 44px;
-  margin-top: 12px;
+  margin-top: var(--s-3);
   font-size: 16px;
 }
 
-.entry-link:hover .arrow {
+.entry-link:hover .arrow,
+.entry-link:focus-visible .arrow {
   transform: translate(2px, -2px);
+}
+
+.entry-link:active {
+  background-color: var(--press);
 }
 
 .shelf {
   display: grid;
-  gap: 0;
+}
+
+.tool {
+  padding-block: var(--s-5) var(--s-6);
+  border-top: 1px solid var(--rule);
+  scroll-margin-top: var(--s-5);
+}
+
+/* The ledger's own rule already sits above the first row. */
+.shelf > .tool:first-child {
+  border-top: 0;
+  padding-top: 0;
 }
 
 @media (min-width: 1000px) {
   .shelf {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 40px;
+    column-gap: var(--s-7);
   }
-}
 
-.tool {
-  padding-block: 24px 32px;
-  border-top: 1px solid var(--rule);
-  scroll-margin-top: 24px;
-}
-
-.tool .entry-stamp {
-  margin-bottom: 14px;
+  .shelf > .tool:nth-child(2) {
+    border-top: 0;
+    padding-top: 0;
+  }
 }
 
 .tool .entry-stamp .sun-stamp {
@@ -412,7 +454,8 @@
 }
 
 .tool .entry-subtitle {
-  font-size: 17px;
+  font-size: 16px;
+  color: var(--ink);
 }
 
 .tool .entry-detail {
@@ -422,51 +465,69 @@
 /* ---------------------------------------------------------------------------
    /writings
 --------------------------------------------------------------------------- */
-.notes > li + li {
-  border-top: 1px solid var(--rule);
-}
-
 .notes {
   border-bottom: 1px solid var(--rule);
 }
 
+.notes > li + li {
+  border-top: 1px solid var(--rule);
+}
+
 .note-row {
   display: grid;
-  gap: 12px;
-  padding-block: 32px;
+  gap: var(--s-5);
+  padding-block: var(--s-6);
   text-decoration: none;
+}
+
+.notes > li:first-child .note-row {
+  padding-top: 0;
 }
 
 @media (min-width: 900px) {
   .note-row {
     grid-template-columns: minmax(0, 1fr) 280px;
-    gap: 40px;
+    gap: var(--s-7);
     align-items: start;
   }
+}
+
+/* The meta is lifted above the title it follows in the source. */
+.note-copy {
+  display: flex;
+  flex-direction: column;
+}
+
+.note-meta {
+  order: -1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-1) var(--s-4);
+  margin-bottom: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-2);
 }
 
 .note-cover {
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 0 0 0 1px var(--rule);
+  transition: box-shadow 0.2s ease;
 }
 
 .note-cover img {
   width: 100%;
   filter: var(--image-dim);
-  transition: transform 0.6s var(--ease-out);
 }
 
-.note-row:hover .note-cover img {
-  transform: scale(1.02);
+.note-row:hover .note-cover,
+.note-row:focus-visible .note-cover {
+  box-shadow: 0 0 0 1px var(--ink-2);
 }
 
 .note-title {
-  font-size: clamp(26px, 2.6vw, 36px);
-  font-weight: 500;
-  line-height: 1.12;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-decoration-color: transparent;
@@ -474,28 +535,18 @@
   transition: text-decoration-color 0.2s ease;
 }
 
-.note-row:hover .note-title {
+.note-row:hover .note-title,
+.note-row:focus-visible .note-title {
   text-decoration-color: currentColor;
 }
 
 .note-excerpt {
-  margin-top: 12px;
+  margin-top: var(--s-3);
   max-width: 36em;
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.55;
   color: var(--ink-2);
   text-wrap: pretty;
-}
-
-.note-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  margin-bottom: 14px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--ink-2);
 }
 
 .note-row:hover .sun-stamp-sun,
@@ -508,15 +559,19 @@
 --------------------------------------------------------------------------- */
 .about-head {
   display: grid;
-  gap: 32px;
-  padding-block: clamp(24px, 6vw, 72px) 64px;
+  gap: var(--s-6);
+  padding-block: clamp(16px, 4vw, 48px) var(--s-7);
+}
+
+.about-head .lead {
+  margin-top: var(--s-5);
 }
 
 @media (min-width: 900px) {
   .about-head {
-    grid-template-columns: var(--label-col) minmax(0, 1fr) minmax(0, 340px);
-    gap: 32px;
-    align-items: end;
+    grid-template-columns: var(--label-col) minmax(0, 1fr) minmax(0, 320px);
+    column-gap: var(--col-gap);
+    align-items: start;
   }
 
   .about-head > :first-child {
@@ -527,7 +582,6 @@
 .portrait {
   position: relative;
   aspect-ratio: 4 / 5;
-  max-width: 340px;
   overflow: hidden;
   border-radius: 6px;
   background: var(--wash);
@@ -536,16 +590,18 @@
 .portrait img {
   object-fit: cover;
   filter: grayscale(1) contrast(1.04);
-  transition: opacity 0.4s ease, filter 0.6s ease;
+  transition: opacity 0.3s ease, filter 0.3s ease;
 }
 
 .portrait .portrait-hover {
   opacity: 0;
 }
 
-.portrait:hover .portrait-hover {
-  opacity: 1;
-  filter: grayscale(0);
+@media (hover: hover) {
+  .portrait:hover .portrait-hover {
+    opacity: 1;
+    filter: grayscale(0);
+  }
 }
 
 .about-copy p {
@@ -562,35 +618,35 @@
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
-  font-size: 17px;
+  gap: var(--s-2) var(--s-5);
+  font-size: 18px;
 }
 
 /* ---------------------------------------------------------------------------
    404
 --------------------------------------------------------------------------- */
 .lost {
-  display: grid;
-  gap: 24px;
+  padding-block: clamp(48px, 10vw, 128px);
   justify-items: start;
-  padding-block: clamp(48px, 12vw, 160px);
 }
 
-.lost .sun-stamp {
-  height: 72px;
+.lost-mark {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
 }
 
-.lost .sun-stamp-sun {
+.lost-mark .sun-stamp {
+  height: 56px;
+}
+
+.lost-mark .sun-stamp-sun {
   fill: var(--paper);
   stroke: var(--sun);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
 
-.about-head .lead {
-  margin-top: 28px;
-}
-
-.site-footer .ledger-label {
-  position: static;
+.lost .entry-link {
+  margin-top: 0;
 }

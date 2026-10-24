@@ -29,15 +29,38 @@ const HomePage = async () => {
   return (
     <Layout>
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-text">
-          <h1 id="hero-title" className="display">
-            <span className="hero-name">Gorock Shetty</span>
-            {statement}
-          </h1>
+        {/* The name is in the header already; it stays in the h1 for the
+            document outline and search, but isn't shown twice. */}
+        <h1 id="hero-title" className="display hero-title">
+          <span className="visually-hidden">Gorock Shetty: </span>
+          {statement}
+        </h1>
 
+        <figure className="hero-figure">
+          <p className="figure-head meta">
+            Noon sun over Sydney · {formatDay(first.date)} – today · one dot per day
+          </p>
+          <Analemma days={year.days} />
+          <figcaption className="caption">
+            Photograph the sun from one spot at the same hour every day and it draws a
+            figure-eight across the sky. This is that loop over Sydney at noon for the last year,
+            and each dot is one of my days: the darker, the more code I shipped —{' '}
+            {year.total.toLocaleString('en-AU')} contributions on {year.activeDays} days. Ringed
+            days are where a project began or an essay went out. East–west is stretched threefold
+            so the lobes read.
+          </figcaption>
+        </figure>
+
+        <div className="hero-creed">
           <ul className="creed" role="list">
             {creed.map((line) => (
-              <li key={line}>{line}</li>
+              <li key={line}>
+                {/* The asterisk points at the footnote below; to a screen
+                    reader it would only be read out as "star". */}
+                {line.split('*').map((part, index) =>
+                  index === 0 ? part : [<span key={index} aria-hidden="true">*</span>, part],
+                )}
+              </li>
             ))}
           </ul>
 
@@ -46,25 +69,17 @@ const HomePage = async () => {
             <Link href={manifestoFootnote.href}>{manifestoFootnote.text}</Link>
           </p>
         </div>
-
-        <figure className="hero-figure">
-          <Analemma days={year.days} />
-          <figcaption className="caption">
-            Photograph the sun from one spot at the same hour every day and it draws a
-            figure-eight across the sky. This is that loop over Sydney at noon, from{' '}
-            {formatDay(first.date)} to today, and each dot is one of my days: the darker, the more
-            code I shipped — {year.total.toLocaleString('en-AU')} contributions on{' '}
-            {year.activeDays} days. Ringed days are launches and essays. East–west is stretched threefold so the lobes
-            read.
-          </figcaption>
-        </figure>
       </section>
 
       <Ledger id="work-label" label="Work" more={{ href: '/work', label: 'Everything, back to 2018' }}>
-        <WorkIndex projects={[...productProjects, ...toolProjects]} />
+        <WorkIndex projects={productProjects} />
       </Ledger>
 
-      <Ledger id="writing-label" label="Writing" more={{ href: '/writings', label: 'All writing' }}>
+      <Ledger id="tools-label" label="Open source">
+        <WorkIndex projects={toolProjects} />
+      </Ledger>
+
+      <Ledger id="writing-label" label="Writing">
         <WritingIndex posts={blogPosts} />
       </Ledger>
 
@@ -78,7 +93,7 @@ const HomePage = async () => {
           If you’re building in this space, or want to argue about what AI actually changes, my DMs
           are open:{' '}
           <a href={contactUrl} target="_blank" rel="noopener noreferrer">
-            {contactHandle} on X
+            {contactHandle} on X<span className="visually-hidden"> (opens in a new tab)</span>
           </a>
           .
         </p>

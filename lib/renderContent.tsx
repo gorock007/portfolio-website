@@ -35,7 +35,7 @@ export const renderContent = (content: string): ReactNode[] =>
 
     if (/^\d+\.\s/.test(block)) {
       return (
-        <ol key={index}>
+        <ol key={index} role="list">
           {block.split('\n').filter(Boolean).map((item, itemIndex) => (
             <li key={itemIndex}>{renderInline(item.replace(/^\d+\.\s/, ''))}</li>
           ))}
@@ -45,7 +45,7 @@ export const renderContent = (content: string): ReactNode[] =>
 
     if (block.startsWith('- ')) {
       return (
-        <ul key={index}>
+        <ul key={index} role="list">
           {block.split('\n').filter(Boolean).map((item, itemIndex) => (
             <li key={itemIndex}>{renderInline(item.replace(/^-\s/, ''))}</li>
           ))}

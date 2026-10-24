@@ -27,12 +27,37 @@ export const readMode = (): SkyMode => {
   }
 }
 
+/**
+ * The theme-color meta is created by SKY_SCRIPT, not rendered by React, so a
+ * client-side navigation never resets it to the day colour behind our back.
+ */
+const setThemeColor = (sky: Sky) => {
+  let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.name = 'theme-color'
+    document.head.appendChild(meta)
+  }
+  meta.content = THEME_COLOR[sky]
+}
+
 export const applySky = (mode: SkyMode = readMode()) => {
   const sky = mode === 'auto' ? skyAt(new Date()) : mode
   const root = document.documentElement
-  root.dataset.sky = sky
-  root.dataset.skyMode = mode
-  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR[sky])
+  const change = () => {
+    root.dataset.sky = sky
+    root.dataset.skyMode = mode
+    setThemeColor(sky)
+  }
+  // Only a change of sky is animated, as one crossfade of the whole page —
+  // tokens switching one by one under a CSS transition would pass through
+  // states where the dots and the paper are nearly the same grey.
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (root.dataset.sky !== sky && !reduce && 'startViewTransition' in document) {
+    document.startViewTransition(change)
+  } else {
+    change()
+  }
 }
 
 export const writeMode = (mode: SkyMode) => {
@@ -82,4 +107,5 @@ k=0.006918-0.399912*C(g)+0.070257*S(g)-0.006758*C(2*g)+0.000907*S(2*g)-0.002697*
 r=Math.PI/180,a=((h*60+e+4*${SYDNEY.lon})/4-180)*r,f=${SYDNEY.lat}*r,
 t=Math.asin(S(f)*S(k)+C(f)*C(k)*C(a))/r;s=t>${HORIZON}?'day':'night'}
 var o=document.documentElement;o.dataset.sky=s;o.dataset.skyMode=m;
-var c=document.querySelector('meta[name="theme-color"]');if(c)c.setAttribute('content',s==='day'?'${THEME_COLOR.day}':'${THEME_COLOR.night}')}catch(e){}})()`
+var c=document.createElement('meta');c.name='theme-color';c.content=s==='day'?'${THEME_COLOR.day}':'${THEME_COLOR.night}';
+document.head.appendChild(c)}catch(e){}})()`

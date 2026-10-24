@@ -7,7 +7,7 @@ import SunStamp from '@/components/SunStamp'
 import { blogPosts } from '@/data/writing'
 import { renderContent } from '@/lib/renderContent'
 import { site } from '@/lib/site'
-import { isoFromHuman } from '@/lib/sun'
+import { formatDay, isoFromHuman } from '@/lib/sun'
 
 type Props = { params: Promise<{ id: string }> }
 
@@ -81,7 +81,7 @@ const WritingPostPage = async ({ params }: Props) => {
   const next = blogPosts.length > 1 ? blogPosts[(index + 1) % blogPosts.length] : null
 
   return (
-    <Layout narrow>
+    <Layout>
       <article className="article">
         <Link href="/writings" className="back-link">
           <span className="arrow" aria-hidden="true">←</span> All writing
@@ -90,7 +90,7 @@ const WritingPostPage = async ({ params }: Props) => {
         <header className="article-header">
           <p className="article-meta">
             <SunStamp date={isoFromHuman(post.date)} />
-            <span>{post.date}</span>
+            <time dateTime={isoFromHuman(post.date)}>{post.date}</time>
             <span>{post.readTime}</span>
             <span>{post.tags.join(', ')}</span>
           </p>
@@ -113,11 +113,12 @@ const WritingPostPage = async ({ params }: Props) => {
         <div className="article-body">{renderContent(post.content)}</div>
 
         {post.sourceUrl && (
-          <aside className="article-source" aria-label="Source of inspiration">
-            <p>Source of inspiration</p>
+          <aside className="article-source" aria-labelledby="source-label">
+            <p id="source-label">Source of inspiration</p>
             <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
               {post.sourceLabel || 'Read the original post'}{' '}
               <span className="arrow" aria-hidden="true">↗</span>
+              <span className="visually-hidden"> (opens in a new tab)</span>
             </a>
           </aside>
         )}
@@ -125,8 +126,8 @@ const WritingPostPage = async ({ params }: Props) => {
         {next && (
           <nav className="article-next" aria-label="Next note">
             <Link href={`/writings/${next.id}`}>
-              <span className="meta">Read next · {next.date}</span>
-              <span className="article-next-title">{next.title}</span>
+              <span className="meta">Read next · {formatDay(isoFromHuman(next.date))}</span>
+              <span className="note-title">{next.title}</span>
             </Link>
           </nav>
         )}

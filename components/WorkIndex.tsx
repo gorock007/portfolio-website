@@ -1,5 +1,5 @@
 import type { Project } from '@/data/types'
-import { formatMonth } from '@/lib/sun'
+import { formatDay } from '@/lib/sun'
 import SunStamp from './SunStamp'
 
 /** One line per project, stamped with the sun on the day it began. */
@@ -12,7 +12,7 @@ const WorkIndex = ({ projects }: { projects: Project[] }) => (
           <span className="index-title">{project.title}</span>
           <span className="index-desc">{project.subtitle}</span>
           <span className="index-meta">
-            {project.kind} · {formatMonth(project.started)}
+            {project.kind} · <time dateTime={project.started}>{formatDay(project.started)}</time>
           </span>
           <span className="arrow" aria-hidden="true">
             ↗

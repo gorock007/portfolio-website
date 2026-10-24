@@ -1,38 +1,48 @@
 /* ---------------------------------------------------------------------------
-   A note — one column, set for reading.
+   A note — one column, set for reading. On wide screens it starts on the same
+   line as every ledger body above and below it.
 --------------------------------------------------------------------------- */
 .article {
+  max-width: 720px;
   padding-top: clamp(16px, 4vw, 48px);
+}
+
+@media (min-width: 900px) {
+  .article {
+    margin-left: calc(var(--label-col) + var(--col-gap));
+  }
 }
 
 .back-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--s-2);
   min-height: 44px;
   font-size: 14px;
   color: var(--ink-2);
   text-decoration: none;
 }
 
-.back-link:hover {
+.back-link:hover,
+.back-link:focus-visible {
   color: var(--ink);
 }
 
-.back-link:hover .arrow {
+.back-link:hover .arrow,
+.back-link:focus-visible .arrow {
   transform: translateX(-3px);
 }
 
 .article-header {
-  margin-block: 32px 40px;
+  margin-block: var(--s-6) var(--s-7);
 }
 
 .article-meta {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 6px 16px;
-  margin-bottom: 24px;
+  gap: var(--s-1) var(--s-4);
+  margin-bottom: var(--s-5);
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-2);
@@ -55,15 +65,15 @@
 }
 
 .article-excerpt {
-  margin-top: 20px;
-  font-size: 20px;
-  line-height: 1.5;
+  margin-top: var(--s-5);
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.45;
   color: var(--ink-2);
   text-wrap: pretty;
 }
 
 .article-cover {
-  margin-bottom: 48px;
+  margin-bottom: var(--s-7);
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 0 0 0 1px var(--rule);
@@ -90,15 +100,15 @@
 
 .article-body h2 {
   margin-top: 2.4em;
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.02em;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
 }
 
 .article-body h3 {
   margin-top: 2em;
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 600;
   line-height: 1.3;
 }
@@ -111,10 +121,6 @@
 .article-body ul,
 .article-body ol {
   padding-left: 1.3em;
-}
-
-.article-body ul {
-  list-style: none;
 }
 
 .article-body ul li {
@@ -139,7 +145,7 @@
 
 .article-body ol li::marker {
   font-family: var(--font-mono);
-  font-size: 0.75em;
+  font-size: 12px;
   color: var(--ink-2);
 }
 
@@ -152,21 +158,20 @@
 }
 
 .article-divider {
-  width: 48px;
+  width: var(--s-7);
   margin-block: 2.6em;
   border: 0;
   border-top: 1px solid var(--ink-2);
 }
 
 .article-source {
-  margin-top: 56px;
-  padding-top: 20px;
+  margin-top: var(--s-8);
+  padding-top: var(--s-5);
   border-top: 1px solid var(--rule);
   font-size: 16px;
 }
 
 .article-source p {
-  margin-bottom: 4px;
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-2);
@@ -176,36 +181,28 @@
   display: inline-flex;
   min-height: 44px;
   align-items: center;
-  gap: 6px;
+  gap: var(--s-2);
+}
+
+.article-source a:hover .arrow,
+.article-source a:focus-visible .arrow {
+  transform: translate(2px, -2px);
 }
 
 .article-next {
-  display: grid;
-  gap: 8px;
-  margin-top: 72px;
-  padding-top: 24px;
+  margin-top: var(--s-8);
+  padding-top: var(--s-5);
   border-top: 1px solid var(--rule);
 }
 
 .article-next a {
   display: grid;
-  gap: 6px;
-  padding-block: 8px;
+  gap: var(--s-2);
+  padding-block: var(--s-2);
   text-decoration: none;
 }
 
-.article-next-title {
-  font-size: 26px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-  text-decoration-line: underline;
-  text-decoration-thickness: 1px;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.14em;
-  transition: text-decoration-color 0.2s ease;
-}
-
-.article-next a:hover .article-next-title {
+.article-next a:hover .note-title,
+.article-next a:focus-visible .note-title {
   text-decoration-color: currentColor;
 }

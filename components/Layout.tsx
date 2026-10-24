@@ -6,9 +6,9 @@ import type { ReactNode } from 'react'
  * `.page` replays its entrance on every navigation, because each route mounts
  * a fresh one.
  */
-const Layout = ({ children, narrow = false }: { children: ReactNode; narrow?: boolean }) => (
+const Layout = ({ children }: { children: ReactNode }) => (
   <main id="main" tabIndex={-1} className="page">
-    <div className={narrow ? 'container container--narrow' : 'container'}>{children}</div>
+    <div className="container">{children}</div>
   </main>
 )
 

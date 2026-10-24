@@ -22,14 +22,17 @@ const SkyControl = () => {
 
   return (
     <div className="sky-control" role="group" aria-labelledby="sky-control-label">
-      <span id="sky-control-label" className="meta">
-        Light
+      <span id="sky-control-label" className="sky-control-label">
+        Sky
       </span>
       {OPTIONS.map((option) => (
         <button
           key={option.mode}
           type="button"
           className="sky-option"
+          // The pressed look comes from data-sky-mode on <html>, which the
+          // head script sets before paint; aria-pressed follows after mount.
+          data-mode={option.mode}
           aria-pressed={mode === option.mode}
           onClick={() => writeMode(option.mode)}
         >

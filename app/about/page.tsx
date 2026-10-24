@@ -64,7 +64,7 @@ const AboutPage = () => {
           I’m in {profile.location}. If you’re building something in this space, or you just want
           to argue about what AI actually changes, my DMs are open:{' '}
           <a href={contactUrl} target="_blank" rel="noopener noreferrer">
-            {contactHandle} on X
+            {contactHandle} on X<span className="visually-hidden"> (opens in a new tab)</span>
           </a>
           .
         </p>

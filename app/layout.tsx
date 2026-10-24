@@ -48,8 +48,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  // The sky script below rewrites this to the night colour after sunset.
-  themeColor: '#ffffff',
+  // No themeColor here: the sky script writes that meta itself, day or night.
 }
 
 const RootLayout = ({ children }: { children: ReactNode }) => (

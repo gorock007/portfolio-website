@@ -16,7 +16,7 @@
   display: block;
   width: 100%;
   height: auto;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -44,7 +44,7 @@
 }
 
 .analemma-dot.level-0 {
-  opacity: 0.22;
+  opacity: 0.32;
 }
 
 .analemma-dot.level-1 {
@@ -85,7 +85,7 @@
   stroke: var(--ink-2);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
-  opacity: 0.45;
+  opacity: 0.6;
   transition: opacity 0.2s ease, stroke 0.2s ease;
   animation: appear 0.8s ease 1.5s both;
 }
@@ -96,6 +96,7 @@
 }
 
 .analemma-labels text {
+  cursor: pointer;
   fill: var(--ink-2);
   font-family: var(--font-sans);
   transition: fill 0.2s ease;
@@ -139,16 +140,19 @@
 /* The readout under the loop. */
 .analemma-readout {
   display: grid;
-  gap: 6px;
-  margin-top: 12px;
-  padding-top: 12px;
+  gap: var(--s-1);
+  margin-top: var(--s-3);
   border-top: 1px solid var(--rule);
 }
 
 .readout-line {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 20px;
+  align-items: center;
+  /* Room for the Back to today button, so the line never grows when it
+     appears. */
+  min-height: 44px;
+  gap: var(--s-1) var(--s-4);
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--ink-2);
@@ -162,8 +166,9 @@
 .readout-events {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 16px;
-  min-height: 1.5em;
+  gap: var(--s-1) var(--s-4);
+  /* Two lines reserved, so a long event name never pushes the caption. */
+  min-height: 3em;
   font-size: 14px;
   color: var(--ink-2);
 }
@@ -194,4 +199,67 @@
 .sun-stamp-sun {
   fill: var(--ink);
   transition: fill 0.25s ease;
+}
+
+/* Back to today — a quiet text button at the end of the readout line. */
+.readout-reset {
+  margin-left: auto;
+  min-height: 44px;
+  padding: 0 var(--s-2);
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 0.22em;
+  cursor: pointer;
+  transition: text-decoration-color 0.2s ease, background-color 0.2s ease;
+  animation: appear 0.2s ease both;
+}
+
+.readout-reset:hover,
+.readout-reset:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.readout-reset:active {
+  background: var(--press);
+}
+
+/* ---------------------------------------------------------------------------
+   Forced colours (Windows High Contrast). SVG fills are not forced, so the
+   loop and its stamps take the system's own text and highlight colours.
+--------------------------------------------------------------------------- */
+@media (forced-colors: active) {
+  .analemma-dot,
+  .sun-stamp-sun {
+    fill: CanvasText;
+  }
+
+  .analemma-ring,
+  .analemma-cursor,
+  .analemma-leaders path,
+  .sun-stamp-loop,
+  .sky-glyph line {
+    stroke: CanvasText;
+  }
+
+  .analemma-labels text,
+  .analemma-notes text {
+    fill: CanvasText;
+  }
+
+  .analemma-sun,
+  .sky-glyph circle.is-up {
+    fill: Highlight;
+  }
+
+  .analemma-sun-halo,
+  .sky-glyph circle.is-down {
+    stroke: Highlight;
+  }
 }

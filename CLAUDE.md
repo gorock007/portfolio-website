@@ -23,7 +23,7 @@ The site is **an almanac kept by the sun**. The home page plots the last 365 day
 - **The sky**. `<html data-sky="day|night">` follows whether the sun is up in Sydney right now, set before first paint by `SKY_SCRIPT` and kept current by `SkyClock`. Visitors can pin Day or Night in the footer (`localStorage.sky`). There is no `prefers-color-scheme` theme — the sky *is* the theme.
 
 ### Color
-- Tokens live in `:root` / `:root[data-sky="night"]` in `styles/globals.css`: `--paper`, `--ink`, `--ink-2`, `--sun`, `--rule`, `--wash`, `--image-dim`. Never invent inline hex values; derive with `color-mix()` from a token.
+- Tokens live in `:root` / `:root[data-sky="night"]` in `styles/globals.css`: `--paper`, `--ink`, `--ink-2`, `--sun`, `--rule`, `--wash` (hover ground), `--press` (active ground), `--image-dim`. Never invent inline hex values; derive with `color-mix()` from a token.
 - **The only colour is the sun** (`--sun`): today's dot on the loop, the glyph in the header, a stamp's dot on hover or on an entry page. Screenshots and photos keep their own colours (the portrait is greyscale until hovered). Nothing else is coloured.
 - Exactly two text inks. `--ink-2` is 5.74:1 on day paper and 5.28:1 on `--wash` (the hover ground); 7.0:1 at night. Measure new pairings against `--wash`, not just paper, and in **both** skies.
 - Drawn SVG covers get `.is-drawing` so night inverts them instead of leaving a pale slab.
@@ -31,27 +31,32 @@ The site is **an almanac kept by the sun**. The home page plots the last 365 day
 
 ### Typography
 - Geist for what is read, Geist Mono for what is measured (dates, altitudes, counts, kinds). No third family.
-- Sizes: 12 (mono only), 14 (labels, captions, meta), 16–17 (interface and lists), 18–22 (body, lead), and the display classes `.display`, `.page-title`, `.article-title`, `.entry-title`, `.note-title`. No other ad-hoc sizes.
+- Sizes: 12 (mono only — the one exception is the event labels inside the loop, 12px sans, because mono is too wide for their columns), 14 (labels, captions), 16 and 18 (interface, lists, body), 19 (article body), 22 (lead, article h2, tool titles), and the display classes `.display`, `.page-title`, `.article-title`, `.entry-title`/`.note-title`. No other ad-hoc sizes.
 - No all-caps labels. Section labels are `.ledger-label`: 14px, `--ink-2`, sentence case.
 - The manifesto keeps its lowercase voice.
 
 ### Layout
 - One section shape: `Ledger` — a 200px label column (`--label-col`, sticky) and a wide body, ruled off by a 1px `--rule`. Page heads use the same two columns so everything lines up down the page.
 - Lists are `.index` rows: stamp, title, description, mono meta, arrow. Hairlines between rows, `--wash` on hover. No cards, no tiles, no shadows; captures get a 1px `--rule` ring and a 6px radius, nothing more.
+- Spacing comes from the `--s-1`…`--s-9` scale (4, 8, 12, 16, 24, 32, 48, 64, 96). Ledger labels drop to the first line of their body via the `:has()` rules in `pages.css` — add one when a ledger body starts with something new.
+- One-line `.index` rows and two-column product entries only start at 1240px; below that they stack, so nothing folds into a narrow tower in the 1000–1240 band.
 - Content width tops out at 1280px with a `clamp(16px, 4vw, 48px)` gutter; notes read in a 720px column.
 - Below 560px the loop drops its label columns and zooms (`--crop`) so the figure fills the width; the readout names the days instead.
 
 ### Motion
-- CSS only — there is no animation library. The loop draws itself in date order on load (`--i` × 3.5ms), then its rings, labels and the sun. Pages fade up 10px on mount. State transitions stay within 0.2–0.3s; the page's own sky crossfade is 0.6s.
+- CSS only — there is no animation library. The loop draws itself in date order on load (`--i` × 3.5ms), then its rings, labels and the sun. Pages fade up 8px on mount (0.4s). State transitions stay within 0.2–0.3s. A change of sky is one View Transition crossfade of the whole page (`applySky`), never per-token CSS transitions, which pass through unreadable in-between greys.
 - `styles/globals.css` has a `prefers-reduced-motion` block that flattens every animation and transition — keep it intact.
 
 ### Accessibility (non-negotiable)
+- The loop: pointing previews a day, clicking pins it (with a Back to today button), Escape or End returns to today. A mouse resting on the figure never overrides a keyboard selection.
 - The loop is one tab stop: `role="slider"` with `aria-valuetext` describing the day ("Fri 18 Sep 2026, 35 contributions, started Jev Atlas"); arrows step a day, Page Up/Down a week, Home/End the ends. The svg itself is `aria-hidden`. Everything on it is also in the Work and Writing lists as real links.
 - `role="list"` on every styled `<ul>`/`<ol>` — the global `list-style: none` makes Safari drop the role.
 - Never remove focus outlines; never put `border-radius` on `:focus-visible`.
 - Semantic HTML: `<button>` for actions, `<a>` for navigation, one `<h1>` per page, no skipped heading levels.
 - Every meaningful image gets descriptive `alt`; decorative ones (a capture beside its own title) get `alt=""`.
 - Hit targets ≥ 44px tall for nav, footer, sky options and closing links. Inline text links are exempt.
+- Hover grounds sit inside `@media (hover: hover)`; every hover has a matching `:focus-visible`, and pressables get `--press` on `:active`.
+- `@media (forced-colors: active)` in `analemma.css` maps the SVG fills to system colours — extend it for any new SVG.
 - External links carry a visually hidden "(opens in a new tab)" where they are list rows.
 - Route changes move focus into `<main>` (`RouteFocus.tsx`); keep that behaviour when touching routing.
 - Times and dates are formatted locale-free (`formatDay`) or after mount (`SkyClock`), so server and client render the same text.

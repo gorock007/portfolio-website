@@ -5,7 +5,7 @@ import Layout from '@/components/Layout'
 import Ledger from '@/components/Ledger'
 import SunStamp from '@/components/SunStamp'
 import { blogPosts } from '@/data/writing'
-import { isoFromHuman } from '@/lib/sun'
+import { formatDay, isoFromHuman } from '@/lib/sun'
 
 const description =
   'Notes on life, AI, tools, workflows, and whatever I’m learning along the way.'
@@ -35,14 +35,16 @@ const WritingPage = () => (
           {blogPosts.map((post, index) => (
             <li key={post.id}>
               <Link className="note-row" href={`/writings/${post.id}`}>
-                <div>
+                {/* Title first in the source, so the link is announced by its
+                    name; the meta line is lifted above it visually. */}
+                <div className="note-copy">
+                  <h3 className="note-title">{post.title}</h3>
                   <p className="note-meta">
                     <SunStamp date={isoFromHuman(post.date)} />
-                    <span>{post.date}</span>
+                    <time dateTime={isoFromHuman(post.date)}>{formatDay(isoFromHuman(post.date))}</time>
                     <span>{post.readTime}</span>
                     <span>{post.tags.join(', ')}</span>
                   </p>
-                  <h2 className="note-title">{post.title}</h2>
                   <p className="note-excerpt">{post.excerpt}</p>
                 </div>
                 {post.coverImage && (
@@ -51,7 +53,7 @@ const WritingPage = () => (
                       src={post.coverImage}
                       alt=""
                       sizes="(max-width: 899px) 100vw, 280px"
-                      loading={index === 0 ? 'eager' : undefined}
+                      loading={index < 2 ? 'eager' : undefined}
                     />
                   </div>
                 )}

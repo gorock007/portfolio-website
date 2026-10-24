@@ -1,5 +1,5 @@
-// The home tile. Structure mirrors the reference: one display line naming what
-// is being built, a rule, then a stack of quieter lines, then a footnote.
+// The home page's statement: the first line is the display heading, the rest
+// sit beside the loop as quieter lines, and the footnote closes them.
 export const manifestoLines: string[] = [
   'i build things.',
   'i think building is how you understand things.',

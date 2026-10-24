@@ -37,7 +37,8 @@ const Header = () => {
                 <Link
                   href={item.to}
                   className="nav-link"
-                  aria-current={pathname.startsWith(item.to) ? 'page' : undefined}
+                  // A note is inside Writing but is not the Writing page itself.
+                  aria-current={pathname === item.to ? 'page' : pathname.startsWith(`${item.to}/`) ? 'true' : undefined}
                 >
                   {item.label}
                 </Link>

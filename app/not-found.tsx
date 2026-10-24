@@ -7,9 +7,11 @@ export const metadata = { title: 'Not found' }
 
 const NotFound = () => (
   <Layout>
-    <section className="lost">
-      <SunStamp date={sydneyDate()} />
-      <p className="meta">404</p>
+    <section className="lost page-head">
+      <p className="lost-mark">
+        <SunStamp date={sydneyDate()} />
+        <span className="meta">404</span>
+      </p>
       <h1 className="page-title">Nothing rises here.</h1>
       <p className="lead lead--quiet">
         This page is below the horizon. It may have moved, or it was never here to begin with.

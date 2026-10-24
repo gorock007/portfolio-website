@@ -36,29 +36,43 @@ const SkyClock = () => {
       setReading(read())
       if (readMode() === 'auto') applySky('auto')
     }
+    // Another tab pinning the sky changes localStorage here too.
+    const onStorage = (event: StorageEvent) => {
+      if (event.key !== 'sky') return
+      applySky()
+      window.dispatchEvent(new Event(SKY_EVENT))
+    }
     tick()
     const timer = window.setInterval(tick, TICK)
     window.addEventListener(SKY_EVENT, tick)
+    window.addEventListener('storage', onStorage)
     return () => {
       window.clearInterval(timer)
       window.removeEventListener(SKY_EVENT, tick)
+      window.removeEventListener('storage', onStorage)
     }
   }, [])
 
   const up = reading ? reading.altitude > HORIZON : true
-  // The glyph: a horizon line with the sun above or below it, set by altitude.
-  const sunY = reading ? 8 - Math.max(-6, Math.min(6, (reading.altitude / 90) * 6)) : 8
+  // The glyph: a horizon line with the sun above or below it. The offset is
+  // eased so a sun 10° down already reads as clearly below the line.
+  const lift = reading
+    ? Math.sign(reading.altitude) * Math.min(5, 2 + Math.abs(reading.altitude) / 15)
+    : 0
+  const sunY = 8 - lift
 
   return (
     <p className="sky-clock" aria-live="off">
       <svg className="sky-glyph" viewBox="0 0 22 16" aria-hidden="true">
         <line x1="1" x2="21" y1="8" y2="8" />
-        <circle cx="11" cy={sunY} r="3" className={up ? 'is-up' : 'is-down'} />
+        {/* No sun until there is a reading: the server cannot know whether
+            it is up, and guessing would flip it on hydration. */}
+        {reading && <circle cx="11" cy={sunY} r="3" className={up ? 'is-up' : 'is-down'} />}
       </svg>
       <span className="sky-clock-place">Sydney</span>
       {reading && (
         <>
-          <span>{reading.time}</span>
+          <span className="sky-clock-time">{reading.time}</span>
           <span className="sky-clock-detail">
             sun {Math.abs(reading.altitude).toFixed(0)}° {up ? 'up' : 'below'}
           </span>

@@ -23,11 +23,24 @@
   --sun: #d9480f; /* 4.3:1 — the only colour on the page */
   --rule: color-mix(in srgb, var(--ink) 13%, var(--paper));
   --wash: color-mix(in srgb, var(--ink) 4%, var(--paper));
+  --press: color-mix(in srgb, var(--ink) 8%, var(--paper));
   --image-dim: none;
+
+  /* One spacing scale, on a 4px grid. */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
 
   --gutter: clamp(16px, 4vw, 48px);
   --measure: 1280px;
   --label-col: 200px;
+  --col-gap: var(--s-6);
   color-scheme: light;
 }
 
@@ -38,9 +51,16 @@
   --sun: #ff8a3d;
   --rule: color-mix(in srgb, var(--ink) 16%, var(--paper));
   --wash: color-mix(in srgb, var(--ink) 6%, var(--paper));
+  --press: color-mix(in srgb, var(--ink) 11%, var(--paper));
   /* Screenshots are made for daylight; at night they come down a little. */
   --image-dim: brightness(0.86);
   color-scheme: dark;
+}
+
+/* A change of sky is one crossfade of the whole page (see applySky). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.4s;
 }
 
 /* ---------------------------------------------------------------------------
@@ -66,8 +86,6 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: "ss01", "tnum" 0;
-  transition: background-color 0.6s ease, color 0.6s ease;
 }
 
 h1,
@@ -92,10 +110,11 @@ a {
   text-decoration-thickness: 1px;
   text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
   text-underline-offset: 0.22em;
-  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+  transition: text-decoration-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
-a:hover {
+a:hover,
+a:focus-visible {
   text-decoration-color: currentColor;
 }
 
@@ -134,7 +153,6 @@ img {
   font-family: var(--font-mono);
   font-size: 12px;
   line-height: 1.5;
-  letter-spacing: 0;
   color: var(--ink-2);
   font-weight: 400;
 }
@@ -154,93 +172,113 @@ img {
   padding-inline: var(--gutter);
 }
 
-.container--narrow {
-  max-width: calc(720px + var(--gutter) * 2);
-}
-
 .page {
   display: block;
-  padding-block: 24px 96px;
+  padding-block: var(--s-5) var(--s-6);
   outline: none;
-  animation: page-in 0.7s var(--ease-out) both;
+  animation: page-in 0.4s var(--ease-out) both;
 }
 
 @keyframes page-in {
   from {
     opacity: 0;
-    translate: 0 10px;
+    translate: 0 8px;
   }
 }
 
 .skip-link {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: var(--s-3);
+  left: var(--s-3);
   z-index: 10;
-  padding: 12px 16px;
+  padding: var(--s-3) var(--s-4);
   background: var(--ink);
   color: var(--paper);
   font-size: 14px;
   text-decoration: none;
   translate: 0 -200%;
+  transition: translate 0.2s var(--ease-out);
 }
 
 .skip-link:focus-visible {
   translate: 0 0;
 }
 
-/* Header — the name, the sky over Sydney, the three rooms. */
+.skip-link:hover {
+  text-decoration-line: underline;
+}
+
+/* Header — the name, the sky over Sydney, the three rooms. The outer tracks
+   are equal so the clock sits on the page's true centre line. */
 .header-row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
-  padding-block: 16px;
+  gap: var(--s-5);
+  padding-block: var(--s-4);
 }
 
 .brand {
+  justify-self: start;
   display: inline-flex;
   align-items: center;
   min-height: 44px;
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.01em;
-  text-decoration: none;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 6px;
+}
+
+.brand:hover,
+.brand:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.site-header nav {
+  justify-self: end;
 }
 
 .nav-list {
   display: flex;
-  gap: 4px;
-  margin-right: -10px;
+  gap: var(--s-1);
+  margin-right: calc(var(--s-3) * -1);
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding-inline: 10px;
+  padding-inline: var(--s-3);
   font-size: 16px;
   color: var(--ink-2);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.nav-link:hover {
-  color: var(--ink);
-}
-
-.nav-link[aria-current="page"] {
-  color: var(--ink);
   text-decoration-line: underline;
-  text-decoration-color: var(--ink);
+  text-decoration-color: transparent;
   text-underline-offset: 6px;
 }
 
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--ink);
+}
+
+.nav-link:active {
+  background-color: var(--press);
+}
+
+.nav-link[aria-current] {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+
 .sky-clock {
-  justify-self: center;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--s-3);
+  /* Wide enough for the full reading before it arrives, so nothing shifts
+     when the clock fills in after hydration. */
+  min-width: 42ch;
   min-height: 20px;
   font-family: var(--font-mono);
   font-size: 12px;
@@ -248,7 +286,12 @@ img {
   white-space: nowrap;
 }
 
+.sky-clock > span:not(.sky-clock-place) {
+  animation: appear 0.3s ease both;
+}
+
 .sky-glyph {
+  flex: none;
   width: 22px;
   height: 16px;
   overflow: visible;
@@ -259,6 +302,10 @@ img {
   stroke-width: 1;
 }
 
+.sky-glyph circle {
+  transition: cy 0.3s ease;
+}
+
 .sky-glyph circle.is-up {
   fill: var(--sun);
 }
@@ -266,10 +313,14 @@ img {
 .sky-glyph circle.is-down {
   fill: var(--paper);
   stroke: var(--sun);
-  stroke-width: 1.2;
+  stroke-width: 1.25;
 }
 
 @media (max-width: 1023px) {
+  .sky-clock {
+    min-width: 15ch;
+  }
+
   .sky-clock-detail {
     display: none;
   }
@@ -285,30 +336,42 @@ img {
     grid-row: 2;
     grid-column: 1 / -1;
     justify-self: start;
-    margin-top: -4px;
   }
 }
 
-/* Footer */
+/* Footer — the same two columns as every ledger above it. */
 .site-footer {
   border-top: 1px solid var(--rule);
-  padding-block: 48px 64px;
+  padding-block: var(--s-6) var(--s-8);
 }
 
 .footer-grid {
   display: grid;
-  gap: 40px;
+  gap: var(--s-6);
+}
+
+.footer-elsewhere {
+  display: grid;
+  gap: var(--s-3);
 }
 
 @media (min-width: 900px) {
   .footer-grid {
     grid-template-columns: var(--label-col) minmax(0, 1fr) auto;
-    gap: 32px;
+    column-gap: var(--col-gap);
+    row-gap: var(--s-5);
     align-items: start;
   }
 
-  .footer-grid > section {
-    display: contents;
+  .footer-elsewhere {
+    grid-column: 1 / 3;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
+    column-gap: var(--col-gap);
+  }
+
+  /* Down to the first line of the links, which sit inside 44px targets. */
+  .footer-elsewhere .ledger-label {
+    padding-top: var(--s-3);
   }
 
   .footer-grid .colophon {
@@ -319,21 +382,30 @@ img {
 .elsewhere {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 28px;
+  gap: 0 var(--s-5);
 }
 
 .elsewhere a {
   display: inline-flex;
   align-items: baseline;
-  gap: 8px;
+  gap: var(--s-2);
   min-height: 44px;
-  padding-block: 10px;
+  padding-block: var(--s-3);
   font-size: 16px;
   text-decoration: none;
 }
 
-.elsewhere a:hover {
+.elsewhere-name {
   text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.elsewhere a:hover .elsewhere-name,
+.elsewhere a:focus-visible .elsewhere-name {
+  text-decoration-color: currentColor;
 }
 
 .elsewhere-handle {
@@ -345,44 +417,76 @@ img {
 .sky-control {
   display: flex;
   align-items: center;
-  gap: 2px;
+  margin-right: calc(var(--s-3) * -1);
 }
 
-.sky-control .meta {
-  margin-right: 10px;
+.sky-control-label {
+  margin-right: var(--s-2);
+  font-size: 14px;
+  color: var(--ink-2);
 }
 
 .sky-option {
   min-height: 44px;
-  padding: 0 12px;
+  padding: 0 var(--s-3);
   border: 0;
   background: transparent;
   color: var(--ink-2);
   font: inherit;
   font-size: 14px;
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease;
-}
-
-.sky-option:hover {
-  color: var(--ink);
-  background: var(--wash);
-}
-
-.sky-option[aria-pressed="true"] {
-  color: var(--ink);
-  text-decoration: underline;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: transparent;
   text-underline-offset: 6px;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.sky-option:hover,
+.sky-option:focus-visible {
+  color: var(--ink);
+}
+
+.sky-option:active {
+  background: var(--press);
+}
+
+/* Pressed is drawn from <html data-sky-mode>, which exists before paint;
+   aria-pressed on the buttons only arrives with hydration. */
+:root[data-sky-mode="auto"] .sky-option[data-mode="auto"],
+:root[data-sky-mode="day"] .sky-option[data-mode="day"],
+:root[data-sky-mode="night"] .sky-option[data-mode="night"] {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
 }
 
 .colophon {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  max-width: 40em;
+  gap: var(--s-1);
   font-size: 14px;
   line-height: 1.55;
   color: var(--ink-2);
+}
+
+/* Hover grounds only where there is a real hover; on touch they stick. */
+@media (hover: hover) {
+  .sky-option:hover {
+    background: var(--wash);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The drawn covers are greyscale line work on light paper. At night they are
+   turned over rather than dimmed, so they sit on the dark page like the loop
+   does instead of glowing as a pale slab. */
+:root[data-sky="night"] .is-drawing img {
+  filter: invert(0.92) contrast(1.05);
 }
 
 /* ---------------------------------------------------------------------------
@@ -401,11 +505,8 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
 
-/* The drawn covers are greyscale line work on light paper. At night they are
-   turned over rather than dimmed, so they sit on the dark page like the loop
-   does instead of glowing as a pale slab. */
-:root[data-sky="night"] .is-drawing img {
-  filter: invert(0.92) contrast(1.05);
+  .arrow {
+    transform: none !important;
+  }
 }
