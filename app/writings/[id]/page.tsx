@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import FadeIn from '@/components/FadeIn'
 import Layout from '@/components/Layout'
+import SunStamp from '@/components/SunStamp'
 import { blogPosts } from '@/data/writing'
 import { renderContent } from '@/lib/renderContent'
 import { site } from '@/lib/site'
+import { isoFromHuman } from '@/lib/sun'
 
 type Props = { params: Promise<{ id: string }> }
 
@@ -42,10 +43,8 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     : [{ url: site.ogImage, width: 1200, height: 630, alt: post.title }]
 
   // The dates in the data are written for people ("7 September 2026"); og
-  // wants ISO 8601, and anything unparseable is simply left off.
-  const published = Number.isNaN(Date.parse(post.date))
-    ? undefined
-    : new Date(post.date).toISOString()
+  // wants ISO 8601, at the start of the day in Sydney.
+  const published = `${isoFromHuman(post.date)}T00:00:00+10:00`
 
   return {
     title: post.title,
@@ -76,59 +75,61 @@ const WritingPostPage = async ({ params }: Props) => {
 
   if (!post) notFound()
 
+  // The list runs newest first, so the next note to read is the older one;
+  // the oldest wraps round to the newest.
+  const index = blogPosts.indexOf(post)
+  const next = blogPosts.length > 1 ? blogPosts[(index + 1) % blogPosts.length] : null
+
   return (
-    <Layout>
+    <Layout narrow>
       <article className="article">
         <Link href="/writings" className="back-link">
-          <span aria-hidden="true">←</span> All writing
+          <span className="arrow" aria-hidden="true">←</span> All writing
         </Link>
 
-        <FadeIn>
-          <header className="article-header">
-            <div className="article-tags">
-              {post.tags.map((tag) => (
-                <span key={tag}>{tag}</span>
-              ))}
-            </div>
+        <header className="article-header">
+          <p className="article-meta">
+            <SunStamp date={isoFromHuman(post.date)} />
+            <span>{post.date}</span>
+            <span>{post.readTime}</span>
+            <span>{post.tags.join(', ')}</span>
+          </p>
 
-            <h1 className="article-title">{post.title}</h1>
+          <h1 className="article-title">{post.title}</h1>
+          <p className="article-excerpt">{post.excerpt}</p>
+        </header>
 
-            <p className="article-byline">
-              <strong>Gorock Shetty</strong>
-              <span>{post.date}</span>
-              <span>{post.readTime}</span>
-            </p>
-          </header>
+        {post.coverImage && (
+          <figure className={`article-cover${post.coverImage.src.endsWith('.svg') ? ' is-drawing' : ''}`}>
+            <Image
+              src={post.coverImage}
+              alt={post.coverImageAlt || ''}
+              sizes="(max-width: 767px) 100vw, 720px"
+              preload
+            />
+          </figure>
+        )}
 
-          {post.coverImage && (
-            <figure className="article-cover">
-              <Image
-                src={post.coverImage}
-                alt={post.coverImageAlt || ''}
-                sizes="(max-width: 767px) 100vw, 672px"
-                priority
-              />
-            </figure>
-          )}
+        <div className="article-body">{renderContent(post.content)}</div>
 
-          <div className="article-body">{renderContent(post.content)}</div>
+        {post.sourceUrl && (
+          <aside className="article-source" aria-label="Source of inspiration">
+            <p>Source of inspiration</p>
+            <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
+              {post.sourceLabel || 'Read the original post'}{' '}
+              <span className="arrow" aria-hidden="true">↗</span>
+            </a>
+          </aside>
+        )}
 
-          {post.sourceUrl && (
-            <aside className="article-source">
-              <p>Source of inspiration</p>
-              <a href={post.sourceUrl} target="_blank" rel="noopener noreferrer">
-                {post.sourceLabel || 'Read the original post'}{' '}
-                <span className="link-arrow" aria-hidden="true">↗</span>
-              </a>
-            </aside>
-          )}
-        </FadeIn>
-
-        <div className="article-bottom">
-          <Link href="/writings" className="back-link">
-            <span aria-hidden="true">←</span> All writing
-          </Link>
-        </div>
+        {next && (
+          <nav className="article-next" aria-label="Next note">
+            <Link href={`/writings/${next.id}`}>
+              <span className="meta">Read next · {next.date}</span>
+              <span className="article-next-title">{next.title}</span>
+            </Link>
+          </nav>
+        )}
       </article>
     </Layout>
   )

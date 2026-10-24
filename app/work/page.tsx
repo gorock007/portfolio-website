@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Layout from '@/components/Layout'
-import ListView, { type ListItem } from '@/components/ListView'
-import Tile from '@/components/Tile'
-import TileGrid from '@/components/TileGrid'
-import ViewSwitcher from '@/components/ViewSwitcher'
-import ProjectTile from '@/components/tiles/ProjectTile'
-import { projects } from '@/data/projects'
+import Ledger from '@/components/Ledger'
+import SunStamp from '@/components/SunStamp'
+import type { Project } from '@/data/types'
+import { earlierProjects, productProjects, toolProjects } from '@/data/projects'
+import { formatDay } from '@/lib/sun'
 
-const description = 'Products and tools designed, built, and run end to end.'
+const description =
+  'Products Gorock Shetty runs, the tools he has open-sourced, and everything back to the first thing he shipped.'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -17,34 +18,114 @@ export const metadata: Metadata = {
   twitter: { title: 'Work — Gorock Shetty', description },
 }
 
-const listItems: ListItem[] = projects.map((project) => ({
-  id: project.id,
-  href: project.url,
-  title: project.title,
-  description: project.subtitle,
-  meta: project.urlLabel,
-}))
+const Begun = ({ project }: { project: Project }) => (
+  <p className="entry-stamp">
+    <SunStamp date={project.started} />
+    <span className="meta">
+      {project.kind}
+      <br />
+      Begun {formatDay(project.started)}
+    </span>
+  </p>
+)
+
+const ExternalLink = ({ project }: { project: Project }) => (
+  <a className="entry-link" href={project.url} target="_blank" rel="noopener noreferrer">
+    {project.urlLabel} <span className="arrow" aria-hidden="true">↗</span>
+    <span className="visually-hidden"> (opens in a new tab)</span>
+  </a>
+)
+
+const Proof = ({ items }: { items?: string[] }) =>
+  items?.length ? (
+    <ul className="proof" role="list">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  ) : null
 
 const WorkPage = () => (
   <Layout>
-    <ViewSwitcher
-      caption="Everything I’ve shipped…"
-      heading={<h1 className="page-h1 list-heading">Work.</h1>}
-      pairs
-      list={<ListView items={listItems} />}
-      grid={
-        <TileGrid className="tile-grid--pairs">
-          <Tile size="wide">
-            <h1 className="page-h1">Work.</h1>
-            <p className="page-h2">{description}</p>
-          </Tile>
+    <header className="page-head">
+      <h1 className="page-title">Work</h1>
+      <p className="lead">
+        The products I run, the tools I’ve given away, and the long tail back to the first thing I
+        ever shipped. Each is stamped with the sun as it stood over Sydney on the day it began.
+      </p>
+    </header>
 
-          {projects.map((project) => (
-            <ProjectTile key={project.id} project={project} />
-          ))}
-        </TileGrid>
-      }
-    />
+    <Ledger id="products-label" label="Products">
+      {productProjects.map((project, index) => (
+        <article key={project.id} id={project.id} className="product" aria-labelledby={`${project.id}-title`}>
+          {project.img && (
+            <a
+              className="product-shot"
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={-1}
+              aria-hidden="true"
+            >
+              <Image
+                src={project.img}
+                alt=""
+                sizes="(max-width: 999px) 100vw, 640px"
+                loading={index === 0 ? 'eager' : undefined}
+              />
+            </a>
+          )}
+          <div>
+            <Begun project={project} />
+            <h3 id={`${project.id}-title`} className="entry-title">
+              {project.title}
+            </h3>
+            <p className="entry-subtitle">{project.subtitle}</p>
+            {project.detail && <p className="entry-detail">{project.detail}</p>}
+            <Proof items={project.proof} />
+            <ExternalLink project={project} />
+          </div>
+        </article>
+      ))}
+    </Ledger>
+
+    <Ledger id="tools-label" label="Open source & experiments">
+      <div className="shelf">
+        {toolProjects.map((project) => (
+          <article key={project.id} id={project.id} className="tool" aria-labelledby={`${project.id}-title`}>
+            <Begun project={project} />
+            <h3 id={`${project.id}-title`} className="entry-title">
+              {project.title}
+            </h3>
+            <p className="entry-subtitle">{project.subtitle}</p>
+            {project.detail && <p className="entry-detail">{project.detail}</p>}
+            <Proof items={project.proof} />
+            <ExternalLink project={project} />
+          </article>
+        ))}
+      </div>
+    </Ledger>
+
+    <Ledger id="earlier-label" label="Earlier">
+      <ol className="index" role="list">
+        {earlierProjects.map((project) => (
+          <li key={project.id} id={project.id}>
+            <a className="index-row" href={project.url} target="_blank" rel="noopener noreferrer">
+              <SunStamp date={project.started} />
+              <span className="index-title">{project.title}</span>
+              <span className="index-desc">{project.subtitle}</span>
+              <span className="index-meta">
+                {project.kind} · {project.started.slice(0, 4)}
+              </span>
+              <span className="arrow" aria-hidden="true">
+                ↗
+              </span>
+              <span className="visually-hidden"> (opens in a new tab)</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </Ledger>
   </Layout>
 )
 

@@ -1,0 +1,197 @@
+/* ---------------------------------------------------------------------------
+   The analemma — the noon sun over Sydney, one dot per day of the last year.
+--------------------------------------------------------------------------- */
+.analemma {
+  container: analemma / inline-size;
+}
+
+.analemma-instrument {
+  /* The svg is wider than this box on narrow screens and is clipped to it;
+     the focus ring is drawn outside, so it survives the clip. */
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+.analemma-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Too narrow for the label columns: zoom in on the loop and let the readout
+   name the days instead. --crop is set inline from the figure's geometry. */
+@container analemma (max-width: 560px) {
+  .analemma-svg {
+    width: calc(var(--crop) * 100%);
+    margin-left: calc((1 - var(--crop)) * 50%);
+  }
+
+  .analemma-labels,
+  .analemma-leaders {
+    display: none;
+  }
+}
+
+.analemma-dot {
+  fill: var(--ink);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dot-in 0.7s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 3.5ms + 120ms);
+}
+
+.analemma-dot.level-0 {
+  opacity: 0.22;
+}
+
+.analemma-dot.level-1 {
+  opacity: 0.48;
+}
+
+.analemma-dot.level-2 {
+  opacity: 0.74;
+}
+
+.analemma-dot.level-3 {
+  opacity: 1;
+}
+
+@keyframes dot-in {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+
+.analemma-ring {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  animation: appear 0.6s ease 1.4s both;
+}
+
+.analemma-leaders path {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.45;
+  transition: opacity 0.2s ease, stroke 0.2s ease;
+  animation: appear 0.8s ease 1.5s both;
+}
+
+.analemma-leaders path.is-active {
+  stroke: var(--ink);
+  opacity: 1;
+}
+
+.analemma-labels text {
+  fill: var(--ink-2);
+  font-family: var(--font-sans);
+  transition: fill 0.2s ease;
+  animation: appear 0.8s ease 1.6s both;
+}
+
+.analemma-labels text.is-active {
+  fill: var(--ink);
+}
+
+.analemma-notes text {
+  fill: var(--ink-2);
+  font-family: var(--font-mono);
+  animation: appear 0.8s ease 1.6s both;
+}
+
+.analemma-sun {
+  fill: var(--sun);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dot-in 0.9s var(--ease-out) 1.45s both;
+}
+
+.analemma-sun-halo {
+  fill: none;
+  stroke: var(--sun);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.5;
+  animation: appear 1.2s ease 1.8s both;
+}
+
+.analemma-cursor {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+/* The readout under the loop. */
+.analemma-readout {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.readout-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.readout-line span:first-child {
+  color: var(--ink);
+}
+
+.readout-events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  min-height: 1.5em;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.readout-events a {
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------------
+   The stamp — the same loop, small, dating one thing.
+--------------------------------------------------------------------------- */
+.sun-stamp {
+  display: block;
+  flex: none;
+  height: 28px;
+  width: auto;
+  overflow: visible;
+}
+
+.sun-stamp-loop {
+  fill: none;
+  stroke: var(--ink-2);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.55;
+}
+
+.sun-stamp-sun {
+  fill: var(--ink);
+  transition: fill 0.25s ease;
+}

@@ -1,98 +1,88 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
+import Analemma from '@/components/Analemma'
 import Layout from '@/components/Layout'
-import ListView, { type ListItem } from '@/components/ListView'
-import Tile from '@/components/Tile'
-import TileGrid from '@/components/TileGrid'
-import ViewSwitcher from '@/components/ViewSwitcher'
-import ActivityTile from '@/components/tiles/ActivityTile'
-import ManifestoTile from '@/components/tiles/ManifestoTile'
-import NowTile from '@/components/tiles/NowTile'
-import PortraitTile from '@/components/tiles/PortraitTile'
-import ProjectTile from '@/components/tiles/ProjectTile'
-import SocialTile from '@/components/tiles/SocialTile'
-import StackTile from '@/components/tiles/StackTile'
-import WritingTile from '@/components/tiles/WritingTile'
-import { featuredProjects, projects } from '@/data/projects'
+import Ledger from '@/components/Ledger'
+import WorkIndex from '@/components/WorkIndex'
+import WritingIndex from '@/components/WritingIndex'
+import { manifestoFootnote, manifestoLines } from '@/data/manifesto'
+import { productProjects, toolProjects } from '@/data/projects'
 import { contactHandle, contactUrl } from '@/data/siteLinks'
 import { blogPosts } from '@/data/writing'
 import { site } from '@/lib/site'
+import { formatDay } from '@/lib/sun'
+import { getYear } from '@/lib/year'
 
 export const metadata: Metadata = {
   title: site.title,
   alternates: { canonical: '/' },
 }
 
-const listItems: ListItem[] = [
-  ...projects.map((project) => ({
-    id: project.id,
-    href: project.url,
-    title: project.title,
-    description: project.subtitle,
-    meta: project.urlLabel,
-  })),
-  ...blogPosts.map((post) => ({
-    id: post.id,
-    to: `/writings/${post.id}`,
-    title: post.title,
-    description: post.excerpt,
-    meta: post.date,
-  })),
-]
+// The loop ends on today, so the page is rebuilt hourly to keep up with it.
+export const revalidate = 3600
 
-const HomePage = () => {
-  const latestPost = blogPosts[0]
+const HomePage = async () => {
+  const year = await getYear()
+  const [statement, ...creed] = manifestoLines
+  const first = year.days[0]
 
   return (
     <Layout>
-      <ViewSwitcher
-        caption="Look around…"
-        heading={<h1 className="page-h1 list-heading">{site.name}.</h1>}
-        list={<ListView items={listItems} />}
-        grid={
-          <TileGrid>
-            {/* The products come first. Dense packing promotes whatever is
-                early enough to fill a gap, so listing the small tiles ahead of
-                these would put trivia above the work. */}
-            <ManifestoTile />
-            {featuredProjects.map((project) => (
-              <ProjectTile key={project.id} project={project} />
+      <section className="hero" aria-labelledby="hero-title">
+        <div className="hero-text">
+          <h1 id="hero-title" className="display">
+            <span className="hero-name">Gorock Shetty</span>
+            {statement}
+          </h1>
+
+          <ul className="creed" role="list">
+            {creed.map((line) => (
+              <li key={line}>{line}</li>
             ))}
+          </ul>
 
-            <WritingTile post={latestPost} />
-            <NowTile />
-            <ActivityTile />
-            <StackTile />
+          <p className="creed-foot">
+            <span aria-hidden="true">* </span>
+            <Link href={manifestoFootnote.href}>{manifestoFootnote.text}</Link>
+          </p>
+        </div>
 
-            <PortraitTile />
-            <SocialTile />
+        <figure className="hero-figure">
+          <Analemma days={year.days} />
+          <figcaption className="caption">
+            Photograph the sun from one spot at the same hour every day and it draws a
+            figure-eight across the sky. This is that loop over Sydney at noon, from{' '}
+            {formatDay(first.date)} to today, and each dot is one of my days: the darker, the more
+            code I shipped — {year.total.toLocaleString('en-AU')} contributions on{' '}
+            {year.activeDays} days. Ringed days are launches and essays. East–west is stretched threefold so the lobes
+            read.
+          </figcaption>
+        </figure>
+      </section>
 
-            <Tile size="sm" to="/work">
-              <div className="stat-tile">
-                <p className="stat-label">Work</p>
-                <p className="stat-body">
-                  Products and tools designed, built, and run end to end.
-                </p>
-                <p className="project-url">
-                  See the work <span className="link-arrow" aria-hidden="true">→</span>
-                </p>
-              </div>
-            </Tile>
+      <Ledger id="work-label" label="Work" more={{ href: '/work', label: 'Everything, back to 2018' }}>
+        <WorkIndex projects={[...productProjects, ...toolProjects]} />
+      </Ledger>
 
-            <Tile size="sm" href={contactUrl}>
-              <div className="stat-tile">
-                <p className="stat-label">Say hello</p>
-                <p className="stat-body">
-                  If you’re building something in this space, or want to argue about what AI
-                  actually changes, my DMs are open.
-                </p>
-                <p className="project-url">
-                  {contactHandle} on X <span className="link-arrow" aria-hidden="true">↗</span>
-                </p>
-              </div>
-            </Tile>
-          </TileGrid>
-        }
-      />
+      <Ledger id="writing-label" label="Writing" more={{ href: '/writings', label: 'All writing' }}>
+        <WritingIndex posts={blogPosts} />
+      </Ledger>
+
+      <Ledger id="now-label" label="Now">
+        <p className="lead">
+          Running NaatiAce and Revisit, building Klypst and Don’t Make It Ugly, and open-sourcing
+          the tools I make along the way — from Sydney. Learning extensively about AI, and
+          genuinely optimistic about what comes next.
+        </p>
+        <p className="lead lead--quiet">
+          If you’re building in this space, or want to argue about what AI actually changes, my DMs
+          are open:{' '}
+          <a href={contactUrl} target="_blank" rel="noopener noreferrer">
+            {contactHandle} on X
+          </a>
+          .
+        </p>
+      </Ledger>
     </Layout>
   )
 }

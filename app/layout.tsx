@@ -1,13 +1,11 @@
 import type { Metadata, Viewport } from 'next'
 import type { ReactNode } from 'react'
-import DotPattern from '@/components/DotPattern'
 import Footer from '@/components/Footer'
-import Nav from '@/components/Nav'
+import Header from '@/components/Header'
 import PersonSchema from '@/components/PersonSchema'
-import Providers from '@/components/Providers'
-import ReadingRoom from '@/components/ReadingRoom'
 import RouteFocus from '@/components/RouteFocus'
-import { geist } from '@/lib/fonts'
+import { geist, geistMono } from '@/lib/fonts'
+import { SKY_SCRIPT } from '@/lib/sky'
 import { site } from '@/lib/site'
 import '@/styles/globals.css'
 
@@ -50,26 +48,25 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
+  // The sky script below rewrites this to the night colour after sunset.
   themeColor: '#ffffff',
 }
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
-  <html lang="en" className={geist.variable}>
+  // suppressHydrationWarning: the sky script sets data-sky on <html> before
+  // React hydrates, and React should keep it rather than strip it.
+  <html lang="en" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
+    <head>
+      <script dangerouslySetInnerHTML={{ __html: SKY_SCRIPT }} />
+    </head>
     <body>
       <PersonSchema />
-      <Providers>
-        <DotPattern className="dot-pattern--page" interactive />
-
-        {/* Nav and Footer live outside the route slot so they survive
-            navigation. Rendered per-view they were torn down and rebuilt on
-            every route change, which left the nav pill with nothing to animate
-            from — it mounted already in place. */}
-        <RouteFocus />
-        <ReadingRoom />
-        <Nav />
-        {children}
-        <Footer />
-      </Providers>
+      {/* Header and Footer live outside the route slot so they survive
+          navigation — the sky clock keeps ticking instead of remounting. */}
+      <RouteFocus />
+      <Header />
+      {children}
+      <Footer />
     </body>
   </html>
 )

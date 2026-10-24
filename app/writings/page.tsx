@@ -1,11 +1,11 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import Layout from '@/components/Layout'
-import ListView, { type ListItem } from '@/components/ListView'
-import Tile from '@/components/Tile'
-import TileGrid from '@/components/TileGrid'
-import ViewSwitcher from '@/components/ViewSwitcher'
+import Ledger from '@/components/Ledger'
+import SunStamp from '@/components/SunStamp'
 import { blogPosts } from '@/data/writing'
+import { isoFromHuman } from '@/lib/sun'
 
 const description =
   'Notes on life, AI, tools, workflows, and whatever I’m learning along the way.'
@@ -18,72 +18,49 @@ export const metadata: Metadata = {
   twitter: { title: 'Writing — Gorock Shetty', description },
 }
 
-const listItems: ListItem[] = blogPosts.map((post) => ({
-  id: post.id,
-  to: `/writings/${post.id}`,
-  title: post.title,
-  description: post.excerpt,
-  meta: post.date,
-}))
-
 const WritingPage = () => (
   <Layout>
-    <ViewSwitcher
-      caption="Notes, not takes…"
-      heading={<h1 className="page-h1 list-heading">Writing.</h1>}
-      pairs
-      // No notes means nothing to list, and the toggle falls back to the grid,
-      // which carries the empty state.
-      list={blogPosts.length > 0 ? <ListView items={listItems} /> : undefined}
-      grid={
-        <TileGrid className="tile-grid--pairs">
-          <Tile size="wide">
-            <h1 className="page-h1">Writing.</h1>
-            <p className="page-h2">{description}</p>
-          </Tile>
+    <header className="page-head">
+      <h1 className="page-title">Writing</h1>
+      <p className="lead">
+        Notes, not takes — on life, AI, tools, and whatever I’m learning along the way.
+      </p>
+    </header>
 
-          {blogPosts.length === 0 ? (
-            <Tile size="wide">
-              <div className="empty-state">
-                <p className="stat-label">Coming soon</p>
-                <p className="project-title">First note in progress.</p>
-                <p className="stat-body">
-                  I’m giving it the time it deserves. It’ll appear here when it’s ready.
-                </p>
-              </div>
-            </Tile>
-          ) : (
-            blogPosts.map((post) => (
-              <Tile key={post.id} size="wide" to={`/writings/${post.id}`}>
-                <article className="writing-card">
-                  <div className="writing-card-copy">
-                    <p className="writing-date">
-                      {post.date} · {post.readTime}
-                    </p>
-                    <h2 className="writing-title">{post.title}</h2>
-                    <p className="writing-excerpt">{post.excerpt}</p>
-                    <p className="project-url">
-                      Read the note <span className="link-arrow" aria-hidden="true">→</span>
-                    </p>
+    <Ledger id="notes-label" label="Notes">
+      {blogPosts.length === 0 ? (
+        <p className="lead lead--quiet">The first note is in progress.</p>
+      ) : (
+        <ol className="notes" role="list">
+          {blogPosts.map((post, index) => (
+            <li key={post.id}>
+              <Link className="note-row" href={`/writings/${post.id}`}>
+                <div>
+                  <p className="note-meta">
+                    <SunStamp date={isoFromHuman(post.date)} />
+                    <span>{post.date}</span>
+                    <span>{post.readTime}</span>
+                    <span>{post.tags.join(', ')}</span>
+                  </p>
+                  <h2 className="note-title">{post.title}</h2>
+                  <p className="note-excerpt">{post.excerpt}</p>
+                </div>
+                {post.coverImage && (
+                  <div className={`note-cover${post.coverImage.src.endsWith('.svg') ? ' is-drawing' : ''}`}>
+                    <Image
+                      src={post.coverImage}
+                      alt=""
+                      sizes="(max-width: 899px) 100vw, 280px"
+                      loading={index === 0 ? 'eager' : undefined}
+                    />
                   </div>
-
-                  {post.coverImage && (
-                    <figure className="writing-card-media">
-                      <Image
-                        src={post.coverImage}
-                        alt={post.coverImageAlt || ''}
-                        fill
-                        sizes="(max-width: 767px) 100vw, 260px"
-                      />
-                    </figure>
-                  )}
-                </article>
-              </Tile>
-            ))
-          )}
-        </TileGrid>
-      }
-    />
+                )}
+              </Link>
+            </li>
+          ))}
+        </ol>
+      )}
+    </Ledger>
   </Layout>
 )
 

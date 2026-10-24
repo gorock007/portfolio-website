@@ -1,11 +1,6 @@
-import type { icons } from '@/components/Icons'
-
-export type SocialIcon = keyof typeof icons
-
 export const profile = {
   name: 'Gorock Shetty',
   location: 'Sydney, Australia',
-  building: { label: 'NaatiAce', url: 'https://naatiace.com/' },
 } as const
 
 // The X profile doubles as the contact route now that email is off the site.
@@ -14,30 +9,27 @@ export const contactHandle = '@gorockbits'
 
 export type SocialLink = {
   id: string
+  /** The platform, which is what the link is called on the page. */
   label: string
+  handle: string
   href: string
-  icon: SocialIcon
 }
 
-// Only links with a real destination are rendered in the footer icon row.
 export const socialLinks: SocialLink[] = [
-  // Labels name the platform as well as the handle: three of these share
-  // @gorockbits, and identical link names pointing at different places are
-  // ambiguous in a tooltip and unusable in a screen reader's link list.
-  { id: 'github', label: 'GitHub @gorock007', href: 'https://github.com/gorock007', icon: 'github' },
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/gorakhshetty/', icon: 'linkedin' },
-  { id: 'x', label: 'X @gorockbits', href: contactUrl, icon: 'x' },
-  { id: 'instagram', label: 'Instagram @gorockbits', href: 'https://www.instagram.com/gorockbits/', icon: 'instagram' },
-  { id: 'tiktok', label: 'TikTok @gorockbits', href: 'https://www.tiktok.com/@gorockbits', icon: 'tiktok' },
+  { id: 'github', label: 'GitHub', handle: '@gorock007', href: 'https://github.com/gorock007' },
+  { id: 'x', label: 'X', handle: '@gorockbits', href: contactUrl },
+  { id: 'linkedin', label: 'LinkedIn', handle: 'gorakhshetty', href: 'https://www.linkedin.com/in/gorakhshetty/' },
+  { id: 'instagram', label: 'Instagram', handle: '@gorockbits', href: 'https://www.instagram.com/gorockbits/' },
+  { id: 'tiktok', label: 'TikTok', handle: '@gorockbits', href: 'https://www.tiktok.com/@gorockbits' },
 ]
 
 export type NavItem = { to: string; label: string }
 
+// The name in the header is the way home, so Home is not repeated here.
 export const navItems: NavItem[] = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
   { to: '/work', label: 'Work' },
   { to: '/writings', label: 'Writing' },
+  { to: '/about', label: 'About' },
 ]
 
-export const stack = ['Claude Code', 'Codex', 'MCP', 'React', 'Stripe', 'Supabase']
+export const stack = ['Claude Code', 'Codex', 'MCP', 'Swift', 'React', 'Next.js', 'Stripe', 'Supabase']

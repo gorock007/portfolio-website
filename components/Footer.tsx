@@ -1,33 +1,39 @@
 import { socialLinks } from '@/data/siteLinks'
-import { icons } from './Icons'
-import Tooltip from './Tooltip'
+import { SYDNEY } from '@/lib/sun'
+import SkyControl from './SkyControl'
+
+const coordinates = `${Math.abs(SYDNEY.lat).toFixed(4)}° S, ${SYDNEY.lon.toFixed(4)}° E`
 
 const Footer = () => (
   <footer className="site-footer">
-    <h2 className="stat-label">Elsewhere</h2>
-
-    <ul className="footer-icons">
-      {socialLinks.map((link) => {
-        const Icon = icons[link.icon]
-        if (!Icon) return null
-
-        return (
-          <li key={link.id}>
-            <Tooltip label={link.label}>
-              <a
-                href={link.href}
-                className="footer-icon"
-                aria-label={link.label}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Icon />
+    <div className="container footer-grid">
+      <section aria-labelledby="elsewhere-label">
+        <h2 id="elsewhere-label" className="ledger-label">
+          Elsewhere
+        </h2>
+        <ul className="elsewhere" role="list">
+          {socialLinks.map((link) => (
+            <li key={link.id}>
+              <a href={link.href} target="_blank" rel="noopener noreferrer">
+                {link.label}
+                <span className="elsewhere-handle">{link.handle}</span>
               </a>
-            </Tooltip>
-          </li>
-        )
-      })}
-    </ul>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <SkyControl />
+
+      <p className="colophon">
+        <span className="mono">{coordinates}</span>
+        <span>
+          The page is lit while the sun is up in Sydney and dark once it sets. The orange dot is the
+          sun; nothing else here is coloured but the work.
+        </span>
+        <span>© {new Date().getFullYear()} Gorock Shetty. Set in Geist.</span>
+      </p>
+    </div>
   </footer>
 )
 

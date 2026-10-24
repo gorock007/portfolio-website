@@ -1,13 +1,11 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Layout from '@/components/Layout'
-import Tile from '@/components/Tile'
-import TileGrid from '@/components/TileGrid'
-import ActivityTile from '@/components/tiles/ActivityTile'
-import PortraitTile from '@/components/tiles/PortraitTile'
-import SocialTile from '@/components/tiles/SocialTile'
-import StackTile from '@/components/tiles/StackTile'
+import Ledger from '@/components/Ledger'
+import portrait from '@/assets/images/portrait.jpg'
+import portraitLaughing from '@/assets/images/portrait-laughing.jpg'
 import { aboutBlocks } from '@/data/about'
-import { contactHandle, contactUrl, profile } from '@/data/siteLinks'
+import { contactHandle, contactUrl, profile, stack } from '@/data/siteLinks'
 
 const description =
   'Who Gorock Shetty is, how he thinks, what he is building from Sydney, and what he is after.'
@@ -20,50 +18,59 @@ export const metadata: Metadata = {
   twitter: { title: 'About — Gorock Shetty', description },
 }
 
-const AboutPage = () => (
-  <Layout>
-    <TileGrid>
-      <Tile size="auto">
-        <h1 className="display-heading">
-          <span className="display-emphasis">What I’m about.</span>
-        </h1>
+const SIZES = '(max-width: 899px) 100vw, 340px'
 
-        <hr className="intro-hr" />
+const AboutPage = () => {
+  const [intro, ...rest] = aboutBlocks
 
-        {aboutBlocks.map((block) => (
-          <section key={block.label} className="about-block">
-            <h2 className="work-label">{block.label}</h2>
+  return (
+    <Layout>
+      <header className="about-head">
+        <div>
+          <h1 className="page-title">About</h1>
+          <p className="lead">
+            {intro.paragraphs[0]}
+          </p>
+        </div>
+
+        <div className="portrait">
+          <Image src={portrait} alt={`${profile.name}, photographed outdoors`} fill sizes={SIZES} preload />
+          {/* The same frame, laughing and in colour, faded in under the
+              cursor. Decorative: the image beneath already names him. */}
+          <Image className="portrait-hover" src={portraitLaughing} alt="" aria-hidden="true" fill sizes={SIZES} />
+        </div>
+      </header>
+
+      {rest.map((block, index) => (
+        <Ledger key={block.label} id={`about-${index}`} label={block.label}>
+          <div className="about-copy">
             {block.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
-          </section>
-        ))}
-      </Tile>
+          </div>
+        </Ledger>
+      ))}
 
-      <PortraitTile />
-      <SocialTile />
-      <StackTile />
-      <ActivityTile />
+      <Ledger id="about-tools" label="What I reach for">
+        <ul className="chips" role="list">
+          {stack.map((tool) => (
+            <li key={tool}>{tool}</li>
+          ))}
+        </ul>
+      </Ledger>
 
-      <Tile size="wide">
-        <div className="stat-tile">
-          <p className="stat-label">Where to find me</p>
-          <p className="stat-body">
-            I’m in <strong>{profile.location}</strong>. If you’re building something in this
-            space, or you just want to argue about what AI actually changes, my DMs are open.
-          </p>
-          <a
-            className="pill-button"
-            href={contactUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {contactHandle} on X <span className="link-arrow" aria-hidden="true">↗</span>
+      <Ledger id="about-contact" label="Say hello">
+        <p className="lead">
+          I’m in {profile.location}. If you’re building something in this space, or you just want
+          to argue about what AI actually changes, my DMs are open:{' '}
+          <a href={contactUrl} target="_blank" rel="noopener noreferrer">
+            {contactHandle} on X
           </a>
-        </div>
-      </Tile>
-    </TileGrid>
-  </Layout>
-)
+          .
+        </p>
+      </Ledger>
+    </Layout>
+  )
+}
 
 export default AboutPage
