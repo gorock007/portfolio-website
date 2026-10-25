@@ -9,7 +9,7 @@ import { isDrawing } from '@/lib/images'
 import { formatDay, isoFromHuman } from '@/lib/sun'
 
 const description =
-  'Notes on life, AI, tools, workflows, and whatever I’m learning along the way.'
+  'Notes, not takes. Mostly on AI, and what it says about us: intelligence, ambition, time.'
 
 export const metadata: Metadata = {
   title: 'Writing',
@@ -24,7 +24,7 @@ const WritingPage = () => (
     <header className="page-head">
       <h1 className="page-title">Writing</h1>
       <p className="lead">
-        Notes, not takes — on life, AI, tools, and whatever I’m learning along the way.
+        Notes, not takes. Mostly on AI, and what it says about us.
       </p>
     </header>
 
