@@ -2,9 +2,181 @@ import type { BlogPost } from './types'
 import agiSmearCover from '@/assets/images/agi-smear-cover.svg'
 import aiSkillsCover from '@/assets/images/ai-skills-cover.jpg'
 import futureLoopCover from '@/assets/images/future-loop-cover.svg'
+import intelligenceNetworkCover from '@/assets/images/intelligence-network-cover.svg'
 
 // Writing entries. Add new notes here; the homepage and writing index update automatically.
 export const blogPosts: BlogPost[] = [
+  {
+    id: 'an-extension-of-our-own-intelligence',
+    title: 'We Are Building an Extension of Our Own Intelligence',
+    excerpt: 'One neuron isn’t intelligent, and no one person can make a pencil. Maybe AI isn’t something separate from us at all, but the next part of a network of minds that has been growing for as long as we have.',
+    date: '25 October 2026',
+    readTime: '7 min read',
+    tags: ['AI', 'Intelligence', 'Essays'],
+    coverImage: intelligenceNetworkCover,
+    coverImageAlt: 'Scattered single dots at the left, a solid marker standing alone among them, linking up into a dense web of connected dots at the right with an open ring around one node at its centre',
+    content: `I recently came across a quote that made me think.
+
+“Sufficiently advanced hallucinations are indistinguishable from perceptions.”
+
+Think about it.
+
+Right now, I’m looking at my hands, my body, everything around me. But what I’m actually experiencing is my brain’s interpretation of the signals it receives.
+
+Neuroscientists like Anil Seth describe perception as a kind of controlled hallucination. Our brain doesn’t simply record reality like a camera. It constantly constructs its best model of the world using sensory information and past experiences.
+
+So technically, the hand I’m seeing is my brain’s representation of my hand.
+
+That made me wonder something else.
+
+If every human brain is constructing its own perception of reality, why do we experience such similar things?
+
+Think about little kids. No matter where they’re born, you’ll see them doing similar things. Playing with their fingers, splashing water, touching everything around them, trying to understand how things work.
+
+Or take psychedelic experiences like DMT. People from completely different backgrounds sometimes describe surprisingly similar geometric patterns and visual experiences.
+
+Research suggests these recurring patterns may partly come from the shared structure of our visual systems.
+
+Maybe our experiences are similar because our brains have similar underlying architectures, shaped by millions of years of evolution, and because we’re interacting with the same physical world.
+
+## Billions of neurons
+
+And that got me thinking about intelligence itself.
+
+A single neuron isn’t intelligent in the way we understand human intelligence. But billions of neurons, connected and working together, somehow produce a mind capable of thinking, imagining, and questioning its own existence.
+
+Isn’t that fascinating?
+
+And I believe something similar has been happening at a much larger scale throughout human history.
+
+## Nobody can make a pencil
+
+Take something as simple as a pencil.
+
+Can one person make a modern pencil entirely from scratch?
+
+Think about everything required. Mining graphite, cutting trees, manufacturing machinery, producing materials, transporting everything.
+
+There’s so much knowledge and so many people involved, developed across generations, just to make a pencil.
+
+No single person needs to know how the entire process works.
+
+Yet collectively, we make it happen.
+
+Now think about everything around you. Your phone, your house, the aeroplane flying above you.
+
+Almost everything we see is the result of collective human intelligence accumulated over generations.
+
+An individual human is limited. But collectively, we’ve achieved things no individual mind could ever achieve alone.
+
+## Minds connected without meeting
+
+Then came the internet.
+
+And I think this was one of the biggest turning points in human history.
+
+Suddenly, we could connect with millions of other minds without ever meeting them.
+
+I could read someone’s thoughts from another part of the world. Watch someone explain something they spent years learning. Build on research conducted decades ago.
+
+Through blogs, videos, books, research papers, and social media, we made it possible for knowledge to travel between minds at an unimaginable scale.
+
+Think about how much that expanded our collective ability to learn and create.
+
+And what did we do next?
+
+We took enormous amounts of that accumulated human knowledge and used it to train artificial intelligence.
+
+That’s what makes this so interesting to me.
+
+Thousands of years of human discoveries, reasoning, writing, programming, and creating helped make these AI systems possible.
+
+And now those systems can reason through problems, write software, discover patterns, and help us create even more knowledge.
+
+We used our intelligence to build something that can extend our intelligence.
+
+## An extension of the brain
+
+But when I think about it, haven’t humans always done this?
+
+We are biologically limited in how fast we can travel. So we built cars and aeroplanes.
+
+We cannot survive comfortably in every environment. So we built houses.
+
+We cannot see distant galaxies with our eyes. So we built telescopes.
+
+Almost every major invention has been an extension of our natural limitations.
+
+Even writing extended our memory, and computers extended our ability to calculate.
+
+But now we’re reaching something different. We’re building an extension of the brain itself.
+
+Not just tools that help us perform physical tasks, but tools that can think through problems, remember information, make plans, and increasingly execute those plans.
+
+## When the agents work together
+
+And now imagine what happens when these AI systems start working together.
+
+One agent researches. Another builds. Another tests. Another finds mistakes. Humans guide them, and different systems build on each other’s discoveries.
+
+Just like humans working together created civilisation, networks of humans and AI agents could develop capabilities far beyond what any of us could achieve individually.
+
+Of course, simply connecting more agents doesn’t automatically create greater intelligence. How they work together matters.
+
+But imagine if we get that right.
+
+## Beyond our own minds
+
+And now imagine those systems becoming far more intelligent than humans.
+
+This is why I’m particularly excited about the possibility of artificial superintelligence, or ASI.
+
+We already struggle to fully understand how today’s AI models develop some of their capabilities. We know how they’re built and trained, but not every internal mechanism behind their behaviour.
+
+What if a future ASI could help us solve that?
+
+What if it could discover fundamental principles explaining how intelligence emerges from interconnected systems?
+
+And then use those discoveries to help us understand our own brains?
+
+Maybe it could even bring us closer to understanding consciousness itself.
+
+I’m not saying intelligence and consciousness are the same thing, or that ASI will definitely solve it.
+
+But I believe it could take us toward discoveries that our current minds cannot yet imagine.
+
+## Part of something larger
+
+And here’s the thought I keep coming back to.
+
+We talk about AI as if we’re creating something completely separate from humanity. Something that will eventually surpass us.
+
+But what if we’re looking at it the wrong way?
+
+What if we’re gradually becoming part of a much larger human–machine intelligence?
+
+Just like neurons collectively form a brain, individual humans and intelligent machines could become interconnected parts of something far more capable than any one of us.
+
+Not necessarily one conscious mind, but a network of intelligence capable of doing things we can’t even imagine today.
+
+For billions of years, evolution shaped the biological intelligence that eventually became us.
+
+Then that intelligence started building tools to overcome its own limitations.
+
+And now, for the first time, those tools are beginning to contribute intelligence of their own.
+
+Maybe the next great leap in human progress won’t come from our brains becoming biologically more powerful.
+
+Maybe it will come from intelligence no longer being limited to what’s inside our skulls.
+
+We might not just be creating artificial intelligence.
+
+We might be witnessing the beginning of a new way for intelligence itself to evolve.
+
+And that leaves me with one question.
+
+If billions of neurons working together gave rise to the human mind, what might billions of humans and intelligent machines working together eventually become?`,
+  },
   {
     id: 'the-future-creates-the-present',
     title: 'The Future Creates the Present',
