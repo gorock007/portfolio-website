@@ -5,6 +5,7 @@ import Layout from '@/components/Layout'
 import Ledger from '@/components/Ledger'
 import SunStamp from '@/components/SunStamp'
 import { blogPosts } from '@/data/writing'
+import { isDrawing } from '@/lib/images'
 import { formatDay, isoFromHuman } from '@/lib/sun'
 
 const description =
@@ -48,9 +49,10 @@ const WritingPage = () => (
                   <p className="note-excerpt">{post.excerpt}</p>
                 </div>
                 {post.coverImage && (
-                  <div className={`note-cover${post.coverImage.src.endsWith('.svg') ? ' is-drawing' : ''}`}>
+                  <div className={`note-cover${isDrawing(post.coverImage) ? ' is-drawing' : ''}`}>
                     <Image
                       src={post.coverImage}
+                      unoptimized={isDrawing(post.coverImage)}
                       alt=""
                       sizes="(max-width: 899px) 100vw, 280px"
                       loading={index < 2 ? 'eager' : undefined}

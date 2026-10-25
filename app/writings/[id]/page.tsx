@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import Layout from '@/components/Layout'
 import SunStamp from '@/components/SunStamp'
 import { blogPosts } from '@/data/writing'
+import { isDrawing } from '@/lib/images'
 import { renderContent } from '@/lib/renderContent'
 import { site } from '@/lib/site'
 import { formatDay, isoFromHuman } from '@/lib/sun'
@@ -30,7 +31,7 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   // not render SVG, so an SVG cover falls back to the site card rather than
   // shipping a preview that shows up blank.
   const cover = post.coverImage
-  const usableCover = cover && !cover.src.endsWith('.svg') ? cover : null
+  const usableCover = cover && !isDrawing(cover) ? cover : null
   const images = usableCover
     ? [
         {
@@ -100,9 +101,10 @@ const WritingPostPage = async ({ params }: Props) => {
         </header>
 
         {post.coverImage && (
-          <figure className={`article-cover${post.coverImage.src.endsWith('.svg') ? ' is-drawing' : ''}`}>
+          <figure className={`article-cover${isDrawing(post.coverImage) ? ' is-drawing' : ''}`}>
             <Image
               src={post.coverImage}
+              unoptimized={isDrawing(post.coverImage)}
               alt={post.coverImageAlt || ''}
               sizes="(max-width: 767px) 100vw, 720px"
               preload
