@@ -18,8 +18,9 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 }
 
-// The loop ends on today, so the page is rebuilt hourly to keep up with it.
-export const revalidate = 3600
+// The loop ends on today and counts today's work, so the page is rebuilt
+// every 15 minutes to keep up with it.
+export const revalidate = 900
 
 const HomePage = async () => {
   const year = await getYear()

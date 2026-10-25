@@ -25,7 +25,7 @@ npm run dev
 
 Create a production build with `npm run build` and serve it locally with `npm run start`. `npm run typecheck` runs TypeScript on its own.
 
-`npm run snapshot:activity` refreshes `data/activity.json`, the committed copy of the contribution counts. The live counts come from a public mirror of the GitHub graph and are re-read hourly. The snapshot is what the loop falls back on when the mirror can't be reached.
+`npm run snapshot:activity` refreshes `data/activity.json`, the committed copy of the contribution counts. The live counts come from a public mirror of the GitHub graph and are re-read every 15 minutes. The snapshot is what the loop falls back on when the mirror can't be reached.
 
 ## Project structure
 
@@ -40,7 +40,7 @@ Adding a project to `data/projects.ts` (with its `started` date) or a note to `d
 
 ## Rendering
 
-Everything is a server component by default. The client components are `Header`, `SkyClock`, `SkyControl`, `Analemma` and `RouteFocus`. The home page is rebuilt every hour so the loop ends on today. Every other route prerenders to static HTML.
+Everything is a server component by default. The client components are `Header`, `SkyClock`, `SkyControl`, `Analemma` and `RouteFocus`. The home page is rebuilt every 15 minutes so the loop ends on today and picks up new contributions. Every other route prerenders to static HTML.
 
 ## Deployment
 

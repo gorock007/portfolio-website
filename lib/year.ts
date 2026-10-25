@@ -7,8 +7,8 @@ import { EAST_WEST_STRETCH, addDays, isoFromHuman, skyPoint, sydneyDate } from '
 // GraphQL API, so the counts come from this public read-only mirror of it.
 const CONTRIBUTIONS_URL = 'https://github-contributions-api.jogruber.de/v4/gorock007?y=last'
 
-/** Re-read hourly, so the loop moves on by a day without a redeploy. */
-export const YEAR_REVALIDATE = 3600
+/** Re-read every 15 minutes, so new contributions show up without a redeploy. */
+export const YEAR_REVALIDATE = 900
 
 const DAYS = 365
 

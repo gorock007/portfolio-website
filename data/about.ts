@@ -4,14 +4,14 @@ export const aboutBlocks: AboutBlock[] = [
   {
     label: 'Who I am',
     paragraphs: [
-      'I’m someone who’s constantly evolving, not in a straight line, but through questioning, rebuilding, and trying again. My mind rarely sits still. I’m always exploring something: an idea, a project, a theory, a fear, a possibility.',
+      'I change my mind a lot, usually by building the wrong thing first. Most days I’m in the middle of something: an idea, a project, a theory, a fear, a possibility.',
     ],
   },
   {
     label: 'How I think',
     paragraphs: [
-      'I’m curious in a way that feels almost restless. When something interests me, I dive deep until I understand it from every angle. And when life gets confusing, I don’t run from it. I try to turn that confusion into clarity.',
-      'I feel things intensely. I think about meaning, identity, purpose, time and existence. Not because I want to sound deep, but because that’s genuinely how my mind works. I’m trying to understand life beyond the surface, beyond “what I do” or “where I’m from.”',
+      'When something catches me, I stay with it until I understand it from the inside. Confusion is usually where I start, not something I avoid.',
+      'I think about meaning, identity, purpose, time and existence: what a life is beyond what I do or where I’m from.',
     ],
   },
   {
@@ -23,15 +23,12 @@ export const aboutBlocks: AboutBlock[] = [
   },
   {
     label: 'How I work',
-    paragraphs: [
-      'I’m someone who tries to improve, sometimes quietly, sometimes obsessively. I fail, I pause, I fall off track, but I always come back. There’s a stubbornness in me that refuses to stay down for long.',
-    ],
+    paragraphs: ['I fall off track and I come back. Coming back is the part I’ve got good at.'],
   },
   {
     label: 'What I’m after',
     paragraphs: [
-      'At the core of everything, I’m someone who wants to build something: a piece of software, a better version of myself, or a philosophy that makes sense of my existence.',
-      'A work in progress: aware, curious, imperfect, and becoming.',
+      'I want to build something that lasts: a piece of software, a better version of myself, or a way of making sense of being here. Still working on all three.',
     ],
   },
 ]
