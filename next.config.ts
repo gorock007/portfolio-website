@@ -1,15 +1,9 @@
 import type { NextConfig } from 'next'
 
-const nextConfig: NextConfig = {
-  images: {
-    // One cover (agi-smear-cover.svg) is a hand-drawn SVG built from the theme
-    // tokens. Every image on the site is a local asset imported at build time,
-    // so the optimizer is never pointed at third-party markup — and the policy
-    // below keeps anything it does serve inert.
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'inline',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-}
+// The image optimizer only handles the raster images. The drawn SVG covers
+// are passed `unoptimized` (see lib/images.ts) and served as static files, so
+// SVG stays switched off here — Next's default — and the optimizer never
+// parses SVG markup at all.
+const nextConfig: NextConfig = {}
 
 export default nextConfig
