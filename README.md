@@ -30,7 +30,7 @@ Create a production build with `npm run build` and serve it locally with `npm ru
 ## Project structure
 
 - Routes: `app/` — `/`, `/about`, `/work`, `/writings`, `/writings/[id]`, plus `not-found.tsx`, `sitemap.ts`, and `robots.ts`
-- Components: `components/` — `Analemma` (the loop), `SunStamp`, `SkyClock`, `SkyControl`, `Header`, `Footer`, `Layout`, `Ledger`, `WorkIndex`, `WritingIndex`
+- Components: `components/` — `Analemma` (the loop), `SunStamp`, `SkyClock`, `Header`, `Footer`, `Layout`, `Ledger`, `WorkIndex`, `WritingIndex`
 - The astronomy and the year: `lib/sun.ts` (solar position over Sydney, date helpers), `lib/sky.ts` (day or night, plus the pre-paint script), `lib/year.ts` (the 365 days, their counts and events)
 - Content: `data/` — `projects.ts`, `writing.ts`, `about.ts`, `manifesto.ts`, `siteLinks.ts`, `activity.json`, with the shared shapes in `types.ts`
 - Styles: `styles/globals.css` (tokens for both skies, base, header, footer), `analemma.css`, `pages.css`, `prose.css`
@@ -40,7 +40,7 @@ Adding a project to `data/projects.ts` (with its `started` date) or a note to `d
 
 ## Rendering
 
-Everything is a server component by default. The client components are `Header`, `SkyClock`, `SkyControl`, `Analemma` and `RouteFocus`. The home page is rebuilt every 15 minutes so the loop ends on today and picks up new contributions. Every other route prerenders to static HTML.
+Everything is a server component by default. The client components are `Header`, `SkyClock`, `Analemma` and `RouteFocus`. The home page is rebuilt every 15 minutes so the loop ends on today and picks up new contributions. Every other route prerenders to static HTML.
 
 ## Deployment
 

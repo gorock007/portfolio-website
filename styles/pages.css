@@ -49,15 +49,6 @@
   color: var(--ink);
 }
 
-.caption {
-  max-width: 44em;
-  margin-top: var(--s-5);
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  text-wrap: pretty;
-}
-
 /* ---------------------------------------------------------------------------
    Home — the statement, the loop, the creed. On narrow screens the loop comes
    straight after the statement, so the idea is on the first screen.
@@ -72,8 +63,17 @@
   padding-block: clamp(16px, 4vw, 48px) var(--s-7);
 }
 
-.hero-title {
+.hero-head {
   grid-area: title;
+}
+
+.hero-who {
+  max-width: 24em;
+  margin-top: var(--s-5);
+}
+
+.hero-who a {
+  color: var(--ink);
 }
 
 .hero-figure {

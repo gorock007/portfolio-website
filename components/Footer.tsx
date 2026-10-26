@@ -1,6 +1,5 @@
 import { socialLinks } from '@/data/siteLinks'
 import { SYDNEY } from '@/lib/sun'
-import SkyControl from './SkyControl'
 
 const coordinates = `${Math.abs(SYDNEY.lat).toFixed(4)}° S, ${SYDNEY.lon.toFixed(4)}° E`
 
@@ -23,8 +22,6 @@ const Footer = () => (
           ))}
         </ul>
       </section>
-
-      <SkyControl />
 
       <p className="colophon">
         <span className="mono">{coordinates}</span>

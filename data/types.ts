@@ -3,9 +3,8 @@ import type { StaticImageData } from 'next/image'
 /**
  * `product` — shipped and run as a business, shown with its capture.
  * `tool` — open source and experiments from the last year.
- * `earlier` — the long tail, back to the first thing ever shipped.
  */
-export type ProjectTier = 'product' | 'tool' | 'earlier'
+export type ProjectTier = 'product' | 'tool'
 
 export type Project = {
   id: string

@@ -4,11 +4,11 @@ import Layout from '@/components/Layout'
 import Ledger from '@/components/Ledger'
 import SunStamp from '@/components/SunStamp'
 import type { Project } from '@/data/types'
-import { earlierProjects, productProjects, toolProjects } from '@/data/projects'
+import { productProjects, toolProjects } from '@/data/projects'
 import { formatDay } from '@/lib/sun'
 
 const description =
-  'Products Gorock Shetty runs, the tools he has open-sourced, and everything back to the first thing he shipped.'
+  'Products Gorock Shetty runs and the tools he has open-sourced.'
 
 export const metadata: Metadata = {
   title: 'Work',
@@ -50,8 +50,8 @@ const WorkPage = () => (
     <header className="page-head">
       <h1 className="page-title">Work</h1>
       <p className="lead">
-        The products I run, the tools I’ve given away, and the long tail back to the first thing I
-        ever shipped. Each is stamped with the sun as it stood over Sydney on the day it began.
+        The products I run and the tools I’ve given away. Each is stamped with the sun as it stood
+        over Sydney on the day it began.
       </p>
     </header>
 
@@ -104,27 +104,6 @@ const WorkPage = () => (
           </article>
         ))}
       </div>
-    </Ledger>
-
-    <Ledger id="earlier-label" label="Earlier">
-      <ol className="index" role="list">
-        {earlierProjects.map((project) => (
-          <li key={project.id} id={project.id}>
-            <a className="index-row" href={project.url} target="_blank" rel="noopener noreferrer">
-              <SunStamp date={project.started} />
-              <span className="index-title">{project.title}</span>
-              <span className="index-desc">{project.subtitle}</span>
-              <span className="index-meta">
-                {project.kind} · {project.started.slice(0, 4)}
-              </span>
-              <span className="arrow" aria-hidden="true">
-                ↗
-              </span>
-              <span className="visually-hidden"> (opens in a new tab)</span>
-            </a>
-          </li>
-        ))}
-      </ol>
     </Ledger>
   </Layout>
 )

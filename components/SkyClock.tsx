@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { HORIZON, SYDNEY, sunAt } from '@/lib/sun'
-import { SKY_EVENT, applySky, nextHorizonCrossing, readMode } from '@/lib/sky'
+import { applySky, nextHorizonCrossing } from '@/lib/sky'
 
 const TICK = 20_000
 
@@ -34,23 +34,11 @@ const SkyClock = () => {
   useEffect(() => {
     const tick = () => {
       setReading(read())
-      if (readMode() === 'auto') applySky('auto')
-    }
-    // Another tab pinning the sky changes localStorage here too.
-    const onStorage = (event: StorageEvent) => {
-      if (event.key !== 'sky') return
       applySky()
-      window.dispatchEvent(new Event(SKY_EVENT))
     }
     tick()
     const timer = window.setInterval(tick, TICK)
-    window.addEventListener(SKY_EVENT, tick)
-    window.addEventListener('storage', onStorage)
-    return () => {
-      window.clearInterval(timer)
-      window.removeEventListener(SKY_EVENT, tick)
-      window.removeEventListener('storage', onStorage)
-    }
+    return () => window.clearInterval(timer)
   }, [])
 
   const up = reading ? reading.altitude > HORIZON : true

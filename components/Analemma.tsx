@@ -95,6 +95,14 @@ const Analemma = ({ days }: Props) => {
   const [unit, setUnit] = useState<number | null>(null)
   const svgRef = useRef<SVGSVGElement>(null)
   const instrumentRef = useRef<HTMLDivElement>(null)
+  // Where the mouse was when a key last moved the selection. Until it has
+  // properly moved away from there, a twitch of the mouse can't take the day
+  // back from the keyboard.
+  const pointerRef = useRef({ x: 0, y: 0 })
+  const keyedAtRef = useRef<{ x: number; y: number } | null>(null)
+  // Read out by screen readers when the Earlier and Later buttons move the
+  // day; the slider's own value is only announced while it has focus.
+  const [announcement, setAnnouncement] = useState('')
 
   const selected = preview ?? pinned
 
@@ -194,9 +202,12 @@ const Analemma = ({ days }: Props) => {
 
   const onPointerMove = (event: PointerEvent<SVGSVGElement>) => {
     if (event.pointerType !== 'mouse') return
+    pointerRef.current = { x: event.clientX, y: event.clientY }
     // While someone is stepping through days with the keys, a mouse resting
     // on the figure must not change the day being read out to them.
-    if (instrumentRef.current?.matches(':focus-visible')) return
+    const keyedAt = keyedAtRef.current
+    if (keyedAt && Math.hypot(event.clientX - keyedAt.x, event.clientY - keyedAt.y) < 24) return
+    keyedAtRef.current = null
     const hit = nearest(event.clientX, event.clientY)
     if (hit >= 0) setPreview(hit)
   }
@@ -208,6 +219,10 @@ const Analemma = ({ days }: Props) => {
     if (hit < 0) return
     setPinned(hit)
     setPreview(null)
+    // The mousedown was stopped from focusing the slider (it would scroll the
+    // whole figure into view), so focus it here: the arrow keys then carry on
+    // from the day just clicked.
+    instrumentRef.current?.focus({ preventScroll: true })
   }
 
   const onKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -226,9 +241,19 @@ const Analemma = ({ days }: Props) => {
     else if (event.key === ' ') next = selected
     else return
     event.preventDefault()
+    keyedAtRef.current = { ...pointerRef.current }
     setPreview(null)
     setPinned(Math.min(todayIndex, Math.max(0, next)))
   }
+
+  // The ringed days, where something began or went out. Earlier and Later
+  // step between them; past the last one, Later comes home to today.
+  const milestones = useMemo(
+    () => days.flatMap((target, index) => (target.events.length ? [index] : [])),
+    [days],
+  )
+  const earlier = milestones.findLast((index) => index < selected)
+  const later = milestones.find((index) => index > selected) ?? (selected < todayIndex ? todayIndex : undefined)
 
   const day = days[selected]
   const isToday = selected === todayIndex
@@ -242,6 +267,14 @@ const Analemma = ({ days }: Props) => {
       contributions(target, today),
       ...events,
     ].join(', ')
+  }
+
+  const stepTo = (index: number | undefined) => {
+    if (index === undefined) return
+    keyedAtRef.current = null
+    setPreview(null)
+    setPinned(index)
+    setAnnouncement(describe(days[index], index === todayIndex))
   }
 
   const { width, height, points, left, right, crop, highest, lowest } = frame
@@ -371,34 +404,66 @@ const Analemma = ({ days }: Props) => {
       </div>
 
       <div className="analemma-readout">
-        <p className="readout-line">
-          <span>{isToday ? 'Today' : formatDay(day.date, { weekday: true }).split(' ')[0]}</span>
-          <span>{formatDay(day.date)}</span>
-          <span>noon sun {day.altitude.toFixed(1)}°</span>
-          <span>{contributions(day, isToday)}</span>
-          {pinned !== todayIndex && preview === null && (
+        <div className="readout-bar">
+          <p className="readout-line">
+            <span>{isToday ? 'Today' : formatDay(day.date, { weekday: true }).split(' ')[0]}</span>
+            <span>{formatDay(day.date)}</span>
+            <span>{contributions(day, isToday)}</span>
+            <span className="readout-altitude">noon sun {day.altitude.toFixed(1)}°</span>
+            {pinned !== todayIndex && preview === null && (
+              <button type="button" className="readout-reset" onClick={() => stepTo(todayIndex)}>
+                Back to today
+              </button>
+            )}
+          </p>
+          <div className="readout-steps" role="group" aria-label="Launches and essays">
+            {/* aria-disabled rather than disabled, so a button that runs out of
+                days keeps focus instead of dropping it on the page. */}
             <button
               type="button"
-              className="readout-reset"
-              onClick={() => setPinned(todayIndex)}
+              className="readout-step"
+              aria-label="Earlier launch or essay"
+              aria-disabled={earlier === undefined}
+              onClick={() => stepTo(earlier)}
             >
-              Back to today
+              <span aria-hidden="true">←</span> Earlier
             </button>
+            <button
+              type="button"
+              className="readout-step"
+              aria-label={later === todayIndex ? 'Back to today' : 'Later launch or essay'}
+              aria-disabled={later === undefined}
+              onClick={() => stepTo(later)}
+            >
+              {later === todayIndex ? 'Today' : 'Later'} <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+        <p className="readout-events">
+          {day.events.length ? (
+            day.events.map((event) => (
+              <span key={event.href}>
+                {event.kind === 'note' ? 'Published ' : 'Started '}
+                <Link href={event.href}>
+                  {event.kind === 'note' ? `“${event.label}”` : event.label}
+                </Link>
+              </span>
+            ))
+          ) : isToday ? (
+            <>
+              <span className="hint-pointer">
+                The glowing dot is today. Point at any day to read it; click one, then step with ← →.
+              </span>
+              <span className="hint-touch">
+                The glowing dot is today. Tap a day to read it, or step through the ringed ones.
+              </span>
+            </>
+          ) : (
+            ' '
           )}
         </p>
-        <p className="readout-events">
-          {day.events.length
-            ? day.events.map((event) => (
-                <span key={event.href}>
-                  {event.kind === 'note' ? 'Published ' : 'Started '}
-                  <Link href={event.href}>
-                    {event.kind === 'note' ? `“${event.label}”` : event.label}
-                  </Link>
-                </span>
-              ))
-            : isToday
-              ? 'The haloed dot is today. Point at any day to read it, click to keep it, or focus the loop and use the arrow keys.'
-              : ' '}
+        <p className="visually-hidden" aria-live="polite">
+          {announcement}
         </p>
       </div>
     </div>

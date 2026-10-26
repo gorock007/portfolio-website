@@ -30,8 +30,15 @@
   }
 
   .analemma-labels,
-  .analemma-leaders {
+  .analemma-leaders,
+  .readout-altitude {
     display: none;
+  }
+
+  /* The buttons wrap under the date here, so their text lines up on the left. */
+  .readout-steps {
+    margin-right: 0;
+    margin-left: calc(var(--s-3) * -1);
   }
 }
 
@@ -145,8 +152,16 @@
   border-top: 1px solid var(--rule);
 }
 
+.readout-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--s-4);
+}
+
 .readout-line {
   display: flex;
+  flex: 1 1 auto;
   flex-wrap: wrap;
   align-items: center;
   /* Room for the Back to today button, so the line never grows when it
@@ -154,12 +169,13 @@
   min-height: 44px;
   gap: var(--s-1) var(--s-4);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 14px;
   color: var(--ink-2);
   font-variant-numeric: tabular-nums;
 }
 
-.readout-line span:first-child {
+/* The day and its date are what is being read; the rest is detail. */
+.readout-line span:nth-child(-n + 2) {
   color: var(--ink);
 }
 
@@ -167,10 +183,72 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-1) var(--s-4);
-  /* Two lines reserved, so a long event name never pushes the caption. */
+  /* Two lines reserved, so a long event name never pushes the page. */
   min-height: 3em;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* Pointing is for mice; a phone is told to tap instead. */
+.hint-touch {
+  display: none;
+}
+
+@media (hover: none) {
+  .hint-pointer {
+    display: none;
+  }
+
+  .hint-touch {
+    display: inline;
+  }
+}
+
+/* Earlier and Later — step between the ringed days. */
+.readout-steps {
+  display: flex;
+  margin-right: calc(var(--s-3) * -1);
+}
+
+.readout-step {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.readout-step:focus-visible {
+  background: var(--wash);
+}
+
+.readout-step:active {
+  background: var(--press);
+}
+
+.readout-step[aria-disabled="true"] {
+  color: var(--ink-2);
+  background: transparent;
+  cursor: not-allowed;
+}
+
+@media (hover: hover) {
+  .readout-step:hover {
+    background: var(--wash);
+  }
+
+  .readout-step[aria-disabled="true"]:hover {
+    background: transparent;
+  }
 }
 
 .readout-events a {

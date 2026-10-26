@@ -3,8 +3,8 @@
 Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). Next.js 16 App Router + React 19 + TypeScript + Tailwind CSS v4 (preflight only; styles are hand-written CSS), deployed on Vercel at gorock.sh.
 
 - Routes live in `app/` (`/`, `/about`, `/work`, `/writings`, `/writings/[id]`, `not-found.tsx`). `Layout` renders the `<main>` region; `app/layout.tsx` renders `Header` and `Footer` around the route slot so they persist across navigation.
-- Server components by default. The client boundaries are `Header` (for `aria-current`), `SkyClock`, `SkyControl`, `Analemma`, and `RouteFocus`.
-- All content is data-driven: `data/` (`projects.ts`, `writing.ts`, `about.ts`, `manifesto.ts`, `siteLinks.ts`, shapes in `types.ts`). Every project has a `tier` (`product` | `tool` | `earlier`), a `kind`, and a `started` date (`YYYY-MM-DD`, the repo's first day) — the date is what places it on the loop and on its stamp.
+- Server components by default. The client boundaries are `Header` (for `aria-current`), `SkyClock`, `Analemma`, and `RouteFocus`.
+- All content is data-driven: `data/` (`projects.ts`, `writing.ts`, `about.ts`, `manifesto.ts`, `siteLinks.ts`, shapes in `types.ts`). Every project has a `tier` (`product` | `tool`), a `kind`, and a `started` date (`YYYY-MM-DD`, the repo's first day) — the date is what places it on the loop and on its stamp.
 - `data/activity.json` is a committed snapshot of the GitHub contribution counts. `lib/year.ts` lays live counts from the public mirror over it, so the loop never draws empty. Refresh it with `npm run snapshot:activity`.
 - `lib/sun.ts` is the astronomy (NOAA solar position for Sydney) and the locale-free date helpers. `lib/sky.ts` decides day or night and holds `SKY_SCRIPT`, the pre-paint copy of the same maths. If you change one, change the other.
 - Site-wide constants in `lib/site.ts` — the canonical origin, Open Graph and Twitter defaults, read by every page's metadata plus `sitemap.ts` and `robots.ts`. Never hard-code the domain anywhere else.
@@ -18,16 +18,16 @@ Personal portfolio of Gorock Shetty (founder of NaatiAce, maker of Revisit). Nex
 The site is **an almanac kept by the sun**. The home page plots the last 365 days on the noon-sun analemma over Sydney — the figure-eight the sun draws if you photograph it at the same hour every day — one dot per day, darker the more code was shipped that day, ringed where something launched or an essay was published. Everything else follows from that one idea. This is a committed direction — keep it coherent, don't drift.
 
 ### The three devices
-- **The loop** (`components/Analemma.tsx`). Real geometry: altitude and azimuth at 12:00 AEST (standard time, never DST — daylight saving tears the figure in two), east–west stretched ×3 (`EAST_WEST_STRETCH`), which the caption says out loud. Don't fake or redraw the shape.
+- **The loop** (`components/Analemma.tsx`). Real geometry: altitude and azimuth at 12:00 AEST (standard time, never DST — daylight saving tears the figure in two), east–west stretched ×3 (`EAST_WEST_STRETCH`). Don't fake or redraw the shape.
 - **The stamp** (`components/SunStamp.tsx`). Every dated thing — a project, a note, the 404 — carries a tiny copy of that year's loop with a dot on its day, like a postmark. New dated content gets one; nothing undated does.
-- **The sky**. `<html data-sky="day|night">` follows whether the sun is up in Sydney right now, set before first paint by `SKY_SCRIPT` and kept current by `SkyClock`. Visitors can pin Day or Night in the footer (`localStorage.sky`). There is no `prefers-color-scheme` theme — the sky *is* the theme.
+- **The sky**. `<html data-sky="day|night">` follows whether the sun is up in Sydney right now, set before first paint by `SKY_SCRIPT` and kept current by `SkyClock`. Every visitor gets Sydney's sky, wherever they are; there is no override and no `prefers-color-scheme` theme — the sky *is* the theme. (`SKY_SCRIPT` clears the old `localStorage.sky` pin so no one stays stuck on it.)
 
 ### Color
 - Tokens live in `:root` / `:root[data-sky="night"]` in `styles/globals.css`: `--paper`, `--ink`, `--ink-2`, `--sun`, `--rule`, `--wash` (hover ground), `--press` (active ground), `--image-dim`. Never invent inline hex values; derive with `color-mix()` from a token.
 - **The only colour is the sun** (`--sun`): today's dot on the loop, the glyph in the header, a stamp's dot on hover or on an entry page. Screenshots and photos keep their own colours (the portrait is greyscale until hovered). Nothing else is coloured.
 - Exactly two text inks. `--ink-2` is 5.74:1 on day paper and 5.28:1 on `--wash` (the hover ground); 7.0:1 at night. Measure new pairings against `--wash`, not just paper, and in **both** skies.
 - Drawn SVG covers get `.is-drawing` so night inverts them instead of leaving a pale slab.
-- Never communicate state by colour alone (pressed sky options are underlined; the active nav item is underlined).
+- Never communicate state by colour alone (the active nav item is underlined).
 
 ### Typography
 - Geist for what is read, Geist Mono for what is measured (dates, altitudes, counts, kinds). No third family.
@@ -48,13 +48,13 @@ The site is **an almanac kept by the sun**. The home page plots the last 365 day
 - `styles/globals.css` has a `prefers-reduced-motion` block that flattens every animation and transition — keep it intact.
 
 ### Accessibility (non-negotiable)
-- The loop: pointing previews a day, clicking pins it (with a Back to today button), Escape or End returns to today. A mouse resting on the figure never overrides a keyboard selection.
+- The loop: pointing previews a day, clicking pins it and focuses the slider so the arrow keys carry on from there (with a Back to today button), Escape or End returns to today. Earlier / Later buttons under it step between the ringed days, which is how a phone gets around. A mouse resting on the figure never overrides a keyboard selection.
 - The loop is one tab stop: `role="slider"` with `aria-valuetext` describing the day ("Fri 18 Sep 2026, 35 contributions, started Jev Atlas"); arrows step a day, Page Up/Down a week, Home/End the ends. The svg itself is `aria-hidden`. Everything on it is also in the Work and Writing lists as real links.
 - `role="list"` on every styled `<ul>`/`<ol>` — the global `list-style: none` makes Safari drop the role.
 - Never remove focus outlines; never put `border-radius` on `:focus-visible`.
 - Semantic HTML: `<button>` for actions, `<a>` for navigation, one `<h1>` per page, no skipped heading levels.
 - Every meaningful image gets descriptive `alt`; decorative ones (a capture beside its own title) get `alt=""`.
-- Hit targets ≥ 44px tall for nav, footer, sky options and closing links. Inline text links are exempt.
+- Hit targets ≥ 44px tall for nav, footer, the loop's readout buttons and closing links. Inline text links are exempt.
 - Hover grounds sit inside `@media (hover: hover)`; every hover has a matching `:focus-visible`, and pressables get `--press` on `:active`.
 - `@media (forced-colors: active)` in `analemma.css` maps the SVG fills to system colours — extend it for any new SVG.
 - External links carry a visually hidden "(opens in a new tab)" where they are list rows.

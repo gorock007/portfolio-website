@@ -357,14 +357,14 @@ img {
 
 @media (min-width: 900px) {
   .footer-grid {
-    grid-template-columns: var(--label-col) minmax(0, 1fr) auto;
+    grid-template-columns: var(--label-col) minmax(0, 1fr);
     column-gap: var(--col-gap);
     row-gap: var(--s-5);
     align-items: start;
   }
 
   .footer-elsewhere {
-    grid-column: 1 / 3;
+    grid-column: 1 / -1;
     grid-template-columns: var(--label-col) minmax(0, 1fr);
     column-gap: var(--col-gap);
   }
@@ -414,52 +414,6 @@ img {
   color: var(--ink-2);
 }
 
-.sky-control {
-  display: flex;
-  align-items: center;
-  margin-right: calc(var(--s-3) * -1);
-}
-
-.sky-control-label {
-  margin-right: var(--s-2);
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
-.sky-option {
-  min-height: 44px;
-  padding: 0 var(--s-3);
-  border: 0;
-  background: transparent;
-  color: var(--ink-2);
-  font: inherit;
-  font-size: 14px;
-  text-decoration-line: underline;
-  text-decoration-thickness: 1px;
-  text-decoration-color: transparent;
-  text-underline-offset: 6px;
-  cursor: pointer;
-  transition: color 0.2s ease, background-color 0.2s ease, text-decoration-color 0.2s ease;
-}
-
-.sky-option:hover,
-.sky-option:focus-visible {
-  color: var(--ink);
-}
-
-.sky-option:active {
-  background: var(--press);
-}
-
-/* Pressed is drawn from <html data-sky-mode>, which exists before paint;
-   aria-pressed on the buttons only arrives with hydration. */
-:root[data-sky-mode="auto"] .sky-option[data-mode="auto"],
-:root[data-sky-mode="day"] .sky-option[data-mode="day"],
-:root[data-sky-mode="night"] .sky-option[data-mode="night"] {
-  color: var(--ink);
-  text-decoration-color: var(--ink);
-}
-
 .colophon {
   display: flex;
   flex-direction: column;
@@ -467,13 +421,6 @@ img {
   font-size: 14px;
   line-height: 1.55;
   color: var(--ink-2);
-}
-
-/* Hover grounds only where there is a real hover; on touch they stick. */
-@media (hover: hover) {
-  .sky-option:hover {
-    background: var(--wash);
-  }
 }
 
 @keyframes appear {

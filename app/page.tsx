@@ -10,7 +10,6 @@ import { productProjects, toolProjects } from '@/data/projects'
 import { contactHandle, contactUrl } from '@/data/siteLinks'
 import { blogPosts } from '@/data/writing'
 import { site } from '@/lib/site'
-import { formatDay } from '@/lib/sun'
 import { getYear } from '@/lib/year'
 
 export const metadata: Metadata = {
@@ -25,31 +24,30 @@ export const revalidate = 900
 const HomePage = async () => {
   const year = await getYear()
   const [statement, ...creed] = manifestoLines
-  const first = year.days[0]
 
   return (
     <Layout>
       <section className="hero" aria-labelledby="hero-title">
-        {/* The name is in the header already; it stays in the h1 for the
-            document outline and search, but isn't shown twice. */}
-        <h1 id="hero-title" className="display hero-title">
-          <span className="visually-hidden">Gorock Shetty: </span>
-          {statement}
-        </h1>
+        <div className="hero-head">
+          {/* The name is in the header already; it stays in the h1 for the
+              document outline and search, but isn't shown twice. */}
+          <h1 id="hero-title" className="display hero-title">
+            <span className="visually-hidden">Gorock Shetty: </span>
+            {statement}
+          </h1>
+          {/* Who this is, for someone who reads one line and leaves. */}
+          <p className="lead hero-who">
+            I’m Gorock, a founder in Sydney. I built{' '}
+            <Link href="/work#naatiace">NaatiAce</Link>, AI exam practice people pay for, and I’m
+            currently building a personal agent that predicts your next action.
+          </p>
+        </div>
 
         <figure className="hero-figure">
           <p className="figure-head meta">
-            Noon sun over Sydney · {formatDay(first.date)} – today · one dot per day
+            My last year on the noon sun over Sydney · one dot a day, darker the more I shipped
           </p>
           <Analemma days={year.days} />
-          <figcaption className="caption">
-            Photograph the sun from one spot at the same hour every day and it draws a
-            figure-eight across the sky. This is that loop over Sydney at noon for the last year,
-            and each dot is one of my days: the darker, the more code I shipped —{' '}
-            {year.total.toLocaleString('en-AU')} contributions on {year.activeDays} days. Ringed
-            days are where a project began or an essay went out. East–west is stretched threefold
-            so the lobes read.
-          </figcaption>
         </figure>
 
         <div className="hero-creed">
@@ -72,7 +70,7 @@ const HomePage = async () => {
         </div>
       </section>
 
-      <Ledger id="work-label" label="Work" more={{ href: '/work', label: 'Everything, back to 2018' }}>
+      <Ledger id="work-label" label="Work" more={{ href: '/work', label: 'All work, in detail' }}>
         <WorkIndex projects={productProjects} />
       </Ledger>
 
