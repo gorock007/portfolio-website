@@ -84,8 +84,8 @@ const HomePage = async () => {
 
       <Ledger id="now-label" label="Now">
         <p className="lead">
-          Running NaatiAce and Revisit, building Klypst and Don’t Make It Ugly, and open-sourcing
-          the tools I make along the way — from Sydney. Learning extensively about AI, and
+          Running NaatiAce, building a personal agent that predicts your next action, Klypst and
+          Don’t Make It Ugly, and open-sourcing the tools I make along the way — from Sydney. Learning extensively about AI, and
           genuinely optimistic about what comes next.
         </p>
         <p className="lead lead--quiet">
