@@ -1,14 +1,11 @@
-import { socialLinks } from '@/data/siteLinks'
-import { SYDNEY } from '@/lib/sun'
-
-const coordinates = `${Math.abs(SYDNEY.lat).toFixed(4)}° S, ${SYDNEY.lon.toFixed(4)}° E`
+import { profile, socialLinks } from '@/data/siteLinks'
 
 const Footer = () => (
   <footer className="site-footer">
     <div className="container footer-grid">
       <section className="footer-elsewhere" aria-labelledby="elsewhere-label">
         <h2 id="elsewhere-label" className="ledger-label">
-          Elsewhere
+          elsewhere.
         </h2>
         <ul className="elsewhere" role="list">
           {socialLinks.map((link) => (
@@ -24,8 +21,7 @@ const Footer = () => (
       </section>
 
       <p className="colophon">
-        <span className="mono">{coordinates}</span>
-        <span>Day while the sun is up in Sydney, night once it has set.</span>
+        <span>{profile.location}.</span>
         <span>© {new Date().getFullYear()} Gorock Shetty. Set in Geist and Geist Mono.</span>
       </p>
     </div>

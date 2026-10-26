@@ -10,6 +10,8 @@ export type Project = {
   id: string
   title: string
   subtitle: string
+  /** A line or two under the subtitle on the home page; /work shows `detail`. */
+  summary?: string
   detail?: string
   proof?: string[]
   img?: StaticImageData
@@ -19,6 +21,8 @@ export type Project = {
   tier: ProjectTier
   /** What it is, in a word or two: "Mac app", "Claude Code skill". */
   kind: string
+  /** Where it stands — "Live", "Shipped" — shown in place of the date on the home page. */
+  status?: string
   /** The day it began (`YYYY-MM-DD`) — the repository's first day, where there is one. */
   started: string
 }

@@ -1,14 +1,24 @@
-// The home page's statement: the first line is the display heading, the rest
-// sit beside the loop as quieter lines, and the footnote closes them.
-export const manifestoLines: string[] = [
-  'i build things.',
-  'i think the fastest way to learn something is to ship it, then go back and find out why it works.',
-  'i think AI made implementation cheap and judgment expensive.',
-  'so the question i care about is what should be built.',
-  'i am trying to stay relevant for the post-AGI world*.',
-]
+// The home page's statement, and the beliefs it opens up into. The beliefs
+// keep the statement's lowercase voice; the reasons under them are prose.
+export const statement = 'i build things.'
 
-export const manifestoFootnote = {
-  text: 'Understand reality. Think from first principles. Articulate intent. Develop judgment.',
-  href: '/writings/ai-skills-that-compound',
-}
+export type Belief = { line: string; why: string }
+
+export const beliefs: Belief[] = [
+  {
+    line: 'i think the fastest way to learn something is to build it.',
+    why: 'Not another tutorial. Not another course. Start building, get stuck, figure it out, and keep going.',
+  },
+  {
+    line: 'i think being willing to figure things out is more valuable than knowing everything.',
+    why: 'I’ve started projects I had no idea how to build. Some worked, some didn’t. But every time, I came out knowing something I didn’t before.',
+  },
+  {
+    line: 'i think AI is changing what it means to be a builder.',
+    why: 'Implementation is getting cheaper. Ideas are easier to test. What matters more now is understanding problems, knowing what to build, and having the judgment to make it useful.',
+  },
+  {
+    line: 'i think we’re still very early.',
+    why: 'I don’t know exactly what the world looks like in ten years. But I want to be close enough to the frontier to help shape what comes next.',
+  },
+]

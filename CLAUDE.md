@@ -32,7 +32,7 @@ The site is **an almanac kept by the sun**. The home page plots the last 365 day
 ### Typography
 - Geist for what is read, Geist Mono for what is measured (dates, altitudes, counts, kinds). No third family.
 - Sizes: 12 (mono only — the one exception is the event labels inside the loop, 12px sans, because mono is too wide for their columns), 14 (labels, captions), 16 and 18 (interface, lists, body), 19 (article body), 22 (lead, article h2, tool titles), and the display classes `.display`, `.page-title`, `.article-title`, `.entry-title`/`.note-title`. No other ad-hoc sizes.
-- No all-caps labels. Section labels are `.ledger-label`: 14px, `--ink-2`, sentence case.
+- No all-caps labels. Section labels are `.ledger-label`: 14px, `--ink-2`, sentence case — except on the home page and in the footer, which speak in the manifesto's lowercase voice with a closing full stop ("work.", "elsewhere.").
 - The manifesto keeps its lowercase voice.
 
 ### Layout

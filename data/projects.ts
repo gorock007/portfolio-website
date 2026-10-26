@@ -4,13 +4,15 @@ import revisit from '@/assets/images/revisit-social-preview.png'
 import dontMakeItUgly from '@/assets/images/dont-make-it-ugly-social-preview.png'
 import klypst from '@/assets/images/klypst-social-preview.png'
 
-// Newest first within each tier. `started` is the repository's first day, so
-// the home page can place each one on the loop.
+// In the order the home page lists them. `started` is the repository's first
+// day, so the home page can place each one on the loop.
 export const projects: Project[] = [
   {
     id: 'naatiace',
     title: 'NaatiAce',
-    subtitle: 'AI-powered NAATI CCL practice across 55 languages.',
+    subtitle: 'An AI-powered language exam preparation platform.',
+    summary:
+      'Started as an idea. Became a real product with users, paying customers, subscriptions, and AI-powered practice across 55 languages.',
     detail:
       'A subscription product with paying customers. Mock exams, AI scoring, and interpretation feedback — designed, built, and operated end to end.',
     proof: ['Subscription', 'Paying customers', 'Built end to end'],
@@ -20,12 +22,15 @@ export const projects: Project[] = [
     url: 'https://naatiace.com/',
     tier: 'product',
     kind: 'Web product',
+    status: 'Live',
     started: '2026-04-02',
   },
   {
     id: 'revisit',
     title: 'Revisit',
-    subtitle: 'A private Mac project inbox for your coding agents.',
+    subtitle: 'A home for everything you want to build with AI.',
+    summary:
+      'A native Mac app for capturing ideas, prompts, links, and context, so they don’t get lost between projects and coding sessions.',
     detail:
       'Hands the right context to Claude Code, Codex, and other MCP clients. One-time purchase, Stripe checkout, no tracking.',
     proof: ['One-time purchase', 'Stripe checkout', 'No tracking'],
@@ -34,13 +39,16 @@ export const projects: Project[] = [
     urlLabel: 'revisit.gorockshetty.com',
     url: 'https://revisit.gorockshetty.com/',
     tier: 'product',
-    kind: 'Mac app',
+    kind: 'macOS app',
+    status: 'Shipped',
     started: '2026-07-30',
   },
   {
     id: 'dont-make-it-ugly',
     title: 'Don’t Make It Ugly',
-    subtitle: 'Good design references for whatever you’re building.',
+    subtitle: 'Good design shouldn’t be the hardest part of building.',
+    summary:
+      'A curated directory of design references for builders who can ship software but want to make it look better.',
     detail:
       'A curated directory of design inspiration, components, libraries, repositories, prompts, and agent resources for people building software with coding agents. Its skills put a DESIGN.md contract in the repo and check the build against it.',
     proof: ['Curated resources', 'Agent skills', 'Built end to end'],
@@ -50,13 +58,16 @@ export const projects: Project[] = [
     urlLabel: 'dontmakeitugly.com',
     url: 'https://dontmakeitugly.com/',
     tier: 'product',
-    kind: 'Directory',
+    kind: 'Web directory',
+    status: 'Live',
     started: '2026-09-02',
   },
   {
     id: 'klypst',
     title: 'Klypst',
-    subtitle: 'Private clipboard history for iPhone.',
+    subtitle: 'Clipboard history, built for iPhone.',
+    summary:
+      'A private clipboard manager exploring what useful, lightweight tools can look like on iOS.',
     detail:
       'Save what you copy — text, links, images — and bring it back with one press of the Action Button. Built on App Intents and an iOS 26 interactive snippet; nothing leaves the device.',
     proof: ['On-device only', 'No clipboard monitoring', 'One press to capture'],
@@ -66,14 +77,29 @@ export const projects: Project[] = [
     urlLabel: 'klypst.vercel.app',
     url: 'https://klypst.vercel.app/',
     tier: 'product',
-    kind: 'iPhone app',
+    kind: 'iOS app',
+    status: 'Project',
     started: '2026-09-09',
   },
 
   {
+    id: 'jarvis',
+    title: 'Jarvis',
+    subtitle:
+      'An orchestration system for coding agents. One conversation, multiple workers building in parallel.',
+    detail:
+      'An open-source Claude Code plugin. Jarvis writes the brief, starts workers — Claude Code, Codex, OpenCode — in their own terminals in Superset, Ultron or tmux, reviews what they hand back, and owns the commits. Routes each task to a model by the kind of decision in it, and spends less as your usage runs low.',
+    proof: ['MIT licensed', 'Usage-aware model routing', 'Any agent CLI'],
+    urlLabel: 'github.com/gorock007/jarvis',
+    url: 'https://github.com/gorock007/jarvis',
+    tier: 'tool',
+    kind: 'Claude Code plugin',
+    started: '2026-09-17',
+  },
+  {
     id: 'cc-usage-audit',
     title: 'cc-usage-audit',
-    subtitle: 'Find out where your Claude Code usage actually goes.',
+    subtitle: 'Understand where your Claude Code usage actually goes.',
     detail:
       'Reads the session transcripts Claude Code already keeps, prices every request at API rates, and shows what drove the spend: models, subagents, cache reloads after an idle gap, headless hooks that fire on every stop, your worst five-hour window. One Python file, no dependencies, no network.',
     proof: ['Local only', 'One file', 'Python 3.8+'],
@@ -86,7 +112,7 @@ export const projects: Project[] = [
   {
     id: 'jev-atlas',
     title: 'Jev Atlas',
-    subtitle: 'An evidence-first field guide to Jev, for people and coding agents.',
+    subtitle: 'An evidence-first guide to Jev, built for both humans and coding agents.',
     detail:
       'Independent research on TypeSafe AI’s System One model: 31 build blueprints mapped to the property of Jev each one depends on, a fit checker for your own workflow, and every claim traced to its evidence — a vendor claim stays a vendor claim. Ships a read-only MCP server with five tools.',
     proof: ['Read-only MCP server', '31 blueprints', 'Independent'],
@@ -97,22 +123,9 @@ export const projects: Project[] = [
     started: '2026-09-18',
   },
   {
-    id: 'jarvis',
-    title: 'Jarvis',
-    subtitle: 'You talk to one agent. A team of agents does the building.',
-    detail:
-      'An open-source Claude Code plugin. Jarvis writes the brief, starts workers — Claude Code, Codex, OpenCode — in their own terminals in Superset, Ultron or tmux, reviews what they hand back, and owns the commits. Routes each task to a model by the kind of decision in it, and spends less as your usage runs low.',
-    proof: ['MIT licensed', 'Usage-aware model routing', 'Any agent CLI'],
-    urlLabel: 'github.com/gorock007/jarvis',
-    url: 'https://github.com/gorock007/jarvis',
-    tier: 'tool',
-    kind: 'Claude Code plugin',
-    started: '2026-09-17',
-  },
-  {
     id: 'naatiace-practice-studio',
     title: 'NaatiAce Practice Studio',
-    subtitle: 'Your own AI agent becomes your NAATI CCL examiner.',
+    subtitle: 'Turn your own AI agent into a NAATI CCL practice examiner.',
     detail:
       'Built for the WebMCP Challenge. The page exposes WebMCP tools, so the agent in your browser picks the dialogue, plays each segment, waits while you interpret out loud, scores you against a band rubric and drills the terms you missed. No login, no keys, no backend.',
     proof: ['WebMCP-native', 'Works offline', 'AGPL-3.0'],
@@ -125,7 +138,7 @@ export const projects: Project[] = [
   {
     id: 'make-product-viral',
     title: 'make-product-viral',
-    subtitle: 'Grades a landing page against the 32 Principles of a Viral Product.',
+    subtitle: 'A skill for evaluating products against principles of viral growth.',
     detail:
       'A Claude Code skill. It reads the public surface of your product — hero, pricing, OG image, CTA — scores all 32 principles with a file:line quote for each, writes before-and-after copy for the worst five, then makes the fixes you pick.',
     proof: ['Claude Code skill', 'Scores 0–100', 'Edits your code'],

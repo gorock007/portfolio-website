@@ -10,9 +10,18 @@ const WorkIndex = ({ projects }: { projects: Project[] }) => (
         <a className="index-row" href={project.url} target="_blank" rel="noopener noreferrer">
           <SunStamp date={project.started} />
           <span className="index-title">{project.title}</span>
-          <span className="index-desc">{project.subtitle}</span>
+          <span className="index-desc">
+            {project.summary ? (
+              <>
+                <span className="index-lede">{project.subtitle}</span> {project.summary}
+              </>
+            ) : (
+              project.subtitle
+            )}
+          </span>
           <span className="index-meta">
-            {project.kind} · <time dateTime={project.started}>{formatDay(project.started)}</time>
+            {project.kind} ·{' '}
+            {project.status ?? <time dateTime={project.started}>{formatDay(project.started)}</time>}
           </span>
           <span className="arrow" aria-hidden="true">
             ↗

@@ -50,15 +50,14 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Home — the statement, the loop, the creed. On narrow screens the loop comes
-   straight after the statement, so the idea is on the first screen.
+   Home — the statement and who is making it, beside the loop. On narrow
+   screens the loop comes straight after, so both are on the first screens.
 --------------------------------------------------------------------------- */
 .hero {
   display: grid;
   grid-template-areas:
     "title"
-    "figure"
-    "creed";
+    "figure";
   row-gap: var(--s-7);
   padding-block: clamp(16px, 4vw, 48px) var(--s-7);
 }
@@ -67,12 +66,18 @@
   grid-area: title;
 }
 
-.hero-who {
-  max-width: 24em;
-  margin-top: var(--s-5);
+.hero-intro {
+  display: grid;
+  gap: var(--s-4);
+  max-width: 30em;
+  margin-top: var(--s-6);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
 }
 
-.hero-who a {
+.hero-intro .lead {
   color: var(--ink);
 }
 
@@ -82,17 +87,10 @@
   max-width: 760px;
 }
 
-.hero-creed {
-  grid-area: creed;
-}
-
 @media (min-width: 1100px) {
   .hero {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "title figure"
-      "creed figure";
+    grid-template-areas: "title figure";
     column-gap: var(--col-gap);
     align-items: start;
   }
@@ -102,34 +100,59 @@
   }
 }
 
-.figure-head {
-  margin-bottom: var(--s-2);
+.figure-note {
+  margin-top: var(--s-3);
 }
 
-.creed {
+/* A row of closing links — the hero's way on, the contact routes. */
+.go-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--s-6);
+  margin-top: var(--s-5);
+  font-size: 16px;
+}
+
+/* The beliefs keep the statement's lowercase voice; the reason under each
+   is ordinary prose. */
+.beliefs {
   display: grid;
-  gap: var(--s-4);
-  max-width: 26em;
-  font-size: clamp(18px, 1.5vw, 20px);
+  gap: var(--s-6);
+  max-width: 40em;
+}
+
+.belief {
+  font-size: clamp(18px, 1.6vw, 22px);
   line-height: 1.4;
   letter-spacing: -0.01em;
-  color: var(--ink-2);
-}
-
-.creed li {
   text-wrap: pretty;
 }
 
-.creed-foot {
-  max-width: 26em;
-  margin-top: var(--s-6);
-  font-size: 14px;
+.belief-why {
+  margin-top: var(--s-2);
+  font-size: 16px;
   line-height: 1.55;
   color: var(--ink-2);
+  text-wrap: pretty;
 }
 
-.creed-foot a {
+/* A section's own few lines before its list, or the whole of its body. */
+.ledger-copy {
+  display: grid;
+  gap: var(--s-4);
+  max-width: 36em;
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.ledger-copy--main {
   color: var(--ink);
+}
+
+.ledger-copy + .index {
+  margin-top: var(--s-5);
 }
 
 /* ---------------------------------------------------------------------------
@@ -167,6 +190,8 @@
   }
 
   .ledger:has(> .ledger-body > .lead:first-child) > .ledger-label,
+  .ledger:has(> .ledger-body > .ledger-copy:first-child) > .ledger-label,
+  .ledger:has(> .ledger-body > .beliefs:first-child) > .ledger-label,
   .ledger:has(> .ledger-body > .about-copy:first-child) > .ledger-label,
   .ledger:has(> .ledger-body > .chips:first-child) > .ledger-label,
   .ledger:has(> .ledger-body > .notes:first-child) > .ledger-label {
@@ -179,7 +204,8 @@
   font-size: 16px;
 }
 
-.ledger-more a {
+.ledger-more a,
+.go-links a {
   display: inline-flex;
   align-items: center;
   gap: var(--s-2);
@@ -187,7 +213,9 @@
 }
 
 .ledger-more a:hover .arrow,
-.ledger-more a:focus-visible .arrow {
+.ledger-more a:focus-visible .arrow,
+.go-links a:hover .arrow,
+.go-links a:focus-visible .arrow {
   transform: translateX(3px);
 }
 
@@ -236,6 +264,11 @@
   font-size: 16px;
   line-height: 1.45;
   color: var(--ink-2);
+}
+
+/* A product's one-liner, ahead of the sentence or two that follows it. */
+.index-lede {
+  color: var(--ink);
 }
 
 .index-meta {
