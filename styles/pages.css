@@ -66,7 +66,8 @@
   grid-area: title;
 }
 
-.hero-intro {
+.hero-intro,
+.about-intro {
   display: grid;
   gap: var(--s-4);
   max-width: 30em;
@@ -77,7 +78,8 @@
   text-wrap: pretty;
 }
 
-.hero-intro .lead {
+.hero-intro .lead,
+.about-intro .lead {
   color: var(--ink);
 }
 
@@ -193,7 +195,6 @@
   .ledger:has(> .ledger-body > .ledger-copy:first-child) > .ledger-label,
   .ledger:has(> .ledger-body > .beliefs:first-child) > .ledger-label,
   .ledger:has(> .ledger-body > .about-copy:first-child) > .ledger-label,
-  .ledger:has(> .ledger-body > .chips:first-child) > .ledger-label,
   .ledger:has(> .ledger-body > .notes:first-child) > .ledger-label {
     padding-top: var(--s-1);
   }
@@ -596,10 +597,6 @@
   padding-block: clamp(16px, 4vw, 48px) var(--s-7);
 }
 
-.about-head .lead {
-  margin-top: var(--s-5);
-}
-
 @media (min-width: 900px) {
   .about-head {
     grid-template-columns: var(--label-col) minmax(0, 1fr) minmax(0, 320px);
@@ -646,13 +643,6 @@
 
 .about-copy p + p {
   margin-top: 1em;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--s-2) var(--s-5);
-  font-size: 18px;
 }
 
 /* ---------------------------------------------------------------------------

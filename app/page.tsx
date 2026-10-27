@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Analemma from '@/components/Analemma'
+import External from '@/components/External'
 import Layout from '@/components/Layout'
 import Ledger from '@/components/Ledger'
 import WorkIndex from '@/components/WorkIndex'
@@ -22,13 +23,6 @@ export const metadata: Metadata = {
 export const revalidate = 900
 
 const linkedinUrl = socialLinks.find((link) => link.id === 'linkedin')?.href
-
-const External = ({ href, children }: { href: string; children: string }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer">
-    {children} <span className="arrow" aria-hidden="true">↗</span>
-    <span className="visually-hidden"> (opens in a new tab)</span>
-  </a>
-)
 
 const HomePage = async () => {
   const year = await getYear()

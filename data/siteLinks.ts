@@ -5,7 +5,6 @@ export const profile = {
 
 // The X profile doubles as the contact route now that email is off the site.
 export const contactUrl = 'https://x.com/gorockbits'
-export const contactHandle = '@gorockbits'
 
 export type SocialLink = {
   id: string
@@ -31,5 +30,3 @@ export const navItems: NavItem[] = [
   { to: '/writings', label: 'Writing' },
   { to: '/about', label: 'About' },
 ]
-
-export const stack = ['Claude Code', 'Codex', 'MCP', 'Swift', 'React', 'Next.js', 'Stripe', 'Supabase']

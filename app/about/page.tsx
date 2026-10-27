@@ -1,14 +1,16 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
+import External from '@/components/External'
 import Layout from '@/components/Layout'
 import Ledger from '@/components/Ledger'
 import portrait from '@/assets/images/portrait.jpg'
 import portraitLaughing from '@/assets/images/portrait-laughing.jpg'
 import { aboutBlocks } from '@/data/about'
-import { contactHandle, contactUrl, profile, stack } from '@/data/siteLinks'
+import { contactUrl, profile } from '@/data/siteLinks'
 
 const description =
-  'Who Gorock Shetty is, how he thinks, what he is building from Sydney, and what he is after.'
+  'Who Gorock Shetty is, how he got here, how he figures things out, and what he is chasing.'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -22,15 +24,19 @@ const SIZES = '(max-width: 899px) 100vw, 340px'
 
 const AboutPage = () => {
   const [intro, ...rest] = aboutBlocks
+  const [lead, ...introRest] = intro.paragraphs
 
   return (
     <Layout>
       <header className="about-head">
         <div>
-          <h1 className="page-title">About</h1>
-          <p className="lead">
-            {intro.paragraphs[0]}
-          </p>
+          <h1 className="page-title">{intro.label}</h1>
+          <div className="about-intro">
+            <p className="lead">{lead}</p>
+            {introRest.map((paragraph) => (
+              <p key={paragraph.slice(0, 32)}>{paragraph}</p>
+            ))}
+          </div>
         </div>
 
         <div className="portrait">
@@ -48,27 +54,16 @@ const AboutPage = () => {
               <p key={paragraph.slice(0, 32)}>{paragraph}</p>
             ))}
           </div>
+          {index === rest.length - 1 && (
+            <p className="go-links">
+              <Link href="/work">
+                See what I’m building <span className="arrow" aria-hidden="true">→</span>
+              </Link>
+              <External href={contactUrl}>Find me on X</External>
+            </p>
+          )}
         </Ledger>
       ))}
-
-      <Ledger id="about-tools" label="What I reach for">
-        <ul className="chips" role="list">
-          {stack.map((tool) => (
-            <li key={tool}>{tool}</li>
-          ))}
-        </ul>
-      </Ledger>
-
-      <Ledger id="about-contact" label="Say hello">
-        <p className="lead">
-          I’m in {profile.location}. If you’re building something in this space, or you just want
-          to argue about what AI actually changes, my DMs are open:{' '}
-          <a href={contactUrl} target="_blank" rel="noopener noreferrer">
-            {contactHandle} on X<span className="visually-hidden"> (opens in a new tab)</span>
-          </a>
-          .
-        </p>
-      </Ledger>
     </Layout>
   )
 }
