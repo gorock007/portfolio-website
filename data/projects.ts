@@ -1,5 +1,6 @@
 import type { Project } from './types'
 import naatiace from '@/assets/images/naatiace.jpg'
+import heatlens from '@/assets/images/heatlens-social-preview.png'
 import revisit from '@/assets/images/revisit-social-preview.png'
 import dontMakeItUgly from '@/assets/images/dont-make-it-ugly-social-preview.png'
 import klypst from '@/assets/images/klypst-social-preview.png'
@@ -24,6 +25,24 @@ export const projects: Project[] = [
     kind: 'Web product',
     status: 'Live',
     started: '2026-04-02',
+  },
+  {
+    id: 'heatlens',
+    title: 'HeatLens',
+    subtitle: 'See what’s using your Mac, why, and what you can safely stop.',
+    summary:
+      'A free, open-source menu-bar app that answers “why is my Mac running hot?” by tying every busy process to the project and tool behind it.',
+    detail:
+      'Does nothing until you click. One short scan separates active work from leftovers — a dev server from yesterday, an agent still thinking, a forgotten caffeinate — with the evidence and a confidence level for each. Ships a read-only MCP server, and never stops anything without asking.',
+    proof: ['Open source', 'Fully offline', 'Signed and notarized'],
+    img: heatlens,
+    imgAlt: 'HeatLens — Why is my Mac running hot? A free menu-bar app for Apple Silicon, over a hazy orange sunset.',
+    urlLabel: 'heatlens.gorock.sh',
+    url: 'https://heatlens.gorock.sh/',
+    tier: 'product',
+    kind: 'macOS app',
+    status: 'Shipped',
+    started: '2026-10-26',
   },
   {
     id: 'revisit',
@@ -82,19 +101,6 @@ export const projects: Project[] = [
     started: '2026-09-09',
   },
 
-  {
-    id: 'heatlens',
-    title: 'HeatLens',
-    subtitle: 'See what’s using your Mac, why, and what you can safely stop.',
-    detail:
-      'A menu-bar app for Apple Silicon Macs that does nothing until you click. One short scan ties each busy process to the project and tool behind it — dev servers, agents, a forgotten caffeinate — and keeps active work apart from leftovers. Ships a read-only MCP server, and never stops anything without asking.',
-    proof: ['MIT licensed', 'Fully offline', 'Read-only MCP server'],
-    urlLabel: 'heatlens.gorock.sh',
-    url: 'https://heatlens.gorock.sh/',
-    tier: 'tool',
-    kind: 'macOS app',
-    started: '2026-10-26',
-  },
   {
     id: 'jarvis',
     title: 'Jarvis',
