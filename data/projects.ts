@@ -83,6 +83,19 @@ export const projects: Project[] = [
   },
 
   {
+    id: 'heatlens',
+    title: 'HeatLens',
+    subtitle: 'See what’s using your Mac, why, and what you can safely stop.',
+    detail:
+      'A menu-bar app for Apple Silicon Macs that does nothing until you click. One short scan ties each busy process to the project and tool behind it — dev servers, agents, a forgotten caffeinate — and keeps active work apart from leftovers. Ships a read-only MCP server, and never stops anything without asking.',
+    proof: ['MIT licensed', 'Fully offline', 'Read-only MCP server'],
+    urlLabel: 'heatlens.gorock.sh',
+    url: 'https://heatlens.gorock.sh/',
+    tier: 'tool',
+    kind: 'macOS app',
+    started: '2026-10-26',
+  },
+  {
     id: 'jarvis',
     title: 'Jarvis',
     subtitle:
